@@ -1,125 +1,152 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scripts de Atendimento - Bruno</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f5; color: #1c1e21; padding: 20px; }
-        .header-container { max-width: 1200px; margin: 0 auto 20px auto; text-align: center; }
-        h1 { color: #0c2340; margin-bottom: 15px; font-size: 1.8rem; }
-        .busca-input { width: 100%; max-width: 500px; padding: 12px 20px; font-size: 1rem; border: 2px solid #ccc; border-radius: 25px; outline: none; transition: border-color 0.2s; }
-        .busca-input:focus { border-color: #0056b3; }
-        .grid-scripts { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
-        .script-card { background: #fff; border-radius: 8px; border-left: 5px solid #0056b3; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,.05); display: flex; flex-direction: column; justify-content: space-between; position: relative; }
-        .script-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-right: 85px; }
-        .script-title { font-weight: bold; font-size: .95rem; color: #0056b3; text-transform: uppercase; }
-        .btn-copiar { position: absolute; top: 12px; right: 12px; background-color: #28a745; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: .85rem; font-weight: bold; transition: background .1s; }
-        .btn-copiar:hover { background-color: #218838; }
-        .script-content { background: #f8f9fa; border: 1px solid #e9ecef; padding: 12px; border-radius: 4px; font-size: .9rem; white-space: pre-wrap; word-wrap: break-word; color: #333; line-height: 1.4; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scripts de Atendimento - Bruno</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#f0f4f8;color:#1c1e21;padding:20px}
+.header-container{max-width:1200px;margin:0 auto 24px;text-align:center}
+h1{color:#0c2340;margin-bottom:15px;font-size:1.8rem}
+.busca-input{width:100%;max-width:560px;padding:13px 20px;font-size:1rem;border:2px solid #cbd5e1;border-radius:25px;outline:none;transition:border-color .2s,box-shadow .2s;background:#fff}
+.busca-input:focus{border-color:#0056b3;box-shadow:0 0 0 3px rgba(0,86,179,.12)}
+.grid-scripts{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:20px;max-width:1200px;margin:0 auto}
+.script-card{background:#fff;border-radius:9px;border-left:5px solid #0056b3;padding:15px;box-shadow:0 2px 6px rgba(0,0,0,.06);display:flex;flex-direction:column;position:relative}
+.script-card.destaque{border-left-color:#174ea6}
+.script-header{display:flex;align-items:center;margin-bottom:10px;padding-right:90px}
+.script-title{font-weight:700;font-size:.95rem;color:#0056b3;text-transform:uppercase}
+.categoria{display:inline-block;width:max-content;margin-bottom:8px;padding:4px 8px;border-radius:4px;background:#e8f1fb;color:#0056b3;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.btn-copiar{position:absolute;top:12px;right:12px;background:#28a745;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:.85rem;font-weight:700;transition:background .1s}
+.btn-copiar:hover{background:#218838}
+.script-content{background:#f8fafc;border:1px solid #e2e8f0;padding:13px;border-radius:5px;font-size:.9rem;white-space:pre-wrap;word-wrap:break-word;color:#333;line-height:1.5}
+@media(max-width:600px){body{padding:12px}.grid-scripts{grid-template-columns:1fr}.script-card{min-width:0}.script-content{font-size:.88rem}}
+</style>
 </head>
 <body>
-    <div class="header-container">
-        <h1>Meus Scripts de Atendimento</h1>
-        <input type="text" id="campoBusca" class="busca-input" placeholder="🔍 Digite para pesquisar um script..." onkeyup="filtrarScripts()">
-    </div>
+<div class="header-container">
+<h1>Meus Scripts de Atendimento</h1>
+<input type="text" id="campoBusca" class="busca-input" placeholder="🔍 Digite para pesquisar um script..." onkeyup="filtrarScripts()">
+</div>
 
-    <div class="grid-scripts" id="listaScripts">
-        <div class="script-card"><div class="script-header"><span class="script-title">Abertura</span><button class="btn-copiar" onclick="copiarTexto(this, 's1')">Copiar</button></div><div class="script-content" id="s1">Oi! Sou o Bruno e estarei com você durante este atendimento.
+<div class="grid-scripts" id="listaScripts">
+
+<div class="script-card"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Abertura</span><button class="btn-copiar" onclick="copiarTexto(this,'s1')">Copiar</button></div><div class="script-content" id="s1">Oi! Sou o Bruno e estarei com você durante este atendimento.
 
 Como posso ajudar?</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">Transferência</span><button class="btn-copiar" onclick="copiarTexto(this, 's2')">Copiar</button></div><div class="script-content" id="s2">Estou analisando o seu caso agora mesmo. Volto num instante para prosseguirmos!</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">Solicitando Protocolo / ID</span><button class="btn-copiar" onclick="copiarTexto(this, 's3')">Copiar</button></div><div class="script-content" id="s3">Você já realizou o registro de algum formulário sobre o caso?
+<div class="script-card"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Transferência</span><button class="btn-copiar" onclick="copiarTexto(this,'s2')">Copiar</button></div><div class="script-content" id="s2">Estou analisando o seu caso agora mesmo. Volto num instante para prosseguirmos!</div></div>
+<div class="script-card"><span class="categoria">Protocolo</span><div class="script-header"><span class="script-title">Solicitando Protocolo / ID</span><button class="btn-copiar" onclick="copiarTexto(this,'s3')">Copiar</button></div><div class="script-content" id="s3">Você já realizou o registro de algum formulário sobre o caso?
 
 Me informe, por gentileza, o número do protocolo, que você recebeu por e-mail.</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">Verificando Sucesso</span><button class="btn-copiar" onclick="copiarTexto(this, 's4')">Copiar</button></div><div class="script-content" id="s4">Ajudo com algo mais por aqui?</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">Solicitando Momento</span><button class="btn-copiar" onclick="copiarTexto(this, 's5')">Copiar</button></div><div class="script-content" id="s5">Obrigado
+<div class="script-card"><span class="categoria">Encerramento</span><div class="script-header"><span class="script-title">Verificando Sucesso</span><button class="btn-copiar" onclick="copiarTexto(this,'s4')">Copiar</button></div><div class="script-content" id="s4">Ajudo com algo mais por aqui?</div></div>
+<div class="script-card"><span class="categoria">Tempo de espera</span><div class="script-header"><span class="script-title">Solicitando Momento</span><button class="btn-copiar" onclick="copiarTexto(this,'s5')">Copiar</button></div><div class="script-content" id="s5">Obrigado
 Um momento, enquanto verifico essa informação no sistema.</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">Pedido de Áudio</span><button class="btn-copiar" onclick="copiarTexto(this, 's6')">Copiar</button></div><div class="script-content" id="s6">Desculpe, mas o recurso de áudio não está disponível no momento, poderia escrever?</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">Suspeita de Fraude</span><button class="btn-copiar" onclick="copiarTexto(this, 's7')">Copiar</button></div><div class="script-content" id="s7">Afim de assegurar e garantir a segurança dos dados solicitados, poderia me encaminhar uma foto segurando o seu documento?</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">Agradecendo por Aguardar</span><button class="btn-copiar" onclick="copiarTexto(this, 's8')">Copiar</button></div><div class="script-content" id="s8">Agradeço a espera.
+<div class="script-card"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Pedido de Áudio</span><button class="btn-copiar" onclick="copiarTexto(this,'s6')">Copiar</button></div><div class="script-content" id="s6">Desculpe, mas o recurso de áudio não está disponível no momento, poderia escrever?</div></div>
+<div class="script-card"><span class="categoria">Segurança</span><div class="script-header"><span class="script-title">Suspeita de Fraude</span><button class="btn-copiar" onclick="copiarTexto(this,'s7')">Copiar</button></div><div class="script-content" id="s7">Afim de assegurar e garantir a segurança dos dados solicitados, poderia me encaminhar uma foto segurando o seu documento?</div></div>
+<div class="script-card"><span class="categoria">Tempo de espera</span><div class="script-header"><span class="script-title">Agradecendo por Aguardar</span><button class="btn-copiar" onclick="copiarTexto(this,'s8')">Copiar</button></div><div class="script-content" id="s8">Agradeço a espera.
 
 Desculpe a demora, o sistema está apresentando lentidão</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">Pesquisa: Tarde</span><button class="btn-copiar" onclick="copiarTexto(this, 's9')">Copiar</button></div><div class="script-content" id="s9">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
+<div class="script-card"><span class="categoria">Pesquisa</span><div class="script-header"><span class="script-title">Pesquisa: Tarde</span><button class="btn-copiar" onclick="copiarTexto(this,'s9')">Copiar</button></div><div class="script-content" id="s9">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
 Tenha uma ótima Tarde!</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">Pesquisa: Noite</span><button class="btn-copiar" onclick="copiarTexto(this, 's10')">Copiar</button></div><div class="script-content" id="s10">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
+<div class="script-card"><span class="categoria">Pesquisa</span><div class="script-header"><span class="script-title">Pesquisa: Noite</span><button class="btn-copiar" onclick="copiarTexto(this,'s10')">Copiar</button></div><div class="script-content" id="s10">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
 Tenha uma ótima Noite!</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">2FA Desabilitado (Gov.br)</span><button class="btn-copiar" onclick="copiarTexto(this, 's11')">Copiar</button></div><div class="script-content" id="s11">- (Nome do usuário), a verificação em duas etapas da sua conta foi desabilitada. Agora você conseguirá acessar sua conta gov.br sem a necessidade do código.
+<div class="script-card"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">2FA Desabilitado (Gov.br)</span><button class="btn-copiar" onclick="copiarTexto(this,'s11')">Copiar</button></div><div class="script-content" id="s11">- (Nome do usuário), a verificação em duas etapas da sua conta foi desabilitada. Agora você conseguirá acessar sua conta gov.br sem a necessidade do código.
 
 Por questões de segurança, o nível da conta foi reduzido para Bronze. Recomendamos que aumente o nível da conta seguindo as orientações disponíveis nessa página
 
 https://www.gov.br</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">E-mail Alterado (Gov.br)</span><button class="btn-copiar" onclick="copiarTexto(this, 's12')">Copiar</button></div><div class="script-content" id="s12">- (Nome do usuário), sua solicitação foi aceita e o e-mail da sua conta gov.br foi alterado com sucesso. Agora você conseguirá recuperar sua senha pelo e-mail cadastrado.
+<div class="script-card"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">E-mail Alterado (Gov.br)</span><button class="btn-copiar" onclick="copiarTexto(this,'s12')">Copiar</button></div><div class="script-content" id="s12">- (Nome do usuário), sua solicitação foi aceita e o e-mail da sua conta gov.br foi alterado com sucesso. Agora você conseguirá recuperar sua senha pelo e-mail cadastrado.
 
 Por questões de segurança, o nível da conta foi reduzido para Bronze. Recomendamos que aumente o nível da conta seguindo as orientações disponíveis nessa página
 
 https://www.gov.br</div></div>
-        <div class="script-card"><div class="script-header"><span class="script-title">Nota Interna: Info Chat</span><button class="btn-copiar" onclick="copiarTexto(this, 's13')">Copiar</button></div><div class="script-content" id="s13">Atendimento realizado por chat, em anexo informações corretas.</div></div>
-    </div>
+<div class="script-card"><span class="categoria">Nota interna</span><div class="script-header"><span class="script-title">Nota Interna: Info Chat</span><button class="btn-copiar" onclick="copiarTexto(this,'s13')">Copiar</button></div><div class="script-content" id="s13">Atendimento realizado por chat, em anexo informações corretas.</div></div>
 
-    <script>
-        async function copiarTexto(botao, id) {
-            const elemento = document.getElementById(id);
-            if (!elemento) {
-                console.error('Elemento não encontrado:', id);
-                return;
-            }
+<div class="script-card destaque"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">1ª Sinalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s14')">Copiar</button></div><div class="script-content" id="s14">Ops! Vamos manter o papo amigável? Por favor, evite o uso de palavrões por aqui.</div></div>
+<div class="script-card destaque"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">2ª Sinalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s15')">Copiar</button></div><div class="script-content" id="s15">(Nome do usuário), prezamos por um ambiente de atendimento respeitoso. O uso de palavras pejorativas viola nossas diretrizes. Se o vocabulário inadequado continuar, o atendimento será finalizado imediatamente.</div></div>
+<div class="script-card destaque"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">Finalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s16')">Copiar</button></div><div class="script-content" id="s16">Como o tom desrespeitoso persistiu, estarei encerrando este atendimento conforme nossos Termos de Uso.</div></div>
+<div class="script-card"><span class="categoria">Tempo de resposta</span><div class="script-header"><span class="script-title">Reclamação do Tempo de Resposta</span><button class="btn-copiar" onclick="copiarTexto(this,'s17')">Copiar</button></div><div class="script-content" id="s17">Desculpe. Mas aqui é uma central de atendimento, onde temos vários atendimentos simultâneos. Com isso ocorre um delay sim no tempo de resposta, o que é considerável. Recomendo que, caso não esteja disponível no momento para aguardar o atendimento, nos procure em outro horário. Teremos o prazer de poder te ajudar com a sua demanda.</div></div>
+<div class="script-card destaque"><span class="categoria">Recuperação de conta</span><div class="script-header"><span class="script-title">Menor de Idade</span><button class="btn-copiar" onclick="copiarTexto(this,'s18')">Copiar</button></div><div class="script-content" id="s18">Para darmos continuidade à recuperação da sua conta, será necessária a participação do seu responsável legal (pai, mãe ou tutor).
 
-            const texto = elemento.innerText || elemento.textContent || '';
-            const textoOriginal = botao.textContent;
+Vou te explicar o processo passo a passo.
 
-            try {
-                if (navigator.clipboard && window.isSecureContext) {
-                    await navigator.clipboard.writeText(texto);
-                } else {
-                    const textarea = document.createElement('textarea');
-                    textarea.value = texto;
-                    textarea.style.position = 'fixed';
-                    textarea.style.left = '-9999px';
-                    textarea.style.top = '0';
-                    textarea.setAttribute('readonly', '');
-                    document.body.appendChild(textarea);
-                    textarea.select();
-                    textarea.setSelectionRange(0, textarea.value.length);
+Serão necessários os seguintes itens:
 
-                    const sucesso = document.execCommand('copy');
-                    document.body.removeChild(textarea);
+- Foto do RG do responsável (frente e verso) + número do CPF;
+- Selfie (validação facial) do responsável;
+- Termo de autorização manuscrito (vou te passar o modelo agora).
 
-                    if (!sucesso) {
-                        throw new Error('Não foi possível copiar o texto.');
-                    }
-                }
+📝 Modelo do Termo de Autorização (o responsável deve copiar à mão em uma folha de papel, preencher, assinar e datar):
 
-                botao.textContent = '✓ Copiado!';
-                botao.style.backgroundColor = '#218838';
+Eu, [NOME COMPLETO DO RESPONSÁVEL], CPF [CPF DO RESPONSÁVEL], na qualidade de responsável legal de [SEU NOME COMPLETO], CPF [SEU CPF], autorizo o Ministério da Gestão e da Inovação em Serviços Públicos a alterar os dados cadastrais na plataforma gov.br.
 
-                setTimeout(() => {
-                    botao.textContent = textoOriginal;
-                    botao.style.backgroundColor = '';
-                }, 1500);
-            } catch (erro) {
-                console.error('Erro ao copiar:', erro);
-                botao.textContent = 'Erro ao copiar';
-                botao.style.backgroundColor = '#dc3545';
+[CIDADE], [DATA DE HOJE].
 
-                setTimeout(() => {
-                    botao.textContent = textoOriginal;
-                    botao.style.backgroundColor = '';
-                }, 2000);
-            }
-        }
+Assinatura do Responsável
 
-        function filtrarScripts() {
-            const busca = document.getElementById('campoBusca').value.toLowerCase().trim();
-            const cards = document.querySelectorAll('.script-card');
+Como fazer o procedimento:
 
-            cards.forEach(card => {
-                const texto = card.textContent.toLowerCase();
-                card.style.display = texto.includes(busca) ? '' : 'none';
-            });
-        }
-    </script>
+Acesse o formulário junto com o seu responsável através deste link:
+
+https://atendimento.servicos.gov.br/pt/comprovar-identidade
+
+Siga as instruções na tela para enviar:
+
+- As fotos do RG
+- A selfie do responsável
+- A foto do termo manuscrito
+
+Ao finalizar, o sistema vai gerar um número de protocolo.
+
+Após concluir todo o processo, por favor me responda enviando o número do protocolo gerado.
+
+Assim consigo agilizar sua solicitação e liberar o acesso o mais rápido possível.</div></div>
+<div class="script-card destaque"><span class="categoria">Recuperação de conta</span><div class="script-header"><span class="script-title">Responsável Legal</span><button class="btn-copiar" onclick="copiarTexto(this,'s19')">Copiar</button></div><div class="script-content" id="s19">Para darmos continuidade à recuperação da conta do menor, será necessária a sua participação como responsável legal.
+
+Vou explicar o processo passo a passo para que possamos realizar:
+
+Serão necessários os seguintes itens:
+
+- Foto do seu RG (frente e verso) + número do seu CPF;
+- Selfie (validação facial) sua;
+- Termo de autorização manuscrito (segue o modelo abaixo).
+
+📝 Modelo do Termo de Autorização (você deve copiar à mão em uma folha de papel, preencher, assinar e datar):
+
+Eu, [SEU NOME COMPLETO], CPF [SEU CPF], na qualidade de responsável legal de [NOME DA SUA FILHA], CPF [CPF DA SUA FILHA], autorizo o Ministério da Gestão e da Inovação em Serviços Públicos a alterar os dados cadastrais na plataforma gov.br.
+
+[CIDADE], [DATA DE HOJE].
+
+Sua Assinatura
+
+Como fazer o procedimento:
+
+Acesse o formulário através deste link:
+
+https://atendimento.servicos.gov.br/pt/comprovar-identidade
+
+Siga as instruções na tela para enviar:
+
+- As fotos do seu RG;
+- A sua selfie;
+- A foto do termo manuscrito.
+
+Ao finalizar, o sistema irá gerar um número de protocolo. Por favor, após concluir todo o envio, me informe aqui o número do protocolo gerado para que eu possa localizar a solicitação e agilizar a liberação do acesso.</div></div>
+
+</div>
+
+<script>
+async function copiarTexto(botao,id){
+ const elemento=document.getElementById(id); if(!elemento)return;
+ const texto=elemento.innerText||elemento.textContent||''; const original=botao.textContent;
+ try{
+  if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(texto)}
+  else{const textarea=document.createElement('textarea');textarea.value=texto;textarea.style.position='fixed';textarea.style.left='-9999px';textarea.setAttribute('readonly','');document.body.appendChild(textarea);textarea.select();textarea.setSelectionRange(0,textarea.value.length);const sucesso=document.execCommand('copy');document.body.removeChild(textarea);if(!sucesso)throw new Error('Não foi possível copiar o texto.')}
+  botao.textContent='✓ Copiado!';botao.style.backgroundColor='#218838';
+  setTimeout(()=>{botao.textContent=original;botao.style.backgroundColor=''},1500)
+ }catch(erro){console.error('Erro ao copiar:',erro);botao.textContent='Erro ao copiar';botao.style.backgroundColor='#dc3545';setTimeout(()=>{botao.textContent=original;botao.style.backgroundColor=''},2000)}
+}
+function filtrarScripts(){const busca=document.getElementById('campoBusca').value.toLowerCase().trim();document.querySelectorAll('.script-card').forEach(card=>{card.style.display=card.textContent.toLowerCase().includes(busca)?'':'none'})}
+</script>
 </body>
 </html>
