@@ -3,70 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scripts de Atendimento - Bruno</title>
+<title>Central de Atendimento - Intranet</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#f0f4f8;color:#1c1e21;padding:20px}
-.header-container{max-width:1200px;margin:0 auto 24px;text-align:center}
-h1{color:#0c2340;margin-bottom:15px;font-size:1.8rem}
-.busca-input{width:100%;max-width:560px;padding:13px 20px;font-size:1rem;border:2px solid #cbd5e1;border-radius:25px;outline:none;transition:border-color .2s,box-shadow .2s;background:#fff}
-.busca-input:focus{border-color:#0056b3;box-shadow:0 0 0 3px rgba(0,86,179,.12)}
-.grid-scripts{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:20px;max-width:1200px;margin:0 auto}
-.script-card{background:#fff;border-radius:9px;border-left:5px solid #0056b3;padding:15px;box-shadow:0 2px 6px rgba(0,0,0,.06);display:flex;flex-direction:column;position:relative}
-.script-card.destaque{border-left-color:#174ea6}
-.script-header{display:flex;align-items:center;margin-bottom:10px;padding-right:90px}
-.script-title{font-weight:700;font-size:.95rem;color:#0056b3;text-transform:uppercase}
-.categoria{display:inline-block;width:max-content;margin-bottom:8px;padding:4px 8px;border-radius:4px;background:#e8f1fb;color:#0056b3;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
-.btn-copiar{position:absolute;top:12px;right:12px;background:#28a745;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:.85rem;font-weight:700;transition:background .1s}
-.btn-copiar:hover{background:#218838}
-.script-content{background:#f8fafc;border:1px solid #e2e8f0;padding:13px;border-radius:5px;font-size:.9rem;white-space:pre-wrap;word-wrap:break-word;color:#333;line-height:1.5}
-@media(max-width:600px){body{padding:12px}.grid-scripts{grid-template-columns:1fr}.script-card{min-width:0}.script-content{font-size:.88rem}}
+:root{--azul:#0056b3;--azul-escuro:#0c2340;--azul-claro:#e8f1fb;--fundo:#f3f6fa;--borda:#dbe3ec;--texto:#1f2937;--muted:#64748b;--verde:#28a745}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--fundo);color:var(--texto);min-height:100vh}
+.topbar{height:64px;background:#fff;border-bottom:1px solid var(--borda);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.brand{display:flex;align-items:center;gap:12px;color:var(--azul-escuro);font-weight:800}.brand-icon{width:38px;height:38px;border-radius:8px;background:var(--azul);color:#fff;display:grid;place-items:center;font-size:20px}.brand-text small{display:block;color:var(--muted);font-size:11px;font-weight:500;margin-top:2px}.status{font-size:13px;color:#3f6212;display:flex;align-items:center;gap:7px}.status-dot{width:8px;height:8px;background:#22c55e;border-radius:50%}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1440px;margin:0 auto;min-height:calc(100vh - 64px)}
+.sidebar{background:#fff;border-right:1px solid var(--borda);padding:24px 14px}.menu-title{font-size:11px;color:#94a3b8;font-weight:800;text-transform:uppercase;padding:0 12px 10px;letter-spacing:.5px}.menu{list-style:none}.menu li{margin-bottom:4px}.menu button{width:100%;border:0;background:transparent;text-align:left;padding:10px 12px;border-radius:7px;color:#475569;font-size:14px;cursor:pointer}.menu button:hover,.menu button.active{background:var(--azul-claro);color:var(--azul);font-weight:700}
+.main{padding:30px}.welcome{margin-bottom:22px}.welcome h1{font-size:25px;color:var(--azul-escuro);margin-bottom:5px}.welcome p{color:var(--muted);font-size:14px}.search-wrap{position:relative;margin-bottom:25px}.search-icon{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:17px;color:#94a3b8}.busca-input{width:100%;padding:14px 18px 14px 46px;font-size:15px;border:1px solid var(--borda);border-radius:8px;outline:none;background:#fff;transition:border-color .2s,box-shadow .2s}.busca-input:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(0,86,179,.1)}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:26px 0 12px}.section-head h2{font-size:16px;color:var(--azul-escuro)}.count{font-size:12px;color:var(--muted)}.grid-scripts{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:15px}.script-card{background:#fff;border:1px solid var(--borda);border-left:4px solid var(--azul);border-radius:8px;padding:16px;position:relative;box-shadow:0 1px 3px rgba(15,23,42,.04);transition:box-shadow .15s,transform .15s}.script-card:hover{box-shadow:0 4px 12px rgba(15,23,42,.08);transform:translateY(-1px)}.script-card.destaque{border-left-color:#174ea6}.categoria{display:inline-block;margin-bottom:9px;padding:4px 8px;border-radius:4px;background:var(--azul-claro);color:var(--azul);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}.script-header{display:flex;align-items:center;margin-bottom:11px;padding-right:88px}.script-title{font-weight:700;font-size:14px;color:#1e3a5f}.btn-copiar{position:absolute;top:15px;right:14px;background:var(--verde);color:#fff;border:0;padding:7px 11px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:700}.btn-copiar:hover{background:#218838}.script-content{background:#f8fafc;border:1px solid #e6ebf1;padding:13px;border-radius:5px;font-size:13px;white-space:pre-wrap;word-wrap:break-word;color:#374151;line-height:1.55}
+.quick-links{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:5px}.quick-link{background:#fff;border:1px solid var(--borda);border-radius:8px;padding:13px;color:#334155;cursor:pointer;font-size:13px;text-align:left}.quick-link:hover{border-color:#9bbde0;background:#fafdff}.quick-link strong{display:block;color:var(--azul);margin-bottom:3px}.no-results{display:none;text-align:center;background:#fff;border:1px solid var(--borda);border-radius:8px;padding:35px;color:var(--muted);grid-column:1/-1}
+.footer{max-width:1440px;margin:0 auto;padding:15px 30px;color:#94a3b8;font-size:11px;text-align:right}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{border-right:0;border-bottom:1px solid var(--borda);padding:10px 14px}.menu{display:flex;gap:4px;overflow-x:auto}.menu-title{display:none}.menu li{min-width:max-content}.menu button{padding:8px 10px}.quick-links{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.topbar{padding:0 14px}.brand-text{font-size:14px}.status{display:none}.main{padding:20px 12px}.welcome h1{font-size:21px}.grid-scripts{grid-template-columns:1fr}.quick-links{grid-template-columns:1fr}.script-card{min-width:0}.script-content{font-size:12.5px}}
 </style>
 </head>
 <body>
-<div class="header-container">
-<h1>Meus Scripts de Atendimento</h1>
-<input type="text" id="campoBusca" class="busca-input" placeholder="🔍 Digite para pesquisar um script..." onkeyup="filtrarScripts()">
+<header class="topbar">
+<div class="brand"><div class="brand-icon">▦</div><div class="brand-text">Central de Atendimento<small>Portal interno de apoio</small></div></div>
+<div class="status"><span class="status-dot"></span>Sistema operacional</div>
+</header>
+
+<div class="layout">
+<aside class="sidebar">
+<div class="menu-title">Navegação</div>
+<ul class="menu">
+<li><button class="active" onclick="filtrarCategoria('todos',this)">🏠 Início</button></li>
+<li><button onclick="filtrarCategoria('Atendimento',this)">📋 Atendimento</button></li>
+<li><button onclick="filtrarCategoria('Recuperação de conta',this)">🔐 Recuperação de conta</button></li>
+<li><button onclick="filtrarCategoria('Usuários agressivos',this)">⚠️ Situações</button></li>
+<li><button onclick="filtrarCategoria('Gov.br',this)">🏛️ Gov.br</button></li>
+<li><button onclick="filtrarCategoria('Pesquisa',this)">⭐ Pesquisa</button></li>
+</ul>
+</aside>
+
+<main class="main">
+<div class="welcome"><h1>Olá, Bruno! 👋</h1><p>Acesse rapidamente seus scripts e recursos de apoio ao atendimento.</p></div>
+<div class="search-wrap"><span class="search-icon">🔎</span><input type="text" id="campoBusca" class="busca-input" placeholder="Pesquisar scripts, palavras-chave ou situações..." oninput="filtrarScripts()"></div>
+
+<div class="quick-links">
+<button class="quick-link" onclick="buscarRapido('abertura')"><strong>⚡ Abertura</strong>Iniciar atendimento</button>
+<button class="quick-link" onclick="buscarRapido('transferência')"><strong>🔄 Transferência</strong>Encaminhar atendimento</button>
+<button class="quick-link" onclick="buscarRapido('protocolo')"><strong>📄 Protocolo</strong>Solicitar identificação</button>
+<button class="quick-link" onclick="buscarRapido('pesquisa')"><strong>⭐ Pesquisa</strong>Encerrar atendimento</button>
 </div>
 
+<div class="section-head"><h2>📋 Scripts de atendimento</h2><span class="count" id="contador"></span></div>
 <div class="grid-scripts" id="listaScripts">
-
-<div class="script-card"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Abertura</span><button class="btn-copiar" onclick="copiarTexto(this,'s1')">Copiar</button></div><div class="script-content" id="s1">Oi! Sou o Bruno e estarei com você durante este atendimento.
+<div class="script-card" data-categoria="Atendimento"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Abertura</span><button class="btn-copiar" onclick="copiarTexto(this,'s1')">Copiar</button></div><div class="script-content" id="s1">Oi! Sou o Bruno e estarei com você durante este atendimento.
 
 Como posso ajudar?</div></div>
-<div class="script-card"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Transferência</span><button class="btn-copiar" onclick="copiarTexto(this,'s2')">Copiar</button></div><div class="script-content" id="s2">Estou analisando o seu caso agora mesmo. Volto num instante para prosseguirmos!</div></div>
-<div class="script-card"><span class="categoria">Protocolo</span><div class="script-header"><span class="script-title">Solicitando Protocolo / ID</span><button class="btn-copiar" onclick="copiarTexto(this,'s3')">Copiar</button></div><div class="script-content" id="s3">Você já realizou o registro de algum formulário sobre o caso?
+<div class="script-card" data-categoria="Atendimento"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Transferência</span><button class="btn-copiar" onclick="copiarTexto(this,'s2')">Copiar</button></div><div class="script-content" id="s2">Estou analisando o seu caso agora mesmo. Volto num instante para prosseguirmos!</div></div>
+<div class="script-card" data-categoria="Protocolo"><span class="categoria">Protocolo</span><div class="script-header"><span class="script-title">Solicitando Protocolo / ID</span><button class="btn-copiar" onclick="copiarTexto(this,'s3')">Copiar</button></div><div class="script-content" id="s3">Você já realizou o registro de algum formulário sobre o caso?
 
 Me informe, por gentileza, o número do protocolo, que você recebeu por e-mail.</div></div>
-<div class="script-card"><span class="categoria">Encerramento</span><div class="script-header"><span class="script-title">Verificando Sucesso</span><button class="btn-copiar" onclick="copiarTexto(this,'s4')">Copiar</button></div><div class="script-content" id="s4">Ajudo com algo mais por aqui?</div></div>
-<div class="script-card"><span class="categoria">Tempo de espera</span><div class="script-header"><span class="script-title">Solicitando Momento</span><button class="btn-copiar" onclick="copiarTexto(this,'s5')">Copiar</button></div><div class="script-content" id="s5">Obrigado
+<div class="script-card" data-categoria="Encerramento"><span class="categoria">Encerramento</span><div class="script-header"><span class="script-title">Verificando Sucesso</span><button class="btn-copiar" onclick="copiarTexto(this,'s4')">Copiar</button></div><div class="script-content" id="s4">Ajudo com algo mais por aqui?</div></div>
+<div class="script-card" data-categoria="Tempo de espera"><span class="categoria">Tempo de espera</span><div class="script-header"><span class="script-title">Solicitando Momento</span><button class="btn-copiar" onclick="copiarTexto(this,'s5')">Copiar</button></div><div class="script-content" id="s5">Obrigado
 Um momento, enquanto verifico essa informação no sistema.</div></div>
-<div class="script-card"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Pedido de Áudio</span><button class="btn-copiar" onclick="copiarTexto(this,'s6')">Copiar</button></div><div class="script-content" id="s6">Desculpe, mas o recurso de áudio não está disponível no momento, poderia escrever?</div></div>
-<div class="script-card"><span class="categoria">Segurança</span><div class="script-header"><span class="script-title">Suspeita de Fraude</span><button class="btn-copiar" onclick="copiarTexto(this,'s7')">Copiar</button></div><div class="script-content" id="s7">Afim de assegurar e garantir a segurança dos dados solicitados, poderia me encaminhar uma foto segurando o seu documento?</div></div>
-<div class="script-card"><span class="categoria">Tempo de espera</span><div class="script-header"><span class="script-title">Agradecendo por Aguardar</span><button class="btn-copiar" onclick="copiarTexto(this,'s8')">Copiar</button></div><div class="script-content" id="s8">Agradeço a espera.
+<div class="script-card" data-categoria="Atendimento"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Pedido de Áudio</span><button class="btn-copiar" onclick="copiarTexto(this,'s6')">Copiar</button></div><div class="script-content" id="s6">Desculpe, mas o recurso de áudio não está disponível no momento, poderia escrever?</div></div>
+<div class="script-card" data-categoria="Segurança"><span class="categoria">Segurança</span><div class="script-header"><span class="script-title">Suspeita de Fraude</span><button class="btn-copiar" onclick="copiarTexto(this,'s7')">Copiar</button></div><div class="script-content" id="s7">Afim de assegurar e garantir a segurança dos dados solicitados, poderia me encaminhar uma foto segurando o seu documento?</div></div>
+<div class="script-card" data-categoria="Tempo de espera"><span class="categoria">Tempo de espera</span><div class="script-header"><span class="script-title">Agradecendo por Aguardar</span><button class="btn-copiar" onclick="copiarTexto(this,'s8')">Copiar</button></div><div class="script-content" id="s8">Agradeço a espera.
 
 Desculpe a demora, o sistema está apresentando lentidão</div></div>
-<div class="script-card"><span class="categoria">Pesquisa</span><div class="script-header"><span class="script-title">Pesquisa: Tarde</span><button class="btn-copiar" onclick="copiarTexto(this,'s9')">Copiar</button></div><div class="script-content" id="s9">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
+<div class="script-card" data-categoria="Pesquisa"><span class="categoria">Pesquisa</span><div class="script-header"><span class="script-title">Pesquisa: Tarde</span><button class="btn-copiar" onclick="copiarTexto(this,'s9')">Copiar</button></div><div class="script-content" id="s9">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
 Tenha uma ótima Tarde!</div></div>
-<div class="script-card"><span class="categoria">Pesquisa</span><div class="script-header"><span class="script-title">Pesquisa: Noite</span><button class="btn-copiar" onclick="copiarTexto(this,'s10')">Copiar</button></div><div class="script-content" id="s10">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
+<div class="script-card" data-categoria="Pesquisa"><span class="categoria">Pesquisa</span><div class="script-header"><span class="script-title">Pesquisa: Noite</span><button class="btn-copiar" onclick="copiarTexto(this,'s10')">Copiar</button></div><div class="script-content" id="s10">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
 Tenha uma ótima Noite!</div></div>
-<div class="script-card"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">2FA Desabilitado (Gov.br)</span><button class="btn-copiar" onclick="copiarTexto(this,'s11')">Copiar</button></div><div class="script-content" id="s11">- (Nome do usuário), a verificação em duas etapas da sua conta foi desabilitada. Agora você conseguirá acessar sua conta gov.br sem a necessidade do código.
+<div class="script-card" data-categoria="Gov.br"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">2FA Desabilitado (Gov.br)</span><button class="btn-copiar" onclick="copiarTexto(this,'s11')">Copiar</button></div><div class="script-content" id="s11">- (Nome do usuário), a verificação em duas etapas da sua conta foi desabilitada. Agora você conseguirá acessar sua conta gov.br sem a necessidade do código.
 
 Por questões de segurança, o nível da conta foi reduzido para Bronze. Recomendamos que aumente o nível da conta seguindo as orientações disponíveis nessa página
 
 https://www.gov.br</div></div>
-<div class="script-card"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">E-mail Alterado (Gov.br)</span><button class="btn-copiar" onclick="copiarTexto(this,'s12')">Copiar</button></div><div class="script-content" id="s12">- (Nome do usuário), sua solicitação foi aceita e o e-mail da sua conta gov.br foi alterado com sucesso. Agora você conseguirá recuperar sua senha pelo e-mail cadastrado.
+<div class="script-card" data-categoria="Gov.br"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">E-mail Alterado (Gov.br)</span><button class="btn-copiar" onclick="copiarTexto(this,'s12')">Copiar</button></div><div class="script-content" id="s12">- (Nome do usuário), sua solicitação foi aceita e o e-mail da sua conta gov.br foi alterado com sucesso. Agora você conseguirá recuperar sua senha pelo e-mail cadastrado.
 
 Por questões de segurança, o nível da conta foi reduzido para Bronze. Recomendamos que aumente o nível da conta seguindo as orientações disponíveis nessa página
 
 https://www.gov.br</div></div>
-<div class="script-card"><span class="categoria">Nota interna</span><div class="script-header"><span class="script-title">Nota Interna: Info Chat</span><button class="btn-copiar" onclick="copiarTexto(this,'s13')">Copiar</button></div><div class="script-content" id="s13">Atendimento realizado por chat, em anexo informações corretas.</div></div>
-
-<div class="script-card destaque"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">1ª Sinalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s14')">Copiar</button></div><div class="script-content" id="s14">Ops! Vamos manter o papo amigável? Por favor, evite o uso de palavrões por aqui.</div></div>
-<div class="script-card destaque"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">2ª Sinalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s15')">Copiar</button></div><div class="script-content" id="s15">(Nome do usuário), prezamos por um ambiente de atendimento respeitoso. O uso de palavras pejorativas viola nossas diretrizes. Se o vocabulário inadequado continuar, o atendimento será finalizado imediatamente.</div></div>
-<div class="script-card destaque"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">Finalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s16')">Copiar</button></div><div class="script-content" id="s16">Como o tom desrespeitoso persistiu, estarei encerrando este atendimento conforme nossos Termos de Uso.</div></div>
-<div class="script-card"><span class="categoria">Tempo de resposta</span><div class="script-header"><span class="script-title">Reclamação do Tempo de Resposta</span><button class="btn-copiar" onclick="copiarTexto(this,'s17')">Copiar</button></div><div class="script-content" id="s17">Desculpe. Mas aqui é uma central de atendimento, onde temos vários atendimentos simultâneos. Com isso ocorre um delay sim no tempo de resposta, o que é considerável. Recomendo que, caso não esteja disponível no momento para aguardar o atendimento, nos procure em outro horário. Teremos o prazer de poder te ajudar com a sua demanda.</div></div>
-<div class="script-card destaque"><span class="categoria">Recuperação de conta</span><div class="script-header"><span class="script-title">Menor de Idade</span><button class="btn-copiar" onclick="copiarTexto(this,'s18')">Copiar</button></div><div class="script-content" id="s18">Para darmos continuidade à recuperação da sua conta, será necessária a participação do seu responsável legal (pai, mãe ou tutor).
+<div class="script-card" data-categoria="Nota interna"><span class="categoria">Nota interna</span><div class="script-header"><span class="script-title">Nota Interna: Info Chat</span><button class="btn-copiar" onclick="copiarTexto(this,'s13')">Copiar</button></div><div class="script-content" id="s13">Atendimento realizado por chat, em anexo informações corretas.</div></div>
+<div class="script-card destaque" data-categoria="Usuários agressivos"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">1ª Sinalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s14')">Copiar</button></div><div class="script-content" id="s14">Ops! Vamos manter o papo amigável? Por favor, evite o uso de palavrões por aqui.</div></div>
+<div class="script-card destaque" data-categoria="Usuários agressivos"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">2ª Sinalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s15')">Copiar</button></div><div class="script-content" id="s15">(Nome do usuário), prezamos por um ambiente de atendimento respeitoso. O uso de palavras pejorativas viola nossas diretrizes. Se o vocabulário inadequado continuar, o atendimento será finalizado imediatamente.</div></div>
+<div class="script-card destaque" data-categoria="Usuários agressivos"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">Finalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s16')">Copiar</button></div><div class="script-content" id="s16">Como o tom desrespeitoso persistiu, estarei encerrando este atendimento conforme nossos Termos de Uso.</div></div>
+<div class="script-card" data-categoria="Tempo de resposta"><span class="categoria">Tempo de resposta</span><div class="script-header"><span class="script-title">Reclamação do Tempo de Resposta</span><button class="btn-copiar" onclick="copiarTexto(this,'s17')">Copiar</button></div><div class="script-content" id="s17">Desculpe. Mas aqui é uma central de atendimento, onde temos vários atendimentos simultâneos. Com isso ocorre um delay sim no tempo de resposta, o que é considerável. Recomendo que, caso não esteja disponível no momento para aguardar o atendimento, nos procure em outro horário. Teremos o prazer de poder te ajudar com a sua demanda.</div></div>
+<div class="script-card destaque" data-categoria="Recuperação de conta"><span class="categoria">Recuperação de conta</span><div class="script-header"><span class="script-title">Menor de Idade</span><button class="btn-copiar" onclick="copiarTexto(this,'s18')">Copiar</button></div><div class="script-content" id="s18">Para darmos continuidade à recuperação da sua conta, será necessária a participação do seu responsável legal (pai, mãe ou tutor).
 
 Vou te explicar o processo passo a passo.
 
@@ -101,7 +121,7 @@ Ao finalizar, o sistema vai gerar um número de protocolo.
 Após concluir todo o processo, por favor me responda enviando o número do protocolo gerado.
 
 Assim consigo agilizar sua solicitação e liberar o acesso o mais rápido possível.</div></div>
-<div class="script-card destaque"><span class="categoria">Recuperação de conta</span><div class="script-header"><span class="script-title">Responsável Legal</span><button class="btn-copiar" onclick="copiarTexto(this,'s19')">Copiar</button></div><div class="script-content" id="s19">Para darmos continuidade à recuperação da conta do menor, será necessária a sua participação como responsável legal.
+<div class="script-card destaque" data-categoria="Recuperação de conta"><span class="categoria">Recuperação de conta</span><div class="script-header"><span class="script-title">Responsável Legal</span><button class="btn-copiar" onclick="copiarTexto(this,'s19')">Copiar</button></div><div class="script-content" id="s19">Para darmos continuidade à recuperação da conta do menor, será necessária a sua participação como responsável legal.
 
 Vou explicar o processo passo a passo para que possamos realizar:
 
@@ -132,21 +152,41 @@ Siga as instruções na tela para enviar:
 - A foto do termo manuscrito.
 
 Ao finalizar, o sistema irá gerar um número de protocolo. Por favor, após concluir todo o envio, me informe aqui o número do protocolo gerado para que eu possa localizar a solicitação e agilizar a liberação do acesso.</div></div>
-
+<div class="no-results" id="semResultados">Nenhum script encontrado para esta pesquisa.</div>
 </div>
+</main>
+</div>
+<footer class="footer">Central de Atendimento • Portal interno</footer>
 
 <script>
+let categoriaAtual='todos';
+
 async function copiarTexto(botao,id){
- const elemento=document.getElementById(id); if(!elemento)return;
- const texto=elemento.innerText||elemento.textContent||''; const original=botao.textContent;
+ const elemento=document.getElementById(id);if(!elemento)return;
+ const texto=elemento.innerText||elemento.textContent||'';const original=botao.textContent;
  try{
   if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(texto)}
   else{const textarea=document.createElement('textarea');textarea.value=texto;textarea.style.position='fixed';textarea.style.left='-9999px';textarea.setAttribute('readonly','');document.body.appendChild(textarea);textarea.select();textarea.setSelectionRange(0,textarea.value.length);const sucesso=document.execCommand('copy');document.body.removeChild(textarea);if(!sucesso)throw new Error('Não foi possível copiar o texto.')}
-  botao.textContent='✓ Copiado!';botao.style.backgroundColor='#218838';
-  setTimeout(()=>{botao.textContent=original;botao.style.backgroundColor=''},1500)
+  botao.textContent='✓ Copiado!';botao.style.backgroundColor='#218838';setTimeout(()=>{botao.textContent=original;botao.style.backgroundColor=''},1500)
  }catch(erro){console.error('Erro ao copiar:',erro);botao.textContent='Erro ao copiar';botao.style.backgroundColor='#dc3545';setTimeout(()=>{botao.textContent=original;botao.style.backgroundColor=''},2000)}
 }
-function filtrarScripts(){const busca=document.getElementById('campoBusca').value.toLowerCase().trim();document.querySelectorAll('.script-card').forEach(card=>{card.style.display=card.textContent.toLowerCase().includes(busca)?'':'none'})}
+
+function filtrarScripts(){
+ const busca=document.getElementById('campoBusca').value.toLowerCase().trim();
+ const cards=document.querySelectorAll('.script-card');let visiveis=0;
+ cards.forEach(card=>{const texto=card.textContent.toLowerCase();const categoria=card.dataset.categoria;const mostraCategoria=categoriaAtual==='todos'||categoria===categoriaAtual;const mostraBusca=!busca||texto.includes(busca);const mostrar=mostraCategoria&&mostraBusca;card.style.display=mostrar?'':'none';if(mostrar)visiveis++});
+ document.getElementById('contador').textContent=visiveis+' script'+(visiveis===1?'':'s');document.getElementById('semResultados').style.display=visiveis?'none':'block';
+}
+
+function filtrarCategoria(categoria,botao){
+ categoriaAtual=categoria;document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));botao.classList.add('active');filtrarScripts();window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function buscarRapido(termo){
+ const campo=document.getElementById('campoBusca');campo.value=termo;categoriaAtual='todos';document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));document.querySelector('.menu button').classList.add('active');filtrarScripts();document.querySelector('.grid-scripts').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+filtrarScripts();
 </script>
 </body>
 </html>
