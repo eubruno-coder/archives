@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripts de Atendimento - Bruno</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+            padding: 20px;
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto 20px auto;
+            text-align: center;
+        }
+        h1 {
+            color: #0c2340;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        .busca-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .busca-input:focus {
+            border-color: #0056b3;
+        }
+        .grid-scripts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .script-card {
+            background: #ffffff;
+            border-radius: 8px;
+            border-left: 5px solid #0056b3;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+        .script-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-right: 85px;
+        }
+        .script-title {
+            font-weight: bold;
+            font-size: 0.95rem;
+            color: #0056b3;
+            text-transform: uppercase;
+        }
+        .btn-copiar {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: background 0.1s;
+        }
+        .btn-copiar:hover {
+            background-color: #218838;
+        }
+        .script-content {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #333;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>Meus Scripts de Atendimento</h1>
+        <input type="text" id="campoBusca" class="busca-input" placeholder="🔍 Digite para pesquisar um script..." onkeyup="filtrarScripts()">
+    </div>
+
+    <div class="grid-scripts" id="listaScripts">
+
+        <!-- CARD 1 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">Abertura</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's1')">Copiar</button>
+            </div>
+            <div class="script-content" id="s1">Oi! Sou o Bruno e estarei com você durante este atendimento.
+
+Como posso ajudar?</div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">Transferência</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's2')">Copiar</button>
+            </div>
+            <div class="script-content" id="s2">Estou analisando o seu caso agora mesmo. Volto num instante para prosseguirmos!</div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">Solicitando Protocolo / ID</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's3')">Copiar</button>
+            </div>
+            <div class="script-content" id="s3">Você já realizou o registro de algum formulário sobre o caso?
+
+Me informe, por gentileza, o número do protocolo, que você recebeu por e-mail.</div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">Verificando Sucesso</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's4')">Copiar</button>
+            </div>
+            <div class="script-content" id="s4">Ajudo com algo mais por aqui?</div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">Solicitando Momento</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's5')">Copiar</button>
+            </div>
+            <div class="script-content" id="s5">Obrigado
+Um momento, enquanto verifico essa informação no sistema.</div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">Pedido de Áudio</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's6')">Copiar</button>
+            </div>
+            <div class="script-content" id="s6">Desculpe, mas o recurso de áudio não está disponível no momento, poderia escrever?</div>
+        </div>
+
+        <!-- CARD 7 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">Suspeita de Fraude</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's7')">Copiar</button>
+            </div>
+            <div class="script-content" id="s7">Afim de assegurar e garantir a segurança dos dados solicitados, poderia me encaminhar uma foto segurando o seu documento?</div>
+        </div>
+
+        <!-- CARD 8 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">Agradecendo por Aguardar</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's8')">Copiar</button>
+            </div>
+            <div class="script-content" id="s8">Agradeço a espera.
+
+Desculpe a demora, o sistema está apresentando lentidão</div>
+        </div>
+
+        <!-- CARD 9 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">Pesquisa: Tarde</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's9')">Copiar</button>
+            </div>
+            <div class="script-content" id="s9">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
+Tenha uma ótima Tarde!</div>
+        </div>
+
+        <!-- CARD 10 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">Pesquisa: Noite</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's10')">Copiar</button>
+            </div>
+            <div class="script-content" id="s10">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
+Tenha uma ótima Noite!</div>
+        </div>
+
+        <!-- CARD 11 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">2FA Desabilitado (Gov.br)</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's11')">Copiar</button>
+            </div>
+            <div class="script-content" id="s11">- (Nome do usuário), a verificação em duas etapas da sua conta foi desabilitada. Agora você conseguirá acessar sua conta gov.br sem a necessidade do código.
+
+Por questões de segurança, o nível da conta foi reduzido para Bronze. Recomendamos que aumente o nível da conta seguindo as orientações disponíveis nessa página
+
+https://www.gov.br</div>
+        </div>
+
+        <!-- CARD 12 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">E-mail Alterado (Gov.br)</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's12')">Copiar</button>
+            </div>
+            <div class="script-content" id="s12">- (Nome do usuário), sua solicitação foi aceita e o e-mail da sua conta gov.br foi alterado com sucesso. Agora você conseguirá recuperar sua senha pelo e-mail cadastrado.
+
+Por questões de segurança, o nível da conta foi reduzido para Bronze. Recomendamos que aumente o nível da conta seguindo as orientações disponíveis nessa página
+
+https://www.gov.br</div>
+        </div>
+
+        <!-- CARD 13 -->
+        <div class="script-card">
+            <div class="script-header">
+                <span class="script-title">Nota Interna: Info Chat</span>
+                <button class="btn-copiar" onclick="copiarTexto(this, 's13')">Copiar</button>
+            </div>
+            <div class="script-content" id="s13">Atendimento realizado por chat, em anexo informações corretas.</div>
+        </div>
+
+        <!-- CARD 14 -->
+        <div class="script-card">
