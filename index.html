@@ -9,20 +9,24 @@
 :root{--azul:#0056b3;--azul-escuro:#0c2340;--azul-claro:#e8f1fb;--fundo:#f3f6fa;--borda:#dbe3ec;--texto:#1f2937;--muted:#64748b;--verde:#28a745}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--fundo);color:var(--texto);min-height:100vh}
 .topbar{height:64px;background:#fff;border-bottom:1px solid var(--borda);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.topbar-left{display:flex;align-items:center;gap:12px}.menu-toggle{width:38px;height:38px;border:1px solid var(--borda);background:#fff;color:var(--azul-escuro);border-radius:8px;cursor:pointer;font-size:20px;display:grid;place-items:center}.menu-toggle:hover{background:var(--azul-claro);border-color:#9bbde0;color:var(--azul)}
 .brand{display:flex;align-items:center;gap:12px;color:var(--azul-escuro);font-weight:800}.brand-icon{width:38px;height:38px;border-radius:8px;background:var(--azul);color:#fff;display:grid;place-items:center;font-size:20px}.brand-text small{display:block;color:var(--muted);font-size:11px;font-weight:500;margin-top:2px}.status{font-size:13px;color:#3f6212;display:flex;align-items:center;gap:7px}.status-dot{width:8px;height:8px;background:#22c55e;border-radius:50%}
-.layout{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1440px;margin:0 auto;min-height:calc(100vh - 64px)}
-.sidebar{background:#fff;border-right:1px solid var(--borda);padding:24px 14px}.menu-title{font-size:11px;color:#94a3b8;font-weight:800;text-transform:uppercase;padding:0 12px 10px;letter-spacing:.5px}.menu{list-style:none}.menu li{margin-bottom:4px}.menu button{width:100%;border:0;background:transparent;text-align:left;padding:10px 12px;border-radius:7px;color:#475569;font-size:14px;cursor:pointer}.menu button:hover,.menu button.active{background:var(--azul-claro);color:var(--azul);font-weight:700}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1440px;margin:0 auto;min-height:calc(100vh - 64px);transition:grid-template-columns .2s ease}.layout.collapsed{grid-template-columns:72px minmax(0,1fr)}
+.sidebar{background:#fff;border-right:1px solid var(--borda);padding:24px 14px;overflow:hidden;transition:padding .2s ease}.layout.collapsed .sidebar{padding:24px 10px}.menu-title{font-size:11px;color:#94a3b8;font-weight:800;text-transform:uppercase;padding:0 12px 10px;letter-spacing:.5px;white-space:nowrap}.menu{list-style:none}.menu li{margin-bottom:4px}.menu button{width:100%;border:0;background:transparent;text-align:left;padding:10px 12px;border-radius:7px;color:#475569;font-size:14px;cursor:pointer;white-space:nowrap;overflow:hidden}.menu button:hover,.menu button.active{background:var(--azul-claro);color:var(--azul);font-weight:700}.layout.collapsed .menu-title{visibility:hidden;height:0;padding:0}.layout.collapsed .menu button{font-size:19px;text-align:center;padding:10px 0}.layout.collapsed .menu button{color:transparent;font-size:0}.layout.collapsed .menu button::first-letter{font-size:19px}.layout.collapsed .menu button{padding-left:0;padding-right:0}
 .main{padding:30px}.welcome{margin-bottom:22px}.welcome h1{font-size:25px;color:var(--azul-escuro);margin-bottom:5px}.welcome p{color:var(--muted);font-size:14px}.search-wrap{position:relative;margin-bottom:25px}.search-icon{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:17px;color:#94a3b8}.busca-input{width:100%;padding:14px 18px 14px 46px;font-size:15px;border:1px solid var(--borda);border-radius:8px;outline:none;background:#fff;transition:border-color .2s,box-shadow .2s}.busca-input:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(0,86,179,.1)}
 .section-head{display:flex;align-items:center;justify-content:space-between;margin:26px 0 12px}.section-head h2{font-size:16px;color:var(--azul-escuro)}.count{font-size:12px;color:var(--muted)}.grid-scripts{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:15px}.script-card{background:#fff;border:1px solid var(--borda);border-left:4px solid var(--azul);border-radius:8px;padding:16px;position:relative;box-shadow:0 1px 3px rgba(15,23,42,.04);transition:box-shadow .15s,transform .15s}.script-card:hover{box-shadow:0 4px 12px rgba(15,23,42,.08);transform:translateY(-1px)}.script-card.destaque{border-left-color:#174ea6}.categoria{display:inline-block;margin-bottom:9px;padding:4px 8px;border-radius:4px;background:var(--azul-claro);color:var(--azul);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}.script-header{display:flex;align-items:center;margin-bottom:11px;padding-right:88px}.script-title{font-weight:700;font-size:14px;color:#1e3a5f}.btn-copiar{position:absolute;top:15px;right:14px;background:var(--verde);color:#fff;border:0;padding:7px 11px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:700}.btn-copiar:hover{background:#218838}.script-content{background:#f8fafc;border:1px solid #e6ebf1;padding:13px;border-radius:5px;font-size:13px;white-space:pre-wrap;word-wrap:break-word;color:#374151;line-height:1.55}
 .quick-links{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:5px}.quick-link{background:#fff;border:1px solid var(--borda);border-radius:8px;padding:13px;color:#334155;cursor:pointer;font-size:13px;text-align:left}.quick-link:hover{border-color:#9bbde0;background:#fafdff}.quick-link strong{display:block;color:var(--azul);margin-bottom:3px}.no-results{display:none;text-align:center;background:#fff;border:1px solid var(--borda);border-radius:8px;padding:35px;color:var(--muted);grid-column:1/-1}
 .footer{max-width:1440px;margin:0 auto;padding:15px 30px;color:#94a3b8;font-size:11px;text-align:right}
-@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{border-right:0;border-bottom:1px solid var(--borda);padding:10px 14px}.menu{display:flex;gap:4px;overflow-x:auto}.menu-title{display:none}.menu li{min-width:max-content}.menu button{padding:8px 10px}.quick-links{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.layout{display:block}.layout.collapsed .sidebar{display:none}.sidebar{border-right:0;border-bottom:1px solid var(--borda);padding:10px 14px}.menu{display:flex;gap:4px;overflow-x:auto}.menu-title{display:none}.menu li{min-width:max-content}.menu button{padding:8px 10px}.quick-links{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.topbar{padding:0 14px}.brand-text{font-size:14px}.status{display:none}.main{padding:20px 12px}.welcome h1{font-size:21px}.grid-scripts{grid-template-columns:1fr}.quick-links{grid-template-columns:1fr}.script-card{min-width:0}.script-content{font-size:12.5px}}
 </style>
 </head>
 <body>
-<header class="topbar"><div class="brand"><div class="brand-icon">▦</div><div class="brand-text">Central de Atendimento<small>Portal interno de apoio</small></div></div><div class="status"><span class="status-dot"></span>Sistema operacional</div></header>
-<div class="layout">
+<header class="topbar">
+<div class="topbar-left"><button class="menu-toggle" id="menuToggle" onclick="alternarMenu()" aria-label="Recolher ou expandir menu">☰</button><div class="brand"><div class="brand-icon">▦</div><div class="brand-text">Central de Atendimento<small>Portal interno de apoio</small></div></div></div>
+<div class="status"><span class="status-dot"></span>Sistema operacional</div>
+</header>
+<div class="layout" id="layout">
 <aside class="sidebar"><div class="menu-title">Navegação</div><ul class="menu">
 <li><button class="active" onclick="filtrarCategoria('todos',this)">🏠 Início</button></li>
 <li><button onclick="filtrarCategoria('Atendimento',this)">📋 Atendimento</button></li>
@@ -32,6 +36,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 <li><button onclick="filtrarCategoria('Usuários agressivos',this)">⚠️ Situações</button></li>
 <li><button onclick="filtrarCategoria('Gov.br',this)">🏛️ Gov.br</button></li>
 <li><button onclick="filtrarCategoria('Chamados',this)">📝 Chamados</button></li>
+<li><button onclick="filtrarCategoria('Documentação',this)">📄 Documentação</button></li>
 <li><button onclick="filtrarCategoria('Pesquisa',this)">⭐ Pesquisa</button></li>
 </ul></aside>
 <main class="main">
@@ -45,7 +50,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 </div>
 <div class="section-head"><h2>📋 Scripts de atendimento</h2><span class="count" id="contador"></span></div>
 <div class="grid-scripts" id="listaScripts">
-
 <div class="script-card" data-categoria="Atendimento"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Abertura</span><button class="btn-copiar" onclick="copiarTexto(this,'s1')">Copiar</button></div><div class="script-content" id="s1">Oi! Sou o Bruno e estarei com você durante este atendimento.
 Como posso ajudar?</div></div>
 <div class="script-card" data-categoria="Atendimento"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Transferência</span><button class="btn-copiar" onclick="copiarTexto(this,'s2')">Copiar</button></div><div class="script-content" id="s2">Estou analisando o seu caso agora mesmo. Volto num instante para prosseguirmos!</div></div>
@@ -88,7 +92,6 @@ Nossa equipe técnica realizará a análise da sua dificuldade e assim te ajudar
 <div class="script-card" data-categoria="Chamados"><span class="categoria">Chamados</span><div class="script-header"><span class="script-title">Chamado encerrado há muito tempo</span><button class="btn-copiar" onclick="copiarTexto(this,'s19')">Copiar</button></div><div class="script-content" id="s19">Este chamado está encerrado a muito tempo, será necessário abrir um novo para que possamos seguir com a solicitação.</div></div>
 <div class="script-card" data-categoria="Chamados"><span class="categoria">Chamados</span><div class="script-header"><span class="script-title">Link — Desativar 2FA</span><button class="btn-copiar" onclick="copiarTexto(this,'s20')">Copiar</button></div><div class="script-content" id="s20">https://atendimento.servicos.gov.br/pt/desativar-2fa</div></div>
 <div class="script-card" data-categoria="Chamados"><span class="categoria">Chamados</span><div class="script-header"><span class="script-title">Link — Alterar e-mail</span><button class="btn-copiar" onclick="copiarTexto(this,'s21')">Copiar</button></div><div class="script-content" id="s21">https://atendimento.servicos.gov.br/pt/alterar-email</div></div>
-
 <div class="script-card destaque" data-categoria="Usuários agressivos"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">1ª Sinalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s22')">Copiar</button></div><div class="script-content" id="s22">Ops! Vamos manter o papo amigável? Por favor, evite o uso de palavrões por aqui.</div></div>
 <div class="script-card destaque" data-categoria="Usuários agressivos"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">2ª Sinalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s23')">Copiar</button></div><div class="script-content" id="s23">(Nome do usuário), prezamos por um ambiente de atendimento respeitoso. O uso de palavras pejorativas viola nossas diretrizes. Se o vocabulário inadequado continuar, o atendimento será finalizado imediatamente.</div></div>
 <div class="script-card destaque" data-categoria="Usuários agressivos"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">Finalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s24')">Copiar</button></div><div class="script-content" id="s24">Como o tom desrespeitoso persistiu, estarei encerrando este atendimento conforme nossos Termos de Uso.</div></div>
@@ -159,15 +162,59 @@ Siga as instruções na tela para enviar:
 - A foto do termo manuscrito.
 
 Ao finalizar, o sistema irá gerar um número de protocolo. Por favor, após concluir todo o envio, me informe aqui o número do protocolo gerado para que eu possa localizar a solicitação e agilizar a liberação do acesso.</div></div>
+<div class="script-card destaque" data-categoria="Documentação"><span class="categoria">Documentação</span><div class="script-header"><span class="script-title">Confirmar identidade</span><button class="btn-copiar" onclick="copiarTexto(this,'s28')">Copiar</button></div><div class="script-content" id="s28">Para dar continuidade ao seu processo, por favor acesse o link abaixo e realize a comprovação de identidade:
 
+🔗 Link: https://atendimento.servicos.gov.br/pt/comprovar-identidade
+
+O que será necessário no portal:
+
+- Confirmar sua identidade (selfie);
+- Anexar documento oficial com foto (frente e verso).
+
+Atenção:
+
+(Para a Selfie) Não são permitidos bonés, toucas, chapéus, óculos de sol ou qualquer acessório que cubra a cabeça ou o rosto.
+
+(Para o Documento) O documento deve ser original (cópias xerox e prints de tela não são aceitos).
+Se for documento digital, envie em PDF com QR Code visível.
+
+Após finalizar o processo, responda esta mensagem informando o número do protocolo gerado.
+Assim consigo agilizar sua solicitação e liberar seu acesso o mais rápido possível.</div></div>
+<div class="script-card destaque" data-categoria="Documentação"><span class="categoria">Documentação</span><div class="script-header"><span class="script-title">Envio de documentos</span><button class="btn-copiar" onclick="copiarTexto(this,'s29')">Copiar</button></div><div class="script-content" id="s29">Para dar sequência à sua solicitação, vou precisar que você nos envie algumas informações através do link abaixo:
+
+- Documento oficial com foto, frente e verso (Se for documento digital, deve ser em PDF com o QR code para validação) e com o número do CPF;
+
+- Foto do CPF, caso seja digital precisa mandar o QR code e não pode ser print, precisa baixar em PDF ou caso não tenha o CPF pode estar solicitando pelo site da Receita Federal abaixo:
+
+https://servicos.receita.fazenda.gov.br/Servicos/CPF/ConsultaSituacao/ConsultaPublica.asp
+
+Observação: Cópias (Xerox) e print de tela não são aceitos.
+
+Link do formulário:
+
+https://portal.speedmais.com.br/documentacoesgov/
+
+Após o envio, me avise, por gentileza, para darmos continuidade, tá bem?</div></div>
+<div class="script-card" data-categoria="Documentação"><span class="categoria">Documentação</span><div class="script-header"><span class="script-title">Complementação de informações</span><button class="btn-copiar" onclick="copiarTexto(this,'s30')">Copiar</button></div><div class="script-content" id="s30">Por gentileza, me confirme os seus dados, conforme abaixo:
+
+Nome completo:
+CPF:
+Data de Nascimento:
+E-mail:</div></div>
+<div class="script-card" data-categoria="Documentação"><span class="categoria">Documentação</span><div class="script-header"><span class="script-title">Dica de captura Facematch</span><button class="btn-copiar" onclick="copiarTexto(this,'s31')">Copiar</button></div><div class="script-content" id="s31">- Iluminação: Fique em um ambiente bem iluminado, de frente para a luz (janela, por exemplo) e evite sombras no rosto.
+- Posição: Segure o celular na altura dos olhos e mantenha o rosto centralizado dentro do círculo que aparece na tela.
+- Acessórios: Retire óculos escuros, bonés ou chapéus.
+- Câmera: A câmera traseira do celular geralmente possui uma resolução melhor. Se tiver dificuldades com a câmera frontal, procure a opção de usar a câmera traseira no próprio aplicativo.</div></div>
 <div class="no-results" id="semResultados">Nenhum script encontrado para esta pesquisa.</div>
 </div></main></div>
 <footer class="footer">Central de Atendimento • Portal interno</footer>
 <script>
 let categoriaAtual='todos';
+function alternarMenu(){const layout=document.getElementById('layout');layout.classList.toggle('collapsed');const recolhido=layout.classList.contains('collapsed');document.getElementById('menuToggle').textContent=recolhido?'☰':'☰';localStorage.setItem('menuRecolhido',recolhido?'1':'0')}
+(function(){if(localStorage.getItem('menuRecolhido')==='1')document.getElementById('layout').classList.add('collapsed')})();
 async function copiarTexto(botao,id){const elemento=document.getElementById(id);if(!elemento)return;const texto=elemento.innerText||elemento.textContent||'';const original=botao.textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(texto)}else{const textarea=document.createElement('textarea');textarea.value=texto;textarea.style.position='fixed';textarea.style.left='-9999px';textarea.setAttribute('readonly','');document.body.appendChild(textarea);textarea.select();textarea.setSelectionRange(0,textarea.value.length);const sucesso=document.execCommand('copy');document.body.removeChild(textarea);if(!sucesso)throw new Error('Não foi possível copiar o texto.')}botao.textContent='✓ Copiado!';botao.style.backgroundColor='#218838';setTimeout(()=>{botao.textContent=original;botao.style.backgroundColor=''},1500)}catch(erro){console.error('Erro ao copiar:',erro);botao.textContent='Erro ao copiar';botao.style.backgroundColor='#dc3545';setTimeout(()=>{botao.textContent=original;botao.style.backgroundColor=''},2000)}}
 function filtrarScripts(){const busca=document.getElementById('campoBusca').value.toLowerCase().trim();const cards=document.querySelectorAll('.script-card');let visiveis=0;cards.forEach(card=>{const texto=card.textContent.toLowerCase();const categoria=card.dataset.categoria;const mostraCategoria=categoriaAtual==='todos'||categoria===categoriaAtual;const mostraBusca=!busca||texto.includes(busca);const mostrar=mostraCategoria&&mostraBusca;card.style.display=mostrar?'':'none';if(mostrar)visiveis++});document.getElementById('contador').textContent=visiveis+' script'+(visiveis===1?'':'s');document.getElementById('semResultados').style.display=visiveis?'none':'block'}
-function filtrarCategoria(categoria,botao){categoriaAtual=categoria;document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));botao.classList.add('active');filtrarScripts();window.scrollTo({top:0,behavior:'smooth'})}
+function filtrarCategoria(categoria,botao){categoriaAtual=categoria;document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));botao.classList.add('active');document.getElementById('campoBusca').value='';filtrarScripts();window.scrollTo({top:0,behavior:'smooth'})}
 function buscarRapido(termo){const campo=document.getElementById('campoBusca');campo.value=termo;categoriaAtual='todos';document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));document.querySelector('.menu button').classList.add('active');filtrarScripts();document.querySelector('.grid-scripts').scrollIntoView({behavior:'smooth',block:'start'})}
 filtrarScripts();
 </script>
