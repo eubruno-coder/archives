@@ -4,53 +4,515 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Central de Atendimento - Intranet</title>
+
 <style>
+
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--azul:#0056b3;--azul-escuro:#0c2340;--azul-claro:#e8f1fb;--fundo:#f3f6fa;--borda:#dbe3ec;--texto:#1f2937;--muted:#64748b;--verde:#28a745}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--fundo);color:var(--texto);min-height:100vh}
-body.bloqueado{overflow:hidden}.login-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#0c2340,#0056b3);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9999}.login-box{width:100%;max-width:440px;background:#fff;border-radius:14px;padding:34px;box-shadow:0 20px 60px rgba(0,0,0,.2)}.login-brand{text-align:center;margin-bottom:25px}.login-icon{width:58px;height:58px;margin:0 auto 12px;border-radius:12px;background:var(--azul);color:#fff;display:grid;place-items:center;font-size:28px}.login-brand h1{color:var(--azul-escuro);font-size:22px;margin-bottom:5px}.login-brand p{color:var(--muted);font-size:13px}.login-label{display:block;color:#334155;font-weight:700;font-size:13px;margin-bottom:7px}.login-name{width:100%;padding:13px 14px;border:1px solid var(--borda);border-radius:8px;font-size:15px;outline:none;margin-bottom:15px}.login-name:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(0,86,179,.1)}.terms-box{background:#f8fafc;border:1px solid var(--borda);border-radius:8px;padding:13px;margin-bottom:14px}.terms-check{display:flex;align-items:flex-start;gap:9px;color:#475569;font-size:12px;line-height:1.45;cursor:pointer}.terms-check input{margin-top:3px;accent-color:var(--azul)}.terms-link{border:0;background:none;color:var(--azul);font-weight:700;cursor:pointer;font-size:12px;text-decoration:underline}.login-button{width:100%;padding:13px;border:0;border-radius:8px;background:var(--azul);color:#fff;font-size:14px;font-weight:800;cursor:pointer}.login-button:hover{background:#004494}.login-error{display:none;color:#b91c1c;background:#fef2f2;border:1px solid #fecaca;border-radius:7px;padding:9px;margin-bottom:12px;font-size:12px}.terms-modal{position:fixed;inset:0;background:rgba(15,23,42,.65);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000}.terms-modal.show{display:flex}.terms-content{background:#fff;width:100%;max-width:650px;max-height:85vh;overflow:auto;border-radius:12px;padding:26px}.terms-content h2{color:var(--azul-escuro);margin-bottom:15px}.terms-content h3{font-size:14px;color:#1e3a5f;margin:15px 0 5px}.terms-content p{font-size:13px;line-height:1.55;color:#475569}.terms-close{float:right;border:0;background:#eef2f7;border-radius:6px;padding:6px 10px;cursor:pointer}.user-area{display:flex;align-items:center;gap:12px}.user-name{font-size:13px;color:#475569;font-weight:700}.user-name button{border:0;background:none;color:var(--azul);cursor:pointer;font-size:11px;margin-left:6px}
-.topbar{height:64px;background:#fff;border-bottom:1px solid var(--borda);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.topbar-left{display:flex;align-items:center;gap:12px}.menu-toggle{width:38px;height:38px;border:1px solid var(--borda);background:#fff;color:var(--azul-escuro);border-radius:8px;cursor:pointer;font-size:20px;display:grid;place-items:center}.menu-toggle:hover{background:var(--azul-claro);border-color:#9bbde0;color:var(--azul)}
-.brand{display:flex;align-items:center;gap:12px;color:var(--azul-escuro);font-weight:800}.brand-icon{width:38px;height:38px;border-radius:8px;background:var(--azul);color:#fff;display:grid;place-items:center;font-size:20px}.brand-text small{display:block;color:var(--muted);font-size:11px;font-weight:500;margin-top:2px}.status{font-size:13px;color:#3f6212;display:flex;align-items:center;gap:7px}.status-dot{width:8px;height:8px;background:#22c55e;border-radius:50%}
-.layout{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1440px;margin:0 auto;min-height:calc(100vh - 64px);transition:grid-template-columns .2s ease}.layout.collapsed{grid-template-columns:72px minmax(0,1fr)}
-.sidebar{background:#fff;border-right:1px solid var(--borda);padding:24px 14px;overflow:hidden;transition:padding .2s ease}.layout.collapsed .sidebar{padding:24px 10px}.menu-title{font-size:11px;color:#94a3b8;font-weight:800;text-transform:uppercase;padding:0 12px 10px;letter-spacing:.5px;white-space:nowrap}.menu{list-style:none}.menu li{margin-bottom:4px}.menu button{width:100%;border:0;background:transparent;text-align:left;padding:10px 12px;border-radius:7px;color:#475569;font-size:14px;cursor:pointer;white-space:nowrap;overflow:hidden}.menu button:hover,.menu button.active{background:var(--azul-claro);color:var(--azul);font-weight:700}.layout.collapsed .menu-title{visibility:hidden;height:0;padding:0}.layout.collapsed .menu button{font-size:19px;text-align:center;padding:10px 0}.layout.collapsed .menu button{color:transparent;font-size:0}.layout.collapsed .menu button::first-letter{font-size:19px}.layout.collapsed .menu button{padding-left:0;padding-right:0}
-.main{padding:30px}.welcome{margin-bottom:22px}.welcome h1{font-size:25px;color:var(--azul-escuro);margin-bottom:5px}.welcome p{color:var(--muted);font-size:14px}.search-wrap{position:relative;margin-bottom:25px}.search-icon{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:17px;color:#94a3b8}.busca-input{width:100%;padding:14px 18px 14px 46px;font-size:15px;border:1px solid var(--borda);border-radius:8px;outline:none;background:#fff;transition:border-color .2s,box-shadow .2s}.busca-input:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(0,86,179,.1)}
-.section-head{display:flex;align-items:center;justify-content:space-between;margin:26px 0 12px}.section-head h2{font-size:16px;color:var(--azul-escuro)}.count{font-size:12px;color:var(--muted)}.grid-scripts{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:15px}.script-card{background:#fff;border:1px solid var(--borda);border-left:4px solid var(--azul);border-radius:8px;padding:16px;position:relative;box-shadow:0 1px 3px rgba(15,23,42,.04);transition:box-shadow .15s,transform .15s}.script-card:hover{box-shadow:0 4px 12px rgba(15,23,42,.08);transform:translateY(-1px)}.script-card.destaque{border-left-color:#174ea6}.categoria{display:inline-block;margin-bottom:9px;padding:4px 8px;border-radius:4px;background:var(--azul-claro);color:var(--azul);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}.script-header{display:flex;align-items:center;margin-bottom:11px;padding-right:88px}.script-title{font-weight:700;font-size:14px;color:#1e3a5f}.btn-copiar{position:absolute;top:15px;right:14px;background:var(--verde);color:#fff;border:0;padding:7px 11px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:700}.btn-copiar:hover{background:#218838}.script-content{background:#f8fafc;border:1px solid #e6ebf1;padding:13px;border-radius:5px;font-size:13px;white-space:pre-wrap;word-wrap:break-word;color:#374151;line-height:1.55}
-/* Feedback V1 — compacto */
-.feedback-area{display:flex;align-items:center;justify-content:flex-end;gap:7px;margin-top:10px;padding-top:8px;border-top:1px solid #eef2f7;min-height:28px}
-.feedback-question{font-size:11px;color:#64748b;font-weight:600;margin:0 2px 0 0}
-.feedback-actions{display:flex;align-items:center;gap:4px}
-.feedback-btn{border:1px solid var(--borda);background:#fff;color:#475569;border-radius:6px;padding:4px 7px;font-size:11px;font-weight:600;cursor:pointer;transition:.15s;line-height:1.2}
-.feedback-btn:hover{background:var(--azul-claro);border-color:#9bbde0;color:var(--azul)}
-.feedback-btn.positive:hover{color:#15803d;border-color:#86efac;background:#f0fdf4}
-.feedback-btn.negative:hover{color:#b91c1c;border-color:#fecaca;background:#fef2f2}
-.feedback-message{display:none;font-size:11px;font-weight:600;color:#15803d;margin:0}
-.feedback-message.show{display:inline}
-.feedback-area.feedback-disabled .feedback-actions{display:none}
-.feedback-area.feedback-disabled .feedback-question{display:none}
-.feedback-modal{position:fixed;inset:0;background:rgba(15,23,42,.48);display:none;align-items:center;justify-content:center;padding:18px;z-index:10001}
-.feedback-modal.show{display:flex}
-.feedback-modal-content{width:100%;max-width:390px;background:#fff;border-radius:10px;padding:18px;box-shadow:0 18px 50px rgba(15,23,42,.22)}
-.feedback-modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
-.feedback-modal-title{font-size:15px;font-weight:700;color:var(--azul-escuro)}
-.feedback-modal-close{border:0;background:#eef2f7;color:#475569;border-radius:6px;padding:4px 8px;cursor:pointer;font-size:16px;line-height:1}
-.feedback-reasons{display:grid;gap:7px;margin-bottom:11px}
-.feedback-reasons label{display:flex;align-items:center;gap:8px;font-size:12px;color:#475569;cursor:pointer}
-.feedback-reasons input{accent-color:var(--azul)}
-.feedback-modal-comment{width:100%;min-height:70px;resize:vertical;padding:8px;border:1px solid var(--borda);border-radius:6px;background:#fff;color:#334155;font:inherit;font-size:12px;outline:none}
-.feedback-modal-warning{font-size:10px;color:#92400e;line-height:1.35;margin:7px 0 11px}
-.feedback-modal-actions{display:flex;justify-content:flex-end;gap:5px}
-.feedback-submit{border:0;background:var(--azul);color:#fff;border-radius:6px;padding:7px 10px;font-size:11px;font-weight:700;cursor:pointer}
-.feedback-submit:hover{background:#004494}
-.feedback-cancel{border:0;background:#eef2f7;color:#64748b;border-radius:6px;padding:7px 9px;font-size:11px;cursor:pointer}
-.feedback-modal-message{display:none;font-size:11px;margin-top:8px;color:#b91c1c}
-.feedback-modal-message.show{display:block}
+
+:root{
+    --azul:#0056b3;
+    --azul-escuro:#0c2340;
+    --azul-claro:#e8f1fb;
+    --fundo:#f3f6fa;
+    --borda:#dbe3ec;
+    --texto:#1f2937;
+    --muted:#64748b;
+    --verde:#28a745
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--fundo);
+    color:var(--texto);
+    min-height:100vh
+}
+
+body.bloqueado{
+    overflow:hidden
+}
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+.login-overlay{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(135deg,#0c2340,#0056b3);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:9999;
+}
+
+.login-box{
+    width:100%;
+    max-width:440px;
+    background:#fff;
+    border-radius:14px;
+    padding:34px;
+    box-shadow:0 20px 60px rgba(0,0,0,.2)
+}
+
+.login-brand{
+    text-align:center;
+    margin-bottom:25px
+}
+
+.login-icon{
+    width:58px;
+    height:58px;
+    margin:0 auto 12px;
+    border-radius:12px;
+    background:var(--azul);
+    color:#fff;
+    display:grid;
+    place-items:center;
+    font-size:28px
+}
+
+.login-brand h1{
+    color:var(--azul-escuro);
+    font-size:22px;
+    margin-bottom:5px
+}
+
+.login-brand p{
+    color:var(--muted);
+    font-size:13px
+}
+
+.login-label{
+    display:block;
+    color:#334155;
+    font-weight:700;
+    font-size:13px;
+    margin-bottom:7px
+}
+
+.login-name{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid var(--borda);
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+    margin-bottom:15px
+}
+
+.login-name:focus{
+    border-color:var(--azul);
+    box-shadow:0 0 0 3px rgba(0,86,179,.1)
+}
+
+.terms-box{
+    background:#f8fafc;
+    border:1px solid var(--borda);
+    border-radius:8px;
+    padding:13px;
+    margin-bottom:14px
+}
+
+.terms-check{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    color:#475569;
+    font-size:12px;
+    line-height:1.45;
+    cursor:pointer
+}
+
+.terms-check input{
+    margin-top:3px;
+    accent-color:var(--azul)
+}
+
+.terms-link{
+    border:0;
+    background:none;
+    color:var(--azul);
+    font-weight:700;
+    cursor:pointer;
+    font-size:12px;
+    text-decoration:underline
+}
+
+.login-button{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:8px;
+    background:var(--azul);
+    color:#fff;
+    font-size:14px;
+    font-weight:800;
+    cursor:pointer
+}
+
+.login-button:hover{
+    background:#004494
+}
+
+.login-error{
+    display:none;
+    color:#b91c1c;
+    background:#fef2f2;
+    border:1px solid #fecaca;
+    border-radius:7px;
+    padding:9px;
+    margin-bottom:12px;
+    font-size:12px
+}
+
+
+/* =========================================================
+   TERMOS
+   ========================================================= */
+
+.terms-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.65);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:10000
+}
+
+.terms-modal.show{
+    display:flex
+}
+
+.terms-content{
+    background:#fff;
+    width:100%;
+    max-width:650px;
+    max-height:85vh;
+    overflow:auto;
+    border-radius:12px;
+    padding:26px
+}
+
+.terms-content h2{
+    color:var(--azul-escuro);
+    margin-bottom:15px
+}
+
+.terms-content h3{
+    font-size:14px;
+    color:#1e3a5f;
+    margin:15px 0 5px
+}
+
+.terms-content p{
+    font-size:13px;
+    line-height:1.55;
+    color:#475569
+}
+
+.terms-close{
+    float:right;
+    border:0;
+    background:#eef2f7;
+    border-radius:6px;
+    padding:6px 10px;
+    cursor:pointer
+}
+
+
+/* =========================================================
+   TOPO
+   ========================================================= */
+
+.user-area{
+    display:flex;
+    align-items:center;
+    gap:12px
+}
+
+.user-name{
+    font-size:13px;
+    color:#475569;
+    font-weight:700
+}
+
+.user-name button{
+    border:0;
+    background:none;
+    color:var(--azul);
+    cursor:pointer;
+    font-size:11px;
+    margin-left:6px
+}
+
+.topbar{
+    height:64px;
+    background:#fff;
+    border-bottom:1px solid var(--borda);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:10;
+    box-shadow:0 1px 4px rgba(0,0,0,.04)
+}
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:12px
+}
+
+.menu-toggle{
+    width:38px;
+    height:38px;
+    border:1px solid var(--borda);
+    background:#fff;
+    color:var(--azul-escuro);
+    border-radius:8px;
+    cursor:pointer;
+    font-size:20px;
+    display:grid;
+    place-items:center
+}
+
+.menu-toggle:hover{
+    background:var(--azul-claro);
+    border-color:#9bbde0;
+    color:var(--azul)
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:var(--azul-escuro);
+    font-weight:800
+}
+
+.brand-icon{
+    width:38px;
+    height:38px;
+    border-radius:8px;
+    background:var(--azul);
+    color:#fff;
+    display:grid;
+    place-items:center;
+    font-size:20px
+}
+
+.brand-text small{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    font-weight:500;
+    margin-top:2px
+}
+
+.status{
+    font-size:13px;
+    color:#3f6212;
+    display:flex;
+    align-items:center;
+    gap:7px
+}
+
+.status-dot{
+    width:8px;
+    height:8px;
+    background:#22c55e;
+    border-radius:50%
+}
+
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.layout{
+    display:grid;
+    grid-template-columns:230px minmax(0,1fr);
+    max-width:1440px;
+    margin:0 auto;
+    min-height:calc(100vh - 64px);
+    transition:grid-template-columns .2s ease
+}
+
+.layout.collapsed{
+    grid-template-columns:72px minmax(0,1fr)
+}
+
+
+/* =========================================================
+   MENU LATERAL
+   ========================================================= */
+
+.sidebar{
+    background:#fff;
+    border-right:1px solid var(--borda);
+    padding:24px 14px;
+    overflow:hidden;
+    transition:padding .2s ease
+}
+
+.layout.collapsed .sidebar{
+    padding:24px 10px
+}
+
+.menu-title{
+    font-size:11px;
+    color:#94a3b8;
+    font-weight:800;
+    text-transform:uppercase;
+    padding:0 12px 10px;
+    letter-spacing:.5px;
+    white-space:nowrap
+}
+
+.menu{
+    list-style:none
+}
+
+.menu li{
+    margin-bottom:4px
+}
+
+.menu button{
+    width:100%;
+    border:0;
+    background:transparent;
+    text-align:left;
+    padding:10px 12px;
+    border-radius:7px;
+    color:#475569;
+    font-size:14px;
+    cursor:pointer;
+    white-space:nowrap;
+    overflow:hidden
+}
+
+.menu button:hover,
+.menu button.active{
+    background:var(--azul-claro);
+    color:var(--azul);
+    font-weight:700
+}
+
+.layout.collapsed .menu-title{
+    visibility:hidden;
+    height:0;
+    padding:0
+}
+
+.layout.collapsed .menu button{
+    font-size:19px;
+    text-align:center;
+    padding:10px 0
+}
+
+.layout.collapsed .menu button{
+    color:transparent;
+    font-size:0
+}
+
+.layout.collapsed .menu button::first-letter{
+    font-size:19px
+}
+
+.layout.collapsed .menu button{
+    padding-left:0;
+    padding-right:0
+}
+
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================= */
+
+.main{
+    padding:30px
+}
+
+.welcome{
+    margin-bottom:22px
+}
+
+.welcome h1{
+    font-size:25px;
+    color:var(--azul-escuro);
+    margin-bottom:5px
+}
+
+.welcome p{
+    color:var(--muted);
+    font-size:14px
+}
+
+.search-wrap{
+    position:relative;
+    margin-bottom:25px
+}
+
+.search-icon{
+    position:absolute;
+    left:17px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:17px;
+    color:#94a3b8
+}
+
+.busca-input{
+    width:100%;
+    padding:14px 18px 14px 46px;
+    font-size:15px;
+    border:1px solid var(--borda);
+    border-radius:8px;
+    outline:none;
+    background:#fff;
+    transition:border-color .2s,box-shadow .2s
+}
+
+.busca-input:focus{
+    border-color:var(--azul);
+    box-shadow:0 0 0 3px rgba(0,86,179,.1)
+}
+
+.section-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:26px 0 12px
+}
+
+.section-head h2{
+    font-size:16px;
+    color:var(--azul-escuro)
+}
+
+.count{
+    font-size:12px;
+    color:var(--muted)
+}
+
+
+/* =========================================================
+   QUICK LINKS DOS SCRIPTS
+   ========================================================= */
+
 .quick-links{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:10px;
-    margin-bottom:25px;
+    margin-bottom:25px
 }
+
 .quick-link{
     border:1px solid var(--borda);
     background:#fff;
@@ -60,99 +522,1529 @@ body.bloqueado{overflow:hidden}.login-overlay{position:fixed;inset:0;background:
     cursor:pointer;
     text-align:left;
     transition:.15s;
-    font-size:12px;
+    font-size:12px
 }
 
 .quick-link:hover{
     border-color:#9bbde0;
     background:var(--azul-claro);
-    transform:translateY(-1px);
+    transform:translateY(-1px)
 }
 
 .quick-link strong{
     display:block;
     color:var(--azul);
     font-size:13px;
-    margin-bottom:4px;
+    margin-bottom:4px
 }
-.footer{max-width:1440px;margin:0 auto;padding:15px 30px;color:#94a3b8;font-size:11px;text-align:right}
-@media(max-width:900px){.layout{display:block}.layout.collapsed .sidebar{display:none}.sidebar{border-right:0;border-bottom:1px solid var(--borda);padding:10px 14px}.menu{display:flex;gap:4px;overflow-x:auto}.menu-title{display:none}.menu li{min-width:max-content}.menu button{padding:8px 10px}.quick-links{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.topbar{padding:0 14px}.brand-text{font-size:14px}.status{display:none}.main{padding:20px 12px}.welcome h1{font-size:21px}.grid-scripts{grid-template-columns:1fr}.quick-links{grid-template-columns:1fr}.script-card{min-width:0}.script-content{font-size:12.5px}.user-name{display:none}.login-box{padding:25px 20px}}
+
+
+/* =========================================================
+   SCRIPTS
+   ========================================================= */
+
+.grid-scripts{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+    gap:15px
+}
+
+.script-card{
+    background:#fff;
+    border:1px solid var(--borda);
+    border-left:4px solid var(--azul);
+    border-radius:8px;
+    padding:16px;
+    position:relative;
+    box-shadow:0 1px 3px rgba(15,23,42,.04);
+    transition:box-shadow .15s,transform .15s
+}
+
+.script-card:hover{
+    box-shadow:0 4px 12px rgba(15,23,42,.08);
+    transform:translateY(-1px)
+}
+
+.script-card.destaque{
+    border-left-color:#174ea6
+}
+
+.categoria{
+    display:inline-block;
+    margin-bottom:9px;
+    padding:4px 8px;
+    border-radius:4px;
+    background:var(--azul-claro);
+    color:var(--azul);
+    font-size:10px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.4px
+}
+
+.script-header{
+    display:flex;
+    align-items:center;
+    margin-bottom:11px;
+    padding-right:88px
+}
+
+.script-title{
+    font-weight:700;
+    font-size:14px;
+    color:#1e3a5f
+}
+
+.btn-copiar{
+    position:absolute;
+    top:15px;
+    right:14px;
+    background:var(--verde);
+    color:#fff;
+    border:0;
+    padding:7px 11px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700
+}
+
+.btn-copiar:hover{
+    background:#218838
+}
+
+.script-content{
+    background:#f8fafc;
+    border:1px solid #e6ebf1;
+    padding:13px;
+    border-radius:5px;
+    font-size:13px;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    color:#374151;
+    line-height:1.55
+}
+
+.no-results{
+    display:none;
+    padding:25px;
+    text-align:center;
+    color:var(--muted);
+    background:#fff;
+    border:1px solid var(--borda);
+    border-radius:8px
+}
+
+
+/* =========================================================
+   FEEDBACK
+   ========================================================= */
+
+.feedback-area{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:7px;
+    margin-top:10px;
+    padding-top:8px;
+    border-top:1px solid #eef2f7;
+    min-height:28px
+}
+
+.feedback-question{
+    font-size:11px;
+    color:#64748b;
+    font-weight:600;
+    margin:0 2px 0 0
+}
+
+.feedback-actions{
+    display:flex;
+    align-items:center;
+    gap:4px
+}
+
+.feedback-btn{
+    border:1px solid var(--borda);
+    background:#fff;
+    color:#475569;
+    border-radius:6px;
+    padding:4px 7px;
+    font-size:11px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.15s;
+    line-height:1.2
+}
+
+.feedback-btn:hover{
+    background:var(--azul-claro);
+    border-color:#9bbde0;
+    color:var(--azul)
+}
+
+.feedback-btn.positive:hover{
+    color:#15803d;
+    border-color:#86efac;
+    background:#f0fdf4
+}
+
+.feedback-btn.negative:hover{
+    color:#b91c1c;
+    border-color:#fecaca;
+    background:#fef2f2
+}
+
+.feedback-message{
+    display:none;
+    font-size:11px;
+    font-weight:600;
+    color:#15803d;
+    margin:0
+}
+
+.feedback-message.show{
+    display:inline
+}
+
+.feedback-area.feedback-disabled .feedback-actions{
+    display:none
+}
+
+.feedback-area.feedback-disabled .feedback-question{
+    display:none
+}
+
+.feedback-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.48);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    z-index:10001
+}
+
+.feedback-modal.show{
+    display:flex
+}
+
+.feedback-modal-content{
+    width:100%;
+    max-width:390px;
+    background:#fff;
+    border-radius:10px;
+    padding:18px;
+    box-shadow:0 18px 50px rgba(15,23,42,.22)
+}
+
+.feedback-modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:12px
+}
+
+.feedback-modal-title{
+    font-size:15px;
+    font-weight:700;
+    color:var(--azul-escuro)
+}
+
+.feedback-modal-close{
+    border:0;
+    background:#eef2f7;
+    color:#475569;
+    border-radius:6px;
+    padding:4px 8px;
+    cursor:pointer;
+    font-size:16px;
+    line-height:1
+}
+
+.feedback-reasons{
+    display:grid;
+    gap:7px;
+    margin-bottom:11px
+}
+
+.feedback-reasons label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    color:#475569;
+    cursor:pointer
+}
+
+.feedback-reasons input{
+    accent-color:var(--azul)
+}
+
+.feedback-modal-comment{
+    width:100%;
+    min-height:70px;
+    resize:vertical;
+    padding:8px;
+    border:1px solid var(--borda);
+    border-radius:6px;
+    background:#fff;
+    color:#334155;
+    font:inherit;
+    font-size:12px;
+    outline:none
+}
+
+.feedback-modal-warning{
+    font-size:10px;
+    color:#92400e;
+    line-height:1.35;
+    margin:7px 0 11px
+}
+
+.feedback-modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:5px
+}
+
+.feedback-submit{
+    border:0;
+    background:var(--azul);
+    color:#fff;
+    border-radius:6px;
+    padding:7px 10px;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer
+}
+
+.feedback-submit:hover{
+    background:#004494
+}
+
+.feedback-cancel{
+    border:0;
+    background:#eef2f7;
+    color:#64748b;
+    border-radius:6px;
+    padding:7px 9px;
+    font-size:11px;
+    cursor:pointer
+}
+
+.feedback-modal-message{
+    display:none;
+    font-size:11px;
+    margin-top:8px;
+    color:#b91c1c
+}
+
+.feedback-modal-message.show{
+    display:block
+}
+
+
+/* =========================================================
+   =========================================================
+   NOVA ÁREA — LINKS DE ACESSO
+   =========================================================
+   ========================================================= */
+
+#paginaLinks{
+    display:none
+}
+
+#paginaLinks.visivel{
+    display:block
+}
+
+#paginaScripts.oculto{
+    display:none
+}
+
+
+/* Cabeçalho */
+
+.links-topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:22px
+}
+
+.links-topo h1{
+    font-size:25px;
+    color:var(--azul-escuro);
+    margin-bottom:5px
+}
+
+.links-topo p{
+    color:var(--muted);
+    font-size:14px
+}
+
+
+/* Busca dos sistemas */
+
+.links-busca{
+    width:280px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:0 13px;
+    background:#fff;
+    border:1px solid var(--borda);
+    border-radius:9px;
+    transition:.2s ease
+}
+
+.links-busca:focus-within{
+    border-color:var(--azul);
+    box-shadow:0 0 0 3px rgba(0,86,179,.08)
+}
+
+.links-busca span{
+    font-size:15px
+}
+
+.links-busca input{
+    width:100%;
+    border:none;
+    outline:none;
+    font-size:13px;
+    color:#1d2939;
+    background:transparent
+}
+
+.links-busca input::placeholder{
+    color:#98a2b3
+}
+
+
+/* Seções */
+
+.links-secao{
+    margin-bottom:27px
+}
+
+.links-secao-titulo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:12px
+}
+
+.links-secao-titulo span{
+    font-size:17px
+}
+
+.links-secao-titulo h2{
+    color:#344054;
+    font-size:15px;
+    font-weight:700
+}
+
+
+/* Acesso rápido */
+
+.links-acesso-rapido{
+    padding:16px;
+    margin-bottom:27px;
+    background:linear-gradient(135deg,#f5f9ff,#eef5ff);
+    border:1px solid #d8e7fb;
+    border-radius:11px
+}
+
+.links-atalhos{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap
+}
+
+.links-atalho{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding:9px 14px;
+    background:#fff;
+    border:1px solid #dbe5f0;
+    border-radius:8px;
+    color:#344054;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    transition:.2s ease
+}
+
+.links-atalho:hover{
+    color:var(--azul);
+    border-color:var(--azul);
+    transform:translateY(-1px)
+}
+
+.links-atalho-icone{
+    font-size:16px
+}
+
+
+/* Grid */
+
+.links-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px
+}
+
+
+/* Cards */
+
+.links-card{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    min-height:72px;
+    padding:14px;
+    background:#fff;
+    border:1px solid #e4e7ec;
+    border-radius:10px;
+    text-decoration:none;
+    color:inherit;
+    box-shadow:0 2px 5px rgba(0,0,0,.035);
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease
+}
+
+.links-card:hover{
+    transform:translateY(-2px);
+    border-color:var(--azul);
+    box-shadow:0 6px 16px rgba(0,86,179,.10)
+}
+
+.links-icone{
+    width:43px;
+    height:43px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#eef5ff;
+    border-radius:9px;
+    font-size:20px
+}
+
+.links-conteudo{
+    flex:1;
+    min-width:0
+}
+
+.links-conteudo h3{
+    color:#1d2939;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:4px
+}
+
+.links-conteudo p{
+    color:#667085;
+    font-size:11px;
+    line-height:1.35
+}
+
+.links-seta{
+    color:var(--azul);
+    font-size:20px;
+    font-weight:600;
+    transition:transform .2s ease
+}
+
+.links-card:hover .links-seta{
+    transform:translateX(3px)
+}
+
+
+/* Sem resultado */
+
+.links-sem-resultado{
+    display:none;
+    text-align:center;
+    padding:35px 20px;
+    background:#fff;
+    border:1px solid var(--borda);
+    border-radius:10px;
+    color:var(--muted)
+}
+
+.links-sem-resultado span{
+    display:block;
+    font-size:28px;
+    margin-bottom:8px
+}
+
+.links-sem-resultado strong{
+    display:block;
+    color:#344054;
+    font-size:14px;
+    margin-bottom:4px
+}
+
+.links-sem-resultado p{
+    font-size:12px
+}
+
+.links-card.oculto{
+    display:none
+}
+
+.links-secao.oculto{
+    display:none
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+    max-width:1440px;
+    margin:0 auto;
+    padding:15px 30px;
+    color:#94a3b8;
+    font-size:11px;
+    text-align:right
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+/* ================================
+   ACESSOS AOS SISTEMAS
+================================ */
+
+.acessos-area{
+    margin-bottom:25px;
+}
+
+.acessos-head{
+    margin-top:0;
+    margin-bottom:12px;
+}
+
+.acessos-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.acesso-card{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+    padding:13px 14px;
+    background:#fff;
+    border:1px solid var(--borda);
+    border-radius:8px;
+    text-decoration:none;
+    color:var(--texto);
+    transition:
+        border-color .15s,
+        background .15s,
+        transform .15s,
+        box-shadow .15s;
+}
+
+.acesso-card:hover{
+    border-color:#9bbde0;
+    background:var(--azul-claro);
+    transform:translateY(-1px);
+    box-shadow:0 4px 12px rgba(15,23,42,.07);
+}
+
+.acesso-icon{
+    width:38px;
+    height:38px;
+    flex:0 0 38px;
+    display:grid;
+    place-items:center;
+    background:var(--azul-claro);
+    border-radius:8px;
+    font-size:18px;
+}
+
+.acesso-info{
+    min-width:0;
+    flex:1;
+}
+
+.acesso-info strong{
+    display:block;
+    color:var(--azul-escuro);
+    font-size:13px;
+    margin-bottom:3px;
+}
+
+.acesso-info span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.acesso-arrow{
+    color:#94a3b8;
+    font-size:17px;
+    flex:0 0 auto;
+    transition:.15s;
+}
+
+.acesso-card:hover .acesso-arrow{
+    color:var(--azul);
+    transform:translate(2px,-2px);
+}
+@media(max-width:900px){
+    .acessos-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .acessos-grid{
+        grid-template-columns:1fr;
+    }
+}
+@media(max-width:900px){
+
+    .layout{
+        display:block
+    }
+
+    .layout.collapsed .sidebar{
+        display:none
+    }
+
+    .sidebar{
+        border-right:0;
+        border-bottom:1px solid var(--borda);
+        padding:10px 14px
+    }
+
+    .menu{
+        display:flex;
+        gap:4px;
+        overflow-x:auto
+    }
+
+    .menu-title{
+        display:none
+    }
+
+    .menu li{
+        min-width:max-content
+    }
+
+    .menu button{
+        padding:8px 10px
+    }
+
+    .quick-links{
+        grid-template-columns:repeat(2,1fr)
+    }
+
+    .links-grid{
+        grid-template-columns:repeat(2,1fr)
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    .links-topo{
+        flex-direction:column;
+        align-items:stretch
+    }
+
+    .links-busca{
+        width:100%
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .topbar{
+        padding:0 14px
+    }
+
+    .brand-text{
+        font-size:14px
+    }
+
+    .status{
+        display:none
+    }
+
+    .main{
+        padding:20px 12px
+    }
+
+    .welcome h1{
+        font-size:21px
+    }
+
+    .grid-scripts{
+        grid-template-columns:1fr
+    }
+
+    .quick-links{
+        grid-template-columns:1fr
+    }
+
+    .links-grid{
+        grid-template-columns:1fr
+    }
+
+    .links-atalhos{
+        flex-direction:column
+    }
+
+    .links-atalho{
+        width:100%
+    }
+
+    .script-card{
+        min-width:0
+    }
+
+    .script-content{
+        font-size:12.5px
+    }
+
+    .user-name{
+        display:none
+    }
+
+    .login-box{
+        padding:25px 20px
+    }
+
+}
+
 </style>
 </head>
+
 <body class="bloqueado">
+
+
+<!-- =========================================================
+     LOGIN
+     ========================================================= -->
+
 <div class="login-overlay" id="loginOverlay">
-<div class="login-box">
-<div class="login-brand"><div class="login-icon">▦</div><h1>Central de Atendimento</h1><p>Portal interno de apoio ao atendimento</p></div>
-<label class="login-label" for="loginName">Como podemos te chamar?</label>
-<input class="login-name" id="loginName" type="text" maxlength="80" autocomplete="name" placeholder="Digite seu nome">
-<div class="login-error" id="loginError">Digite seu nome e aceite os Termos de Uso para continuar.</div>
-<div class="terms-box"><label class="terms-check"><input type="checkbox" id="termsCheck"><span>Li e aceito os <button type="button" class="terms-link" onclick="abrirTermos(event)">Termos de Uso</button> da Central de Atendimento.</span></label></div>
-<button class="login-button" onclick="entrarNaCentral()">Entrar na Central</button>
-</div></div>
-<div class="terms-modal" id="termsModal" onclick="fecharTermosFora(event)"><div class="terms-content"><button class="terms-close" onclick="fecharTermos()">Fechar</button><h2>Termos de Uso — Central de Atendimento</h2><p>Última atualização: agosto de 2026.</p><h3>1. Finalidade da ferramenta</h3><p>A Central de Atendimento é uma ferramenta interna destinada exclusivamente ao apoio às atividades de atendimento, consulta e utilização de scripts e orientações disponibilizados pela organização.</p><h3>2. Uso profissional</h3><p>A ferramenta deve ser utilizada exclusivamente para finalidades relacionadas às atividades profissionais. É vedada a utilização para fins pessoais, comerciais ou para qualquer atividade não relacionada ao atendimento.</p><h3>3. Responsabilidade pelo conteúdo</h3><p>Os scripts e orientações disponibilizados servem como material de apoio. O usuário é responsável por utilizar as informações de acordo com os procedimentos, políticas e orientações oficiais vigentes.</p><h3>4. Informações e dados pessoais</h3><p>Não devem ser inseridos, armazenados ou compartilhados na ferramenta dados pessoais, documentos, senhas, códigos de autenticação ou outras informações sensíveis de usuários, salvo quando expressamente autorizado pelos procedimentos oficiais.</p><h3>5. Segurança</h3><p>O usuário deve preservar a segurança das informações acessadas durante sua atividade e não compartilhar o conteúdo da ferramenta com pessoas não autorizadas.</p><h3>6. Atualização dos conteúdos</h3><p>Os scripts podem ser alterados, atualizados ou removidos a qualquer momento, conforme a necessidade operacional.</p><h3>7. Uso indevido</h3><p>O uso da ferramenta em desacordo com estes termos, com as políticas internas ou com as orientações de segurança poderá resultar na restrição de acesso e nas medidas administrativas cabíveis.</p><h3>8. Aceite</h3><p>Ao selecionar “Aceito os Termos de Uso” e acessar a Central de Atendimento, o usuário declara que leu, compreendeu e concorda com as condições estabelecidas.</p></div></div>
+
+    <div class="login-box">
+
+        <div class="login-brand">
+
+            <div class="login-icon">▦</div>
+
+            <h1>Central de Atendimento</h1>
+
+            <p>Portal interno de apoio ao atendimento</p>
+
+        </div>
+
+        <label class="login-label" for="loginName">
+            Como podemos te chamar?
+        </label>
+
+        <input
+            class="login-name"
+            id="loginName"
+            type="text"
+            maxlength="80"
+            autocomplete="name"
+            placeholder="Digite seu nome"
+        >
+
+        <div class="login-error" id="loginError">
+            Digite seu nome e aceite os Termos de Uso para continuar.
+        </div>
+
+        <div class="terms-box">
+
+            <label class="terms-check">
+
+                <input type="checkbox" id="termsCheck">
+
+                <span>
+                    Li e aceito os
+                    <button
+                        type="button"
+                        class="terms-link"
+                        onclick="abrirTermos(event)"
+                    >
+                        Termos de Uso
+                    </button>
+                    da Central de Atendimento.
+                </span>
+
+            </label>
+
+        </div>
+
+        <button
+            class="login-button"
+            onclick="entrarNaCentral()"
+        >
+            Entrar na Central
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MODAL DE TERMOS
+     ========================================================= -->
+
+<div
+    class="terms-modal"
+    id="termsModal"
+    onclick="fecharTermosFora(event)"
+>
+
+    <div class="terms-content">
+
+        <button
+            class="terms-close"
+            onclick="fecharTermos()"
+        >
+            Fechar
+        </button>
+
+        <h2>Termos de Uso — Central de Atendimento</h2>
+
+        <p>Última atualização: agosto de 2026.</p>
+
+        <h3>1. Finalidade da ferramenta</h3>
+        <p>
+            A Central de Atendimento é uma ferramenta interna destinada
+            exclusivamente ao apoio às atividades de atendimento, consulta
+            e utilização de scripts e orientações disponibilizados pela
+            organização.
+        </p>
+
+        <h3>2. Uso profissional</h3>
+        <p>
+            A ferramenta deve ser utilizada exclusivamente para finalidades
+            relacionadas às atividades profissionais. É vedada a utilização
+            para fins pessoais, comerciais ou para qualquer atividade não
+            relacionada ao atendimento.
+        </p>
+
+        <h3>3. Responsabilidade pelo conteúdo</h3>
+        <p>
+            Os scripts e orientações disponibilizados servem como material
+            de apoio. O usuário é responsável por utilizar as informações
+            de acordo com os procedimentos, políticas e orientações oficiais
+            vigentes.
+        </p>
+
+        <h3>4. Informações e dados pessoais</h3>
+        <p>
+            Não devem ser inseridos, armazenados ou compartilhados na
+            ferramenta dados pessoais, documentos, senhas, códigos de
+            autenticação ou outras informações sensíveis de usuários,
+            salvo quando expressamente autorizado pelos procedimentos oficiais.
+        </p>
+
+        <h3>5. Segurança</h3>
+        <p>
+            O usuário deve preservar a segurança das informações acessadas
+            durante sua atividade e não compartilhar o conteúdo da ferramenta
+            com pessoas não autorizadas.
+        </p>
+
+        <h3>6. Atualização dos conteúdos</h3>
+        <p>
+            Os scripts podem ser alterados, atualizados ou removidos a
+            qualquer momento, conforme a necessidade operacional.
+        </p>
+
+        <h3>7. Uso indevido</h3>
+        <p>
+            O uso da ferramenta em desacordo com estes termos, com as
+            políticas internas ou com as orientações de segurança poderá
+            resultar na restrição de acesso e nas medidas administrativas cabíveis.
+        </p>
+
+        <h3>8. Aceite</h3>
+        <p>
+            Ao selecionar “Aceito os Termos de Uso” e acessar a Central de
+            Atendimento, o usuário declara que leu, compreendeu e concorda
+            com as condições estabelecidas.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOPO
+     ========================================================= -->
+
 <header class="topbar">
-<div class="topbar-left"><button class="menu-toggle" id="menuToggle" onclick="alternarMenu()" aria-label="Recolher ou expandir menu">☰</button><div class="brand"><div class="brand-icon">▦</div><div class="brand-text">Central de Atendimento<small>Portal interno de apoio</small></div></div></div>
-<div class="user-area"><span class="user-name" id="topUser"></span><div class="status"><span class="status-dot"></span>Sistema operacional</div></div>
+
+    <div class="topbar-left">
+
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            onclick="alternarMenu()"
+            aria-label="Recolher ou expandir menu"
+        >
+            ☰
+        </button>
+
+        <div class="brand">
+
+            <div class="brand-icon">▦</div>
+
+            <div class="brand-text">
+                Central de Atendimento
+                <small>Portal interno de apoio</small>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="user-area">
+
+        <span
+            class="user-name"
+            id="topUser"
+        ></span>
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            Sistema operacional
+
+        </div>
+
+    </div>
+
 </header>
+
+
+<!-- =========================================================
+     LAYOUT
+     ========================================================= -->
+
 <div class="layout" id="layout">
-<aside class="sidebar"><div class="menu-title">Navegação</div><ul class="menu">
-<li><button class="active" onclick="filtrarCategoria('todos',this)">🏠 Início</button></li><li><button onclick="filtrarCategoria('Atendimento',this)">📋 Atendimento</button></li><li><button onclick="filtrarCategoria('Tempo de espera',this)">⏱️ Tempo de espera</button></li><li><button onclick="filtrarCategoria('Segurança',this)">🔒 Segurança</button></li><li><button onclick="filtrarCategoria('Recuperação de conta',this)">🔐 Recuperação de conta</button></li><li><button onclick="filtrarCategoria('Usuários agressivos',this)">⚠️ Situações</button></li><li><button onclick="filtrarCategoria('Gov.br',this)">🏛️ Gov.br</button></li><li><button onclick="filtrarCategoria('Chamados',this)">📝 Chamados</button></li><li><button onclick="filtrarCategoria('Documentação',this)">📄 Documentação</button></li><li><button onclick="filtrarCategoria('Pesquisa',this)">⭐ Pesquisa</button></li>
-</ul></aside>
+
+
+<!-- =========================================================
+     MENU
+     ========================================================= -->
+
+<aside class="sidebar">
+
+    <div class="menu-title">
+        Navegação
+    </div>
+
+    <ul class="menu">
+
+        <li>
+            <button
+                class="active"
+                onclick="mostrarPagina('scripts',this)"
+            >
+                🏠 Início
+            </button>
+        </li>
+
+        <li>
+            <button onclick="mostrarPagina('links',this)">
+                🔗 Links de Acesso
+            </button>
+        </li>
+
+        <li>
+            <button onclick="filtrarCategoria('Atendimento',this)">
+                📋 Atendimento
+            </button>
+        </li>
+
+        <li>
+            <button onclick="filtrarCategoria('Tempo de espera',this)">
+                ⏱️ Tempo de espera
+            </button>
+        </li>
+
+        <li>
+            <button onclick="filtrarCategoria('Segurança',this)">
+                🔒 Segurança
+            </button>
+        </li>
+
+        <li>
+            <button onclick="filtrarCategoria('Recuperação de conta',this)">
+                🔐 Recuperação de conta
+            </button>
+        </li>
+
+        <li>
+            <button onclick="filtrarCategoria('Usuários agressivos',this)">
+                ⚠️ Situações
+            </button>
+        </li>
+
+        <li>
+            <button onclick="filtrarCategoria('Gov.br',this)">
+                🏛️ Gov.br
+            </button>
+        </li>
+
+        <li>
+            <button onclick="filtrarCategoria('Chamados',this)">
+                📝 Chamados
+            </button>
+        </li>
+
+        <li>
+            <button onclick="filtrarCategoria('Documentação',this)">
+                📄 Documentação
+            </button>
+        </li>
+
+        <li>
+            <button onclick="filtrarCategoria('Pesquisa',this)">
+                ⭐ Pesquisa
+            </button>
+        </li>
+
+    </ul>
+
+</aside>
+
+
+<!-- =========================================================
+     CONTEÚDO
+     ========================================================= -->
+
 <main class="main">
-<div class="welcome"><h1 id="welcomeTitle">Olá! 👋</h1><p>Acesse rapidamente seus scripts e recursos de apoio ao atendimento.</p></div>
-<div class="search-wrap"><span class="search-icon">🔎</span><input type="text" id="campoBusca" class="busca-input" placeholder="Pesquisar scripts, palavras-chave ou situações..." oninput="filtrarScripts()"></div>
-<div class="quick-links"><button class="quick-link" onclick="buscarRapido('abertura')"><strong>⚡ Abertura</strong>Iniciar atendimento</button><button class="quick-link" onclick="buscarRapido('transferência')"><strong>🔄 Transferência</strong>Encaminhar atendimento</button><button class="quick-link" onclick="buscarRapido('protocolo')"><strong>📄 Protocolo</strong>Solicitar identificação</button><button class="quick-link" onclick="buscarRapido('pesquisa')"><strong>⭐ Pesquisa</strong>Encerrar atendimento</button></div>
-<div class="section-head"><h2>📋 Scripts de atendimento</h2><span class="count" id="contador"></span></div>
-<div class="grid-scripts" id="listaScripts">
-<div class="script-card" data-categoria="Atendimento"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Abertura</span><button class="btn-copiar" onclick="copiarTexto(this,'s1')">Copiar</button></div><div class="script-content" id="s1">Olá! Sou o operador responsável por este atendimento.
-Como posso ajudar?</div></div>
-<div class="script-card" data-categoria="Atendimento"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Transferência</span><button class="btn-copiar" onclick="copiarTexto(this,'s2')">Copiar</button></div><div class="script-content" id="s2">Estou analisando o seu caso agora mesmo. Volto num instante para prosseguirmos!</div></div>
-<div class="script-card" data-categoria="Protocolo"><span class="categoria">Protocolo</span><div class="script-header"><span class="script-title">Solicitando o Protocolo/ID — Opção 1</span><button class="btn-copiar" onclick="copiarTexto(this,'s3')">Copiar</button></div><div class="script-content" id="s3">Você já realizou o registro de algum formulário sobre o caso?</div></div>
-<div class="script-card" data-categoria="Protocolo"><span class="categoria">Protocolo</span><div class="script-header"><span class="script-title">Solicitando o Protocolo/ID — Opção 2</span><button class="btn-copiar" onclick="copiarTexto(this,'s4')">Copiar</button></div><div class="script-content" id="s4">Me informe, por gentileza, o número do protocolo, que você recebeu por e-mail.</div></div>
-<div class="script-card" data-categoria="Encerramento"><span class="categoria">Encerramento</span><div class="script-header"><span class="script-title">Verificando se deu tudo certo</span><button class="btn-copiar" onclick="copiarTexto(this,'s5')">Copiar</button></div><div class="script-content" id="s5">Ficou mais alguma dúvida por aí?
 
-Se estiver tudo certo, deixa uma avaliação sobre o meu atendimento antes de fechar? Seu feedback me ajuda demais!</div></div>
-<div class="script-card" data-categoria="Tempo de espera"><span class="categoria">Tempo de espera</span><div class="script-header"><span class="script-title">Solicitando um momento</span><button class="btn-copiar" onclick="copiarTexto(this,'s6')">Copiar</button></div><div class="script-content" id="s6">Obrigado
-Um momento, enquanto verifico essa informação no sistema.</div></div>
-<div class="script-card" data-categoria="Atendimento"><span class="categoria">Atendimento</span><div class="script-header"><span class="script-title">Manda áudio</span><button class="btn-copiar" onclick="copiarTexto(this,'s7')">Copiar</button></div><div class="script-content" id="s7">Desculpe, mas o recurso de áudio não está disponível no momento, poderia escrever?</div></div>
-<div class="script-card" data-categoria="Segurança"><span class="categoria">Segurança</span><div class="script-header"><span class="script-title">Fraude</span><button class="btn-copiar" onclick="copiarTexto(this,'s8')">Copiar</button></div><div class="script-content" id="s8">Afim de assegurar e garantir a segurança dos dados solicitados, poderia me encaminhar uma foto segurando o seu documento?</div></div>
-<div class="script-card" data-categoria="Tempo de espera"><span class="categoria">Tempo de espera</span><div class="script-header"><span class="script-title">Agradecendo por aguardar</span><button class="btn-copiar" onclick="copiarTexto(this,'s9')">Copiar</button></div><div class="script-content" id="s9">Agradeço a espera.
-Desculpe a demora, o sistema está apresentando lentidão</div></div>
-<div class="script-card" data-categoria="Pesquisa"><span class="categoria">Pesquisa</span><div class="script-header"><span class="script-title">Pesquisa de satisfação — Tarde</span><button class="btn-copiar" onclick="copiarTexto(this,'s10')">Copiar</button></div><div class="script-content" id="s10">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
-Tenha uma ótima Tarde!</div></div>
-<div class="script-card" data-categoria="Pesquisa"><span class="categoria">Pesquisa</span><div class="script-header"><span class="script-title">Pesquisa de satisfação — Noite</span><button class="btn-copiar" onclick="copiarTexto(this,'s11')">Copiar</button></div><div class="script-content" id="s11">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
-Tenha uma ótima Noite!</div></div>
-<div class="script-card" data-categoria="Gov.br"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">2FA Desabilitado</span><button class="btn-copiar" onclick="copiarTexto(this,'s12')">Copiar</button></div><div class="script-content" id="s12">- (Nome do usuário), a verificação em duas etapas da sua conta foi desabilitada. Agora você conseguirá acessar sua conta gov.br sem a necessidade do código.
+
+<!-- =========================================================
+     PÁGINA DOS SCRIPTS
+     ========================================================= -->
+
+<div id="paginaScripts">
+
+    <div class="welcome">
+
+        <h1 id="welcomeTitle">
+            Olá! 👋
+        </h1>
+
+        <p>
+            Acesse rapidamente seus scripts e recursos de apoio ao atendimento.
+        </p>
+
+    </div>
+
+
+    <div class="search-wrap">
+
+        <span class="search-icon">
+            🔎
+        </span>
+
+        <input
+            type="text"
+            id="campoBusca"
+            class="busca-input"
+            placeholder="Pesquisar scripts, palavras-chave ou situações..."
+            oninput="filtrarScripts()"
+        >
+
+    </div>
+
+
+    <!-- ACESSO RÁPIDO DOS SCRIPTS -->
+
+  <!-- ACESSOS RÁPIDOS -->
+<div class="acessos-area">
+
+    <div class="section-head acessos-head">
+        <h2>🔗 Acessos aos Sistemas</h2>
+        <span class="count">Acesso rápido</span>
+    </div>
+
+    <div class="acessos-grid">
+
+        <a class="acesso-card" href="https://portalcolabora.speedmais.com.br/user/auth/login" target="_blank" rel="noopener noreferrer">
+            <div class="acesso-icon">🤝</div>
+            <div class="acesso-info">
+                <strong>Portal Colabora</strong>
+                <span>Acesso ao Portal Colabora</span>
+            </div>
+            <span class="acesso-arrow">↗</span>
+        </a>
+
+        <a class="acesso-card" href="https://portal.speedmais.com.br/performancecef" target="_blank" rel="noopener noreferrer">
+            <div class="acesso-icon">⏱️</div>
+            <div class="acesso-info">
+                <strong>Marcar Ponto</strong>
+                <span>Registro e acompanhamento</span>
+            </div>
+            <span class="acesso-arrow">↗</span>
+        </a>
+
+        <a class="acesso-card" href="https://speed-me.evolux.io/" target="_blank" rel="noopener noreferrer">
+            <div class="acesso-icon">💬</div>
+            <div class="acesso-info">
+                <strong>Evolux</strong>
+                <span>Sistema de atendimento</span>
+            </div>
+            <span class="acesso-arrow">↗</span>
+        </a>
+
+        <a class="acesso-card" href="https://gestao.acesso.gov.br/contas" target="_blank" rel="noopener noreferrer">
+            <div class="acesso-icon">🏛️</div>
+            <div class="acesso-info">
+                <strong>Gestão GOV</strong>
+                <span>Gestão de contas gov.br</span>
+            </div>
+            <span class="acesso-arrow">↗</span>
+        </a>
+
+        <a class="acesso-card" href="https://portaldeservicos.gestao.gov.br/pt#/" target="_blank" rel="noopener noreferrer">
+            <div class="acesso-icon">📋</div>
+            <div class="acesso-info">
+                <strong>Portal MEXX</strong>
+                <span>Portal de serviços</span>
+            </div>
+            <span class="acesso-arrow">↗</span>
+        </a>
+
+        <a class="acesso-card" href="https://webmail.speedmais.com.br/" target="_blank" rel="noopener noreferrer">
+            <div class="acesso-icon">✉️</div>
+            <div class="acesso-info">
+                <strong>WEBMAIL</strong>
+                <span>Acesso ao e-mail corporativo</span>
+            </div>
+            <span class="acesso-arrow">↗</span>
+        </a>
+
+    </div>
+
+</div>
+
+<!-- ATALHOS DOS SCRIPTS -->
+<div class="quick-links">
+
+    <button class="quick-link" onclick="buscarRapido('abertura')">
+        <strong>⚡ Abertura</strong>
+        Iniciar atendimento
+    </button>
+
+    <button class="quick-link" onclick="buscarRapido('transferência')">
+        <strong>🔄 Transferência</strong>
+        Encaminhar atendimento
+    </button>
+
+    <button class="quick-link" onclick="buscarRapido('protocolo')">
+        <strong>📄 Protocolo</strong>
+        Solicitar identificação
+    </button>
+
+    <button class="quick-link" onclick="buscarRapido('pesquisa')">
+        <strong>⭐ Pesquisa</strong>
+        Encerrar atendimento
+    </button>
+
+</div>
+
+
+    <div class="section-head">
+
+        <h2>
+            📋 Scripts de atendimento
+        </h2>
+
+        <span
+            class="count"
+            id="contador"
+        ></span>
+
+    </div>
+
+
+    <div
+        class="grid-scripts"
+        id="listaScripts"
+    >
+
+
+<!-- =========================================================
+     SCRIPTS EXISTENTES
+     ========================================================= -->
+
+<div class="script-card" data-categoria="Atendimento">
+<span class="categoria">Atendimento</span>
+<div class="script-header">
+<span class="script-title">Abertura</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s1')">Copiar</button>
+</div>
+<div class="script-content" id="s1">Olá! Sou o operador responsável por este atendimento.
+Como posso ajudar?</div>
+</div>
+
+
+<div class="script-card" data-categoria="Atendimento">
+<span class="categoria">Atendimento</span>
+<div class="script-header">
+<span class="script-title">Transferência</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s2')">Copiar</button>
+</div>
+<div class="script-content" id="s2">Estou analisando o seu caso agora mesmo. Volto num instante para prosseguirmos!</div>
+</div>
+
+
+<div class="script-card" data-categoria="Protocolo">
+<span class="categoria">Protocolo</span>
+<div class="script-header">
+<span class="script-title">Solicitando o Protocolo/ID — Opção 1</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s3')">Copiar</button>
+</div>
+<div class="script-content" id="s3">Você já realizou o registro de algum formulário sobre o caso?</div>
+</div>
+
+
+<div class="script-card" data-categoria="Protocolo">
+<span class="categoria">Protocolo</span>
+<div class="script-header">
+<span class="script-title">Solicitando o Protocolo/ID — Opção 2</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s4')">Copiar</button>
+</div>
+<div class="script-content" id="s4">Me informe, por gentileza, o número do protocolo, que você recebeu por e-mail.</div>
+</div>
+
+
+<div class="script-card" data-categoria="Encerramento">
+<span class="categoria">Encerramento</span>
+<div class="script-header">
+<span class="script-title">Verificando se deu tudo certo</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s5')">Copiar</button>
+</div>
+<div class="script-content" id="s5">Ficou mais alguma dúvida por aí?
+
+Se estiver tudo certo, deixa uma avaliação sobre o meu atendimento antes de fechar? Seu feedback me ajuda demais!</div>
+</div>
+
+
+<div class="script-card" data-categoria="Tempo de espera">
+<span class="categoria">Tempo de espera</span>
+<div class="script-header">
+<span class="script-title">Solicitando um momento</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s6')">Copiar</button>
+</div>
+<div class="script-content" id="s6">Obrigado
+Um momento, enquanto verifico essa informação no sistema.</div>
+</div>
+
+
+<div class="script-card" data-categoria="Atendimento">
+<span class="categoria">Atendimento</span>
+<div class="script-header">
+<span class="script-title">Manda áudio</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s7')">Copiar</button>
+</div>
+<div class="script-content" id="s7">Desculpe, mas o recurso de áudio não está disponível no momento, poderia escrever?</div>
+</div>
+
+
+<div class="script-card" data-categoria="Segurança">
+<span class="categoria">Segurança</span>
+<div class="script-header">
+<span class="script-title">Fraude</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s8')">Copiar</button>
+</div>
+<div class="script-content" id="s8">Afim de assegurar e garantir a segurança dos dados solicitados, poderia me encaminhar uma foto segurando o seu documento?</div>
+</div>
+
+
+<div class="script-card" data-categoria="Tempo de espera">
+<span class="categoria">Tempo de espera</span>
+<div class="script-header">
+<span class="script-title">Agradecendo por aguardar</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s9')">Copiar</button>
+</div>
+<div class="script-content" id="s9">Agradeço a espera.
+Desculpe a demora, o sistema está apresentando lentidão</div>
+</div>
+
+
+<div class="script-card" data-categoria="Pesquisa">
+<span class="categoria">Pesquisa</span>
+<div class="script-header">
+<span class="script-title">Pesquisa de satisfação — Tarde</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s10')">Copiar</button>
+</div>
+<div class="script-content" id="s10">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
+Tenha uma ótima Tarde!</div>
+</div>
+
+
+<div class="script-card" data-categoria="Pesquisa">
+<span class="categoria">Pesquisa</span>
+<div class="script-header">
+<span class="script-title">Pesquisa de satisfação — Noite</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s11')">Copiar</button>
+</div>
+<div class="script-content" id="s11">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
+Tenha uma ótima Noite!</div>
+</div>
+
+
+<div class="script-card" data-categoria="Gov.br">
+<span class="categoria">Gov.br</span>
+<div class="script-header">
+<span class="script-title">2FA Desabilitado</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s12')">Copiar</button>
+</div>
+<div class="script-content" id="s12">- (Nome do usuário), a verificação em duas etapas da sua conta foi desabilitada. Agora você conseguirá acessar sua conta gov.br sem a necessidade do código.
 
 Por questões de segurança, o nível da conta foi reduzido para Bronze. Recomendamos que aumente o nível da conta seguindo as orientações disponíveis nessa página
 
-https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/atendimento-gov.br/duvidas-na-conta-gov.br/duvidas-para-aumentar-o-nivel-da-conta-gov.br</div></div>
-<div class="script-card" data-categoria="Gov.br"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">E-mail Alterado</span><button class="btn-copiar" onclick="copiarTexto(this,'s13')">Copiar</button></div><div class="script-content" id="s13">- (Nome do usuário), sua solicitação foi aceita e o e-mail da sua conta gov.br foi alterado com sucesso. Agora você conseguirá recuperar sua senha pelo e-mail cadastrado.
+https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/atendimento-gov.br/duvidas-na-conta-gov.br/duvidas-para-aumentar-o-nivel-da-conta-gov.br</div>
+</div>
+
+
+<div class="script-card" data-categoria="Gov.br">
+<span class="categoria">Gov.br</span>
+<div class="script-header">
+<span class="script-title">E-mail Alterado</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s13')">Copiar</button>
+</div>
+<div class="script-content" id="s13">- (Nome do usuário), sua solicitação foi aceita e o e-mail da sua conta gov.br foi alterado com sucesso. Agora você conseguirá recuperar sua senha pelo e-mail cadastrado.
 
 Por questões de segurança, o nível da conta foi reduzido para Bronze. Recomendamos que aumente o nível da conta seguindo as orientações disponíveis nessa página
 
-https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/atendimento-gov.br/duvidas-na-conta-gov.br/duvidas-para-aumentar-o-nivel-da-conta-gov.br</div></div>
-<div class="script-card" data-categoria="Chamados"><span class="categoria">Chamados</span><div class="script-header"><span class="script-title">Por no chamado — Informações corretas</span><button class="btn-copiar" onclick="copiarTexto(this,'s14')">Copiar</button></div><div class="script-content" id="s14">Atendimento realizado por chat, em anexo informações corretas.</div></div>
-<div class="script-card" data-categoria="Chamados"><span class="categoria">Chamados</span><div class="script-header"><span class="script-title">Por no chamado — Complemento de dados</span><button class="btn-copiar" onclick="copiarTexto(this,'s15')">Copiar</button></div><div class="script-content" id="s15">Atendimento realizado por chat, através do protocolo de complemento de dados</div></div>
-<div class="script-card" data-categoria="Documentação"><span class="categoria">Documentação</span><div class="script-header"><span class="script-title">Não mandou a documentação</span><button class="btn-copiar" onclick="copiarTexto(this,'s16')">Copiar</button></div><div class="script-content" id="s16">Infelizmente o arquivo que me enviou não pode ser validado em sistema. Sem a documentação correta fica inviável seguir no momento com a sua solicitação.
+https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/atendimento-gov.br/duvidas-na-conta-gov.br/duvidas-para-aumentar-o-nivel-da-conta-gov.br</div>
+</div>
 
-Eu recomendo que você entre em contato, em outro momento, com a documentação válida para que assim possamos resolver a situação.</div></div>
-<div class="script-card" data-categoria="Documentação"><span class="categoria">Documentação</span><div class="script-header"><span class="script-title">Documento é captura de tela</span><button class="btn-copiar" onclick="copiarTexto(this,'s17')">Copiar</button></div><div class="script-content" id="s17">Seu documento não pode ser validado por se tratar de Captura de tela.
-Necessito que encaminhe a foto do original, frente e verso ou, caso ele esteja em formato digital, deve estar acompanhado do QRCode de validação</div></div>
-<div class="script-card" data-categoria="Gov.br"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">Registrar solicitação — Dúvidas no aplicativo</span><button class="btn-copiar" onclick="copiarTexto(this,'s18')">Copiar</button></div><div class="script-content" id="s18">Vou pedir que registre uma solicitação no serviço https://www.gov.br/pt-br/servicos/solicitar-atendimento-conta-gov.br
+
+<div class="script-card" data-categoria="Chamados">
+<span class="categoria">Chamados</span>
+<div class="script-header">
+<span class="script-title">Por no chamado — Informações corretas</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s14')">Copiar</button>
+</div>
+<div class="script-content" id="s14">Atendimento realizado por chat, em anexo informações corretas.</div>
+</div>
+
+
+<div class="script-card" data-categoria="Chamados">
+<span class="categoria">Chamados</span>
+<div class="script-header">
+<span class="script-title">Por no chamado — Complemento de dados</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s15')">Copiar</button>
+</div>
+<div class="script-content" id="s15">Atendimento realizado por chat, através do protocolo de complemento de dados</div>
+</div>
+
+
+<div class="script-card" data-categoria="Documentação">
+<span class="categoria">Documentação</span>
+<div class="script-header">
+<span class="script-title">Não mandou a documentação</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s16')">Copiar</button>
+</div>
+<div class="script-content" id="s16">Infelizmente o arquivo que me enviou não pode ser validado em sistema. Sem a documentação correta fica inviável seguir no momento com a sua solicitação.
+
+Eu recomendo que você entre em contato, em outro momento, com a documentação válida para que assim possamos resolver a situação.</div>
+</div>
+
+
+<div class="script-card" data-categoria="Documentação">
+<span class="categoria">Documentação</span>
+<div class="script-header">
+<span class="script-title">Documento é captura de tela</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s17')">Copiar</button>
+</div>
+<div class="script-content" id="s17">Seu documento não pode ser validado por se tratar de Captura de tela.
+Necessito que encaminhe a foto do original, frente e verso ou, caso ele esteja em formato digital, deve estar acompanhado do QRCode de validação</div>
+</div>
+
+
+<div class="script-card" data-categoria="Gov.br">
+<span class="categoria">Gov.br</span>
+<div class="script-header">
+<span class="script-title">Registrar solicitação — Dúvidas no aplicativo</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s18')">Copiar</button>
+</div>
+<div class="script-content" id="s18">Vou pedir que registre uma solicitação no serviço https://www.gov.br/pt-br/servicos/solicitar-atendimento-conta-gov.br
 opção “01 - Dúvidas no aplicativo GOV.BR”.
 
-Nossa equipe técnica realizará a análise da sua dificuldade e assim te ajudar com esta demanda.</div></div>
-<div class="script-card" data-categoria="Chamados"><span class="categoria">Chamados</span><div class="script-header"><span class="script-title">Chamado encerrado há muito tempo</span><button class="btn-copiar" onclick="copiarTexto(this,'s19')">Copiar</button></div><div class="script-content" id="s19">Este chamado está encerrado a muito tempo, será necessário abrir um novo para que possamos seguir com a solicitação.</div></div>
-<div class="script-card" data-categoria="Chamados"><span class="categoria">Chamados</span><div class="script-header"><span class="script-title">Link — Desativar 2FA</span><button class="btn-copiar" onclick="copiarTexto(this,'s20')">Copiar</button></div><div class="script-content" id="s20">
+Nossa equipe técnica realizará a análise da sua dificuldade e assim te ajudar com esta demanda.</div>
+</div>
+
+
+<div class="script-card" data-categoria="Chamados">
+<span class="categoria">Chamados</span>
+<div class="script-header">
+<span class="script-title">Chamado encerrado há muito tempo</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s19')">Copiar</button>
+</div>
+<div class="script-content" id="s19">Este chamado está encerrado a muito tempo, será necessário abrir um novo para que possamos seguir com a solicitação.</div>
+</div>
+
+
+<div class="script-card" data-categoria="Chamados">
+<span class="categoria">Chamados</span>
+<div class="script-header">
+<span class="script-title">Link — Desativar 2FA</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s20')">Copiar</button>
+</div>
+<div class="script-content" id="s20">
 
 Para desativar a verificação em duas etapas ou desvincular o aplicativo da sua conta gov.br, preencha o formulário através do link abaixo:
 
 https://atendimento.servicos.gov.br/pt/desativar-2fa
 
-Após o preenchimento, pode me informar o número do protocolo/ID, por favor? Assim consigo priorizar para você.</div></div>
-<div class="script-card" data-categoria="Chamados"><span class="categoria">Chamados</span><div class="script-header"><span class="script-title">Link — Alterar e-mail</span><button class="btn-copiar" onclick="copiarTexto(this,'s21')">Copiar</button></div><div class="script-content" id="s21">
+Após o preenchimento, pode me informar o número do protocolo/ID, por favor? Assim consigo priorizar para você.
+
+</div>
+</div>
+
+
+<div class="script-card" data-categoria="Chamados">
+<span class="categoria">Chamados</span>
+<div class="script-header">
+<span class="script-title">Link — Alterar e-mail</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s21')">Copiar</button>
+</div>
+<div class="script-content" id="s21">
 
 Para recuperar o acesso à sua conta gov.br, preencha o formulário através do link abaixo:
 
@@ -160,12 +2052,57 @@ https://atendimento.servicos.gov.br/pt/alterar-email
 
 Após o preenchimento, pode me informar o número do protocolo/ID, por favor? Assim consigo priorizar para você.
 
-</div></div>
-<div class="script-card destaque" data-categoria="Usuários agressivos"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">1ª Sinalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s22')">Copiar</button></div><div class="script-content" id="s22">Ops! Vamos manter o papo amigável? Por favor, evite o uso de palavrões por aqui.</div></div>
-<div class="script-card destaque" data-categoria="Usuários agressivos"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">2ª Sinalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s23')">Copiar</button></div><div class="script-content" id="s23">(Nome do usuário), prezamos por um ambiente de atendimento respeitoso. O uso de palavras pejorativas viola nossas diretrizes. Se o vocabulário inadequado continuar, o atendimento será finalizado imediatamente.</div></div>
-<div class="script-card destaque" data-categoria="Usuários agressivos"><span class="categoria">Usuários agressivos</span><div class="script-header"><span class="script-title">Finalização</span><button class="btn-copiar" onclick="copiarTexto(this,'s24')">Copiar</button></div><div class="script-content" id="s24">Como o tom desrespeitoso persistiu, estarei encerrando este atendimento conforme nossos Termos de Uso.</div></div>
-<div class="script-card" data-categoria="Tempo de resposta"><span class="categoria">Tempo de resposta</span><div class="script-header"><span class="script-title">Reclamação do tempo de resposta</span><button class="btn-copiar" onclick="copiarTexto(this,'s25')">Copiar</button></div><div class="script-content" id="s25">Desculpe. Mas aqui é uma central de atendimento, onde temos vários atendimentos simultâneos. Com isso ocorre um delay sim no tempo de resposta, o que é considerável. Recomendo que, caso não esteja disponível no momento para aguardar o atendimento, nos procure em outro horário. Teremos o prazer de poder te ajudar com a sua demanda.</div></div>
-<div class="script-card destaque" data-categoria="Recuperação de conta"><span class="categoria">Recuperação de conta</span><div class="script-header"><span class="script-title">Menor de idade</span><button class="btn-copiar" onclick="copiarTexto(this,'s26')">Copiar</button></div><div class="script-content" id="s26">Para darmos continuidade à recuperação da sua conta, será necessária a participação do seu responsável legal (pai, mãe ou tutor).
+</div>
+</div>
+
+
+<div class="script-card destaque" data-categoria="Usuários agressivos">
+<span class="categoria">Usuários agressivos</span>
+<div class="script-header">
+<span class="script-title">1ª Sinalização</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s22')">Copiar</button>
+</div>
+<div class="script-content" id="s22">Ops! Vamos manter o papo amigável? Por favor, evite o uso de palavrões por aqui.</div>
+</div>
+
+
+<div class="script-card destaque" data-categoria="Usuários agressivos">
+<span class="categoria">Usuários agressivos</span>
+<div class="script-header">
+<span class="script-title">2ª Sinalização</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s23')">Copiar</button>
+</div>
+<div class="script-content" id="s23">(Nome do usuário), prezamos por um ambiente de atendimento respeitoso. O uso de palavras pejorativas viola nossas diretrizes. Se o vocabulário inadequado continuar, o atendimento será finalizado imediatamente.</div>
+</div>
+
+
+<div class="script-card destaque" data-categoria="Usuários agressivos">
+<span class="categoria">Usuários agressivos</span>
+<div class="script-header">
+<span class="script-title">Finalização</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s24')">Copiar</button>
+</div>
+<div class="script-content" id="s24">Como o tom desrespeitoso persistiu, estarei encerrando este atendimento conforme nossos Termos de Uso.</div>
+</div>
+
+
+<div class="script-card" data-categoria="Tempo de resposta">
+<span class="categoria">Tempo de resposta</span>
+<div class="script-header">
+<span class="script-title">Reclamação do tempo de resposta</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s25')">Copiar</button>
+</div>
+<div class="script-content" id="s25">Desculpe. Mas aqui é uma central de atendimento, onde temos vários atendimentos simultâneos. Com isso ocorre um delay sim no tempo de resposta, o que é considerável. Recomendo que, caso não esteja disponível no momento para aguardar o atendimento, nos procure em outro horário. Teremos o prazer de poder te ajudar com a sua demanda.</div>
+</div>
+
+
+<div class="script-card destaque" data-categoria="Recuperação de conta">
+<span class="categoria">Recuperação de conta</span>
+<div class="script-header">
+<span class="script-title">Menor de idade</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s26')">Copiar</button>
+</div>
+<div class="script-content" id="s26">Para darmos continuidade à recuperação da sua conta, será necessária a participação do seu responsável legal (pai, mãe ou tutor).
 
 Vou te explicar o processo passo a passo.
 
@@ -199,8 +2136,17 @@ Ao finalizar, o sistema vai gerar um número de protocolo.
 
 Após concluir todo o processo, por favor me responda enviando o número do protocolo gerado.
 
-Assim consigo agilizar sua solicitação e liberar o acesso o mais rápido possível.</div></div>
-<div class="script-card destaque" data-categoria="Recuperação de conta"><span class="categoria">Recuperação de conta</span><div class="script-header"><span class="script-title">Responsável legal</span><button class="btn-copiar" onclick="copiarTexto(this,'s27')">Copiar</button></div><div class="script-content" id="s27">Para darmos continuidade à recuperação da conta do menor, será necessária a sua participação como responsável legal.
+Assim consigo agilizar sua solicitação e liberar o acesso o mais rápido possível.</div>
+</div>
+
+
+<div class="script-card destaque" data-categoria="Recuperação de conta">
+<span class="categoria">Recuperação de conta</span>
+<div class="script-header">
+<span class="script-title">Responsável legal</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s27')">Copiar</button>
+</div>
+<div class="script-content" id="s27">Para darmos continuidade à recuperação da conta do menor, será necessária a sua participação como responsável legal.
 
 Vou explicar o processo passo a passo para que possamos realizar:
 
@@ -230,8 +2176,17 @@ Siga as instruções na tela para enviar:
 - A sua selfie;
 - A foto do termo manuscrito.
 
-Ao finalizar, o sistema irá gerar um número de protocolo. Por favor, após concluir todo o envio, me informe aqui o número do protocolo gerado para que eu possa localizar a solicitação e agilizar a liberação do acesso.</div></div>
-<div class="script-card destaque" data-categoria="Documentação"><span class="categoria">Documentação</span><div class="script-header"><span class="script-title">Confirmar identidade</span><button class="btn-copiar" onclick="copiarTexto(this,'s28')">Copiar</button></div><div class="script-content" id="s28">Para dar continuidade ao seu processo, por favor acesse o link abaixo e realize a comprovação de identidade:
+Ao finalizar, o sistema irá gerar um número de protocolo. Por favor, após concluir todo o envio, me informe aqui o número do protocolo gerado para que eu possa localizar a solicitação e agilizar a liberação do acesso.</div>
+</div>
+
+
+<div class="script-card destaque" data-categoria="Documentação">
+<span class="categoria">Documentação</span>
+<div class="script-header">
+<span class="script-title">Confirmar identidade</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s28')">Copiar</button>
+</div>
+<div class="script-content" id="s28">Para dar continuidade ao seu processo, por favor acesse o link abaixo e realize a comprovação de identidade:
 
 🔗 Link: https://atendimento.servicos.gov.br/pt/comprovar-identidade
 
@@ -248,8 +2203,17 @@ Atenção:
 Se for documento digital, envie em PDF com QR Code visível.
 
 Após finalizar o processo, responda esta mensagem informando o número do protocolo gerado.
-Assim consigo agilizar sua solicitação e liberar seu acesso o mais rápido possível.</div></div>
-<div class="script-card destaque" data-categoria="Documentação"><span class="categoria">Documentação</span><div class="script-header"><span class="script-title">Envio de documentos</span><button class="btn-copiar" onclick="copiarTexto(this,'s29')">Copiar</button></div><div class="script-content" id="s29">Para dar sequência à sua solicitação, vou precisar que você nos envie algumas informações através do link abaixo:
+Assim consigo agilizar sua solicitação e liberar seu acesso o mais rápido possível.</div>
+</div>
+
+
+<div class="script-card destaque" data-categoria="Documentação">
+<span class="categoria">Documentação</span>
+<div class="script-header">
+<span class="script-title">Envio de documentos</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s29')">Copiar</button>
+</div>
+<div class="script-content" id="s29">Para dar sequência à sua solicitação, vou precisar que você nos envie algumas informações através do link abaixo:
 
 - Documento oficial com foto, frente e verso (Se for documento digital, deve ser em PDF com o QR code para validação) e com o número do CPF;
 
@@ -263,18 +2227,45 @@ Link do formulário:
 
 https://portal.speedmais.com.br/documentacoesgov/
 
-Após o envio, me avise, por gentileza, para darmos continuidade, tá bem?</div></div>
-<div class="script-card" data-categoria="Documentação"><span class="categoria">Documentação</span><div class="script-header"><span class="script-title">Complementação de informações</span><button class="btn-copiar" onclick="copiarTexto(this,'s30')">Copiar</button></div><div class="script-content" id="s30">Por gentileza, me confirme os seus dados, conforme abaixo:
+Após o envio, me avise, por gentileza, para darmos continuidade, tá bem?</div>
+</div>
+
+
+<div class="script-card" data-categoria="Documentação">
+<span class="categoria">Documentação</span>
+<div class="script-header">
+<span class="script-title">Complementação de informações</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s30')">Copiar</button>
+</div>
+<div class="script-content" id="s30">Por gentileza, me confirme os seus dados, conforme abaixo:
 
 Nome completo:
 CPF:
 Data de Nascimento:
-E-mail:</div></div>
-<div class="script-card" data-categoria="Documentação"><span class="categoria">Documentação</span><div class="script-header"><span class="script-title">Dica de captura Facematch</span><button class="btn-copiar" onclick="copiarTexto(this,'s31')">Copiar</button></div><div class="script-content" id="s31">- Iluminação: Fique em um ambiente bem iluminado, de frente para a luz (janela, por exemplo) e evite sombras no rosto.
+E-mail:</div>
+</div>
+
+
+<div class="script-card" data-categoria="Documentação">
+<span class="categoria">Documentação</span>
+<div class="script-header">
+<span class="script-title">Dica de captura Facematch</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s31')">Copiar</button>
+</div>
+<div class="script-content" id="s31">- Iluminação: Fique em um ambiente bem iluminado, de frente para a luz (janela, por exemplo) e evite sombras no rosto.
 - Posição: Segure o celular na altura dos olhos e mantenha o rosto centralizado dentro do círculo que aparece na tela.
 - Acessórios: Retire óculos escuros, bonés ou chapéus.
-- Câmera: A câmera traseira do celular geralmente possui uma resolução melhor. Se tiver dificuldades com a câmera frontal, procure a opção de usar a câmera traseira no próprio aplicativo.</div></div>
-<div class="script-card" data-categoria="Recuperação de conta"><span class="categoria">Recuperação de conta</span><div class="script-header"><span class="script-title">Ensinando a recuperar a senha</span><button class="btn-copiar" onclick="copiarTexto(this,'s32')">Copiar</button></div><div class="script-content" id="s32">Acesse a página de login do gov.br e digite seu CPF.
+- Câmera: A câmera traseira do celular geralmente possui uma resolução melhor. Se tiver dificuldades com a câmera frontal, procure a opção de usar a câmera traseira no próprio aplicativo.</div>
+</div>
+
+
+<div class="script-card" data-categoria="Recuperação de conta">
+<span class="categoria">Recuperação de conta</span>
+<div class="script-header">
+<span class="script-title">Ensinando a recuperar a senha</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s32')">Copiar</button>
+</div>
+<div class="script-content" id="s32">Acesse a página de login do gov.br e digite seu CPF.
 
 Clique no botão Esqueci minha senha.
 
@@ -286,48 +2277,1599 @@ Selecione uma das formas de recuperação disponíveis:
 
 - E-mail ou SMS: recebe um código de validação para redefinir o acesso.
 
-Crie uma nova senha forte com letras maiúsculas, minúsculas, números e símbolos.</div></div>
-<div class="script-card" data-categoria="Documentação"><span class="categoria">Documentação</span><div class="script-header"><span class="script-title">Dica para o envio do arquivo</span><button class="btn-copiar" onclick="copiarTexto(this,'s33')">Copiar</button></div><div class="script-content" id="s33"># Dica para o envio do arquivo
+Crie uma nova senha forte com letras maiúsculas, minúsculas, números e símbolos.</div>
+</div>
+
+
+<div class="script-card" data-categoria="Documentação">
+<span class="categoria">Documentação</span>
+<div class="script-header">
+<span class="script-title">Dica para o envio do arquivo</span>
+<button class="btn-copiar" onclick="copiarTexto(this,'s33')">Copiar</button>
+</div>
+<div class="script-content" id="s33"># Dica para o envio do arquivo
 
 O arquivo acabou ficando um pouco grande, mas tem um truque bem simples para resolver isso:
 
 1. Envie o arquivo primeiro pelo WhatsApp (o próprio aplicativo reduz o tamanho dele automaticamente).
 2. Depois, basta salvar essa versão que você enviou.
 
-Fazendo assim, ele fica mais leve e pronto para uso!</div></div>
-<div class="no-results" id="semResultados">Nenhum script encontrado para esta pesquisa.</div>
-</div></main></div>
-<footer class="footer">Central de Atendimento • Portal interno • Desenvolvido por Bruno Silva <span id="footerUser"></span> • <button class="user-name" onclick="trocarUsuario()">Trocar usuário</button></footer>
+Fazendo assim, ele fica mais leve e pronto para uso!</div>
+</div>
+
+
+<div class="no-results" id="semResultados">
+    Nenhum script encontrado para esta pesquisa.
+</div>
+
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     PÁGINA — LINKS DE ACESSO
+     ========================================================= -->
+
+<div id="paginaLinks">
+
+    <div class="links-topo">
+
+        <div>
+
+            <h1>🔗 Links de Acesso</h1>
+
+            <p>
+                Acesse rapidamente os principais sistemas utilizados no atendimento.
+            </p>
+
+        </div>
+
+        <div class="links-busca">
+
+            <span>🔍</span>
+
+            <input
+                type="text"
+                id="buscaLinks"
+                placeholder="Pesquisar sistema..."
+                autocomplete="off"
+                oninput="filtrarLinks()"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ACESSO RÁPIDO
+         ===================================================== -->
+
+    <div class="links-acesso-rapido">
+
+        <div class="links-secao-titulo">
+
+            <span>⭐</span>
+
+            <h2>Acesso Rápido</h2>
+
+        </div>
+
+
+        <div class="links-atalhos">
+
+            <a
+                href="https://speed-me.evolux.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="links-atalho"
+            >
+                <span class="links-atalho-icone">💬</span>
+                Evolux
+            </a>
+
+
+            <a
+                href="https://portalcolabora.speedmais.com.br/user/auth/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="links-atalho"
+            >
+                <span class="links-atalho-icone">🌐</span>
+                Portal Colabora
+            </a>
+
+
+            <a
+                href="https://portal.speedmais.com.br/performancecef"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="links-atalho"
+            >
+                <span class="links-atalho-icone">🕐</span>
+                Marcar Ponto
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ATENDIMENTO
+         ===================================================== -->
+
+    <div class="links-secao">
+
+        <div class="links-secao-titulo">
+
+            <span>💬</span>
+
+            <h2>Sistemas de Atendimento</h2>
+
+        </div>
+
+
+        <div class="links-grid">
+
+
+            <a
+                href="https://speed-me.evolux.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="links-card"
+                data-link-nome="Evolux"
+                data-link-descricao="Plataforma de atendimento"
+            >
+
+                <div class="links-icone">
+                    💬
+                </div>
+
+                <div class="links-conteudo">
+
+                    <h3>Evolux</h3>
+
+                    <p>
+                        Plataforma de atendimento.
+                    </p>
+
+                </div>
+
+                <span class="links-seta">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                href="https://portalcolabora.speedmais.com.br/user/auth/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="links-card"
+                data-link-nome="Portal Colabora"
+                data-link-descricao="Portal colaborativo"
+            >
+
+                <div class="links-icone">
+                    🌐
+                </div>
+
+                <div class="links-conteudo">
+
+                    <h3>Portal Colabora</h3>
+
+                    <p>
+                        Acesso ao portal colaborativo.
+                    </p>
+
+                </div>
+
+                <span class="links-seta">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                href="https://portaldeservicos.gestao.gov.br/pt#/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="links-card"
+                data-link-nome="Portal MEXX"
+                data-link-descricao="Portal de serviços"
+            >
+
+                <div class="links-icone">
+                    📋
+                </div>
+
+                <div class="links-conteudo">
+
+                    <h3>Portal MEXX</h3>
+
+                    <p>
+                        Acesso ao portal de serviços.
+                    </p>
+
+                </div>
+
+                <span class="links-seta">
+                    →
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CORPORATIVO
+         ===================================================== -->
+
+    <div class="links-secao">
+
+        <div class="links-secao-titulo">
+
+            <span>🏢</span>
+
+            <h2>Sistemas Corporativos</h2>
+
+        </div>
+
+
+        <div class="links-grid">
+
+
+            <a
+                href="https://portal.speedmais.com.br/performancecef"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="links-card"
+                data-link-nome="Marcar Ponto"
+                data-link-descricao="Registro acompanhamento ponto"
+            >
+
+                <div class="links-icone">
+                    🕐
+                </div>
+
+                <div class="links-conteudo">
+
+                    <h3>Marcar Ponto</h3>
+
+                    <p>
+                        Registro e acompanhamento do ponto.
+                    </p>
+
+                </div>
+
+                <span class="links-seta">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                href="https://webmail.speedmais.com.br/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="links-card"
+                data-link-nome="WEBMAIL"
+                data-link-descricao="Email corporativo"
+            >
+
+                <div class="links-icone">
+                    ✉️
+                </div>
+
+                <div class="links-conteudo">
+
+                    <h3>WEBMAIL</h3>
+
+                    <p>
+                        Acesso ao e-mail corporativo.
+                    </p>
+
+                </div>
+
+                <span class="links-seta">
+                    →
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         GOV
+         ===================================================== -->
+
+    <div class="links-secao">
+
+        <div class="links-secao-titulo">
+
+            <span>🔐</span>
+
+            <h2>Sistemas GOV</h2>
+
+        </div>
+
+
+        <div class="links-grid">
+
+
+            <a
+                href="https://gestao.acesso.gov.br/contas"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="links-card"
+                data-link-nome="Gestão GOV"
+                data-link-descricao="Gestão contas GOV"
+            >
+
+                <div class="links-icone">
+                    🔐
+                </div>
+
+                <div class="links-conteudo">
+
+                    <h3>Gestão GOV</h3>
+
+                    <p>
+                        Gestão de contas GOV.
+                    </p>
+
+                </div>
+
+                <span class="links-seta">
+                    →
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SEM RESULTADO
+         ===================================================== -->
+
+    <div
+        class="links-sem-resultado"
+        id="linksSemResultado"
+    >
+
+        <span>🔎</span>
+
+        <strong>
+            Nenhum sistema encontrado.
+        </strong>
+
+        <p>
+            Tente pesquisar por outro nome.
+        </p>
+
+    </div>
+
+</div>
+
+
+</main>
+
+</div>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer class="footer">
+
+    Central de Atendimento • Portal interno • Desenvolvido por Bruno Silva
+
+    <span id="footerUser"></span>
+
+    •
+
+    <button
+        class="user-name"
+        onclick="trocarUsuario()"
+    >
+        Trocar usuário
+    </button>
+
+</footer>
+
+
 <script>
+
+/* =========================================================
+   SESSÃO
+   ========================================================= */
+
 let categoriaAtual='todos';
-document.addEventListener('DOMContentLoaded',criarFeedbacks);
-function iniciarSessao(){const nome=(localStorage.getItem('centralNome')||'').trim();const aceitou=localStorage.getItem('centralTermosAceitos')==='1';if(nome&&aceitou){mostrarCentral(nome)}else{document.body.classList.add('bloqueado');document.getElementById('loginOverlay').style.display='flex';setTimeout(()=>document.getElementById('loginName').focus(),100)}}
-function mostrarCentral(nome){document.body.classList.remove('bloqueado');document.getElementById('loginOverlay').style.display='none';document.getElementById('welcomeTitle').textContent='Olá, '+nome+'! 👋';document.getElementById('topUser').innerHTML=nome+' <button onclick="trocarUsuario()">Trocar usuário</button>';document.getElementById('footerUser').textContent='• '+nome;const abertura=document.getElementById('s1');if(abertura){abertura.textContent='Olá! Sou '+nome+' e estarei com você durante este atendimento.\nComo posso ajudar?';}}
-function entrarNaCentral(){const nome=document.getElementById('loginName').value.trim();const aceitou=document.getElementById('termsCheck').checked;const erro=document.getElementById('loginError');if(!nome||!aceitou){erro.style.display='block';return}localStorage.setItem('centralNome',nome);localStorage.setItem('centralTermosAceitos','1');localStorage.setItem('centralTermosData',new Date().toISOString());mostrarCentral(nome)}
-function trocarUsuario(){localStorage.removeItem('centralNome');document.getElementById('loginName').value='';document.getElementById('termsCheck').checked=false;document.getElementById('loginError').style.display='none';document.body.classList.add('bloqueado');document.getElementById('loginOverlay').style.display='flex';setTimeout(()=>document.getElementById('loginName').focus(),100)}
-function abrirTermos(e){if(e)e.preventDefault();document.getElementById('termsModal').classList.add('show')}
-function fecharTermos(){document.getElementById('termsModal').classList.remove('show')}
-function fecharTermosFora(e){if(e.target.id==='termsModal')fecharTermos()}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')fecharTermos();if(e.key==='Enter'&&document.getElementById('loginOverlay').style.display!=='none')entrarNaCentral()});
-function alternarMenu(){const layout=document.getElementById('layout');layout.classList.toggle('collapsed');const recolhido=layout.classList.contains('collapsed');localStorage.setItem('menuRecolhido',recolhido?'1':'0')}
-(function(){if(localStorage.getItem('menuRecolhido')==='1')document.getElementById('layout').classList.add('collapsed')})();
-const SUPABASE_URL='https://svyjvfasqoopyzfytmnc.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY='sb_publishable_xOrFc-BCtK9deqTkaeVOQA_1rNqxNiS';
+
+
+function iniciarSessao(){
+
+    const nome = (localStorage.getItem('centralNome') || '').trim();
+    const aceitou = localStorage.getItem('centralTermosAceitos') === '1';
+
+    const overlay = document.getElementById('loginOverlay');
+
+    if (!overlay) return;
+
+    if (nome && aceitou) {
+        mostrarCentral(nome);
+    } else {
+
+        document.body.classList.add('bloqueado');
+
+        overlay.style.display = 'flex';
+
+        setTimeout(() => {
+            const campo = document.getElementById('loginName');
+
+            if (campo) {
+                campo.focus();
+            }
+        }, 100);
+    }
+}
+
+function mostrarCentral(nome){
+
+    document.body.classList.remove('bloqueado');
+
+    const overlay = document.getElementById('loginOverlay');
+    const welcome = document.getElementById('welcomeTitle');
+    const topUser = document.getElementById('topUser');
+    const footerUser = document.getElementById('footerUser');
+    const abertura = document.getElementById('s1');
+
+    if (overlay) {
+        overlay.style.display = 'none';
+    }
+
+    if (welcome) {
+        welcome.textContent = 'Olá, ' + nome + '! 👋';
+    }
+
+    if (topUser) {
+        topUser.innerHTML =
+            nome + ' <button onclick="trocarUsuario()">Trocar usuário</button>';
+    }
+
+    if (footerUser) {
+        footerUser.textContent = '• ' + nome;
+    }
+
+    if (abertura) {
+        abertura.textContent =
+            'Olá! Sou ' + nome +
+            ' e estarei com você durante este atendimento.\n' +
+            'Como posso ajudar?';
+    }
+}
+
+function entrarNaCentral(){
+
+    const campoNome = document.getElementById('loginName');
+    const termos = document.getElementById('termsCheck');
+    const erro = document.getElementById('loginError');
+
+    if (!campoNome || !termos || !erro) return;
+
+    const nome = campoNome.value.trim();
+    const aceitou = termos.checked;
+
+    if (!nome) {
+        erro.textContent = 'Digite seu nome para continuar.';
+        erro.style.display = 'block';
+        campoNome.focus();
+        return;
+    }
+
+    if (!aceitou) {
+        erro.textContent = 'Aceite os Termos de Uso para continuar.';
+        erro.style.display = 'block';
+        return;
+    }
+
+    erro.style.display = 'none';
+
+    localStorage.setItem('centralNome', nome);
+    localStorage.setItem('centralTermosAceitos', '1');
+    localStorage.setItem(
+        'centralTermosData',
+        new Date().toISOString()
+    );
+
+    mostrarCentral(nome);
+}
+    localStorage.setItem(
+        'centralNome',
+        nome
+    );
+
+    localStorage.setItem(
+        'centralTermosAceitos',
+        '1'
+    );
+
+    localStorage.setItem(
+        'centralTermosData',
+        new Date().toISOString()
+    );
+
+    mostrarCentral(nome);
+
+}
+
+
+function trocarUsuario(){
+
+    localStorage.removeItem('centralNome');
+
+    document.getElementById('loginName').value='';
+
+    document.getElementById('termsCheck').checked=false;
+
+    document.getElementById('loginError').style.display='none';
+
+    document.body.classList.add('bloqueado');
+
+    document.getElementById('loginOverlay').style.display='flex';
+
+    setTimeout(
+        ()=>document.getElementById('loginName').focus(),
+        100
+    );
+
+}
+
+
+/* =========================================================
+   TERMOS
+   ========================================================= */
+
+function abrirTermos(e){
+
+    if(e)e.preventDefault();
+
+    document
+        .getElementById('termsModal')
+        .classList.add('show');
+
+}
+
+
+function fecharTermos(){
+
+    document
+        .getElementById('termsModal')
+        .classList.remove('show');
+
+}
+
+
+function fecharTermosFora(e){
+
+    if(e.target.id==='termsModal'){
+        fecharTermos();
+    }
+
+}
+
+
+/* =========================================================
+   MENU LATERAL
+   ========================================================= */
+
+function alternarMenu(){
+
+    const layout=
+        document.getElementById('layout');
+
+    layout.classList.toggle('collapsed');
+
+    const recolhido=
+        layout.classList.contains('collapsed');
+
+    localStorage.setItem(
+        'menuRecolhido',
+        recolhido?'1':'0'
+    );
+
+}
+
+
+(function(){
+
+    if(
+        localStorage.getItem('menuRecolhido')==='1'
+    ){
+
+        document
+            .getElementById('layout')
+            .classList.add('collapsed');
+
+    }
+
+})();
+
+
+/* =========================================================
+   NAVEGAÇÃO ENTRE SCRIPTS E LINKS
+   ========================================================= */
+
+function mostrarPagina(pagina,botao){
+
+    const scripts=
+        document.getElementById('paginaScripts');
+
+    const links=
+        document.getElementById('paginaLinks');
+
+    document
+        .querySelectorAll('.menu button')
+        .forEach(
+            b=>b.classList.remove('active')
+        );
+
+    if(botao){
+        botao.classList.add('active');
+    }
+
+    if(pagina==='links'){
+
+        scripts.classList.add('oculto');
+
+        links.classList.add('visivel');
+
+        document
+            .getElementById('buscaLinks')
+            .value='';
+
+        filtrarLinks();
+
+    }else{
+
+        scripts.classList.remove('oculto');
+
+        links.classList.remove('visivel');
+
+        document
+            .getElementById('campoBusca')
+            .value='';
+
+        categoriaAtual='todos';
+
+        filtrarScripts();
+
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    });
+
+}
+
+
+/* =========================================================
+   SUPABASE / FEEDBACK
+   ========================================================= */
+
+const SUPABASE_URL=
+    'https://svyjvfasqoopyzfytmnc.supabase.co';
+
+const SUPABASE_PUBLISHABLE_KEY=
+    'sb_publishable_xOrFc-BCtK9deqTkaeVOQA_1rNqxNiS';
+
 const FEEDBACK_SCRIPT_VERSION='1.0';
-function criarModalFeedback(){if(document.getElementById('feedbackModal'))return;const modal=document.createElement('div');modal.id='feedbackModal';modal.className='feedback-modal';modal.innerHTML=`<div class="feedback-modal-content" role="dialog" aria-modal="true" aria-labelledby="feedbackModalTitle"><div class="feedback-modal-head"><div class="feedback-modal-title" id="feedbackModalTitle">Como podemos melhorar?</div><button type="button" class="feedback-modal-close" onclick="fecharFeedbackModal()" aria-label="Fechar">×</button></div><div class="feedback-reasons"><label><input type="radio" name="feedbackReason" value="informacao_desatualizada"> Informação desatualizada</label><label><input type="radio" name="feedbackReason" value="informacao_incompleta"> Informação incompleta</label><label><input type="radio" name="feedbackReason" value="texto_pouco_claro"> Texto pouco claro</label><label><input type="radio" name="feedbackReason" value="procedimento_incorreto"> Procedimento incorreto</label><label><input type="radio" name="feedbackReason" value="outro"> Outro</label></div><textarea id="feedbackModalComment" class="feedback-modal-comment" maxlength="1000" placeholder="Comentário opcional"></textarea><div class="feedback-modal-warning">⚠️ Não informe CPF, documentos, senhas ou dados de cidadãos.</div><div class="feedback-modal-actions"><button type="button" class="feedback-cancel" onclick="fecharFeedbackModal()">Cancelar</button><button type="button" class="feedback-submit" onclick="enviarFeedbackModal()">Enviar feedback</button></div><div id="feedbackModalMessage" class="feedback-modal-message" aria-live="polite"></div></div>`;modal.addEventListener('click',e=>{if(e.target===modal)fecharFeedbackModal()});document.body.appendChild(modal)}
+
+
+/* =========================================================
+   MODAL FEEDBACK
+   ========================================================= */
+
+function criarModalFeedback(){
+
+    if(document.getElementById('feedbackModal'))return;
+
+    const modal=document.createElement('div');
+
+    modal.id='feedbackModal';
+
+    modal.className='feedback-modal';
+
+    modal.innerHTML=`
+
+        <div
+            class="feedback-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="feedbackModalTitle"
+        >
+
+            <div class="feedback-modal-head">
+
+                <div
+                    class="feedback-modal-title"
+                    id="feedbackModalTitle"
+                >
+                    Como podemos melhorar?
+                </div>
+
+                <button
+                    type="button"
+                    class="feedback-modal-close"
+                    onclick="fecharFeedbackModal()"
+                    aria-label="Fechar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div class="feedback-reasons">
+
+                <label>
+                    <input
+                        type="radio"
+                        name="feedbackReason"
+                        value="informacao_desatualizada"
+                    >
+                    Informação desatualizada
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="feedbackReason"
+                        value="informacao_incompleta"
+                    >
+                    Informação incompleta
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="feedbackReason"
+                        value="texto_pouco_claro"
+                    >
+                    Texto pouco claro
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="feedbackReason"
+                        value="procedimento_incorreto"
+                    >
+                    Procedimento incorreto
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="feedbackReason"
+                        value="outro"
+                    >
+                    Outro
+                </label>
+
+            </div>
+
+            <textarea
+                id="feedbackModalComment"
+                class="feedback-modal-comment"
+                maxlength="1000"
+                placeholder="Comentário opcional"
+            ></textarea>
+
+            <div class="feedback-modal-warning">
+                ⚠️ Não informe CPF, documentos, senhas ou dados de cidadãos.
+            </div>
+
+            <div class="feedback-modal-actions">
+
+                <button
+                    type="button"
+                    class="feedback-cancel"
+                    onclick="fecharFeedbackModal()"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="button"
+                    class="feedback-submit"
+                    onclick="enviarFeedbackModal()"
+                >
+                    Enviar feedback
+                </button>
+
+            </div>
+
+            <div
+                id="feedbackModalMessage"
+                class="feedback-modal-message"
+                aria-live="polite"
+            ></div>
+
+        </div>
+    `;
+
+    modal.addEventListener(
+        'click',
+        e=>{
+            if(e.target===modal){
+                fecharFeedbackModal();
+            }
+        }
+    );
+
+    document.body.appendChild(modal);
+
+}
+
+
 let feedbackModalArea=null;
-function criarFeedbacks(){criarModalFeedback();document.querySelectorAll('.script-card').forEach(card=>{if(card.querySelector('.feedback-area'))return;const content=card.querySelector('.script-content');if(!content)return;const id=content.id;if(!id)return;const area=document.createElement('div');area.className='feedback-area';area.dataset.scriptId=id;area.innerHTML=`<span class="feedback-question">Foi útil?</span><div class="feedback-actions"><button type="button" class="feedback-btn positive" onclick="enviarFeedback(this,'positive')">👍 Sim</button><button type="button" class="feedback-btn negative" onclick="abrirFeedbackNegativo(this)">👎 Não</button></div><span class="feedback-message"></span>`;card.appendChild(area);const chave='feedbackEnviado_'+id+'_'+FEEDBACK_SCRIPT_VERSION;if(localStorage.getItem(chave)==='1')marcarFeedbackEnviado(area)})}
-function abrirFeedbackNegativo(botao){const area=botao.closest('.feedback-area');if(!area)return;feedbackModalArea=area;const modal=document.getElementById('feedbackModal');if(!modal)return;modal.querySelectorAll('input[name="feedbackReason"]').forEach(i=>i.checked=false);document.getElementById('feedbackModalComment').value='';document.getElementById('feedbackModalMessage').textContent='';document.getElementById('feedbackModalMessage').className='feedback-modal-message';modal.classList.add('show');setTimeout(()=>modal.querySelector('input[name="feedbackReason"]')?.focus(),50)}
-function fecharFeedbackModal(){const modal=document.getElementById('feedbackModal');if(modal)modal.classList.remove('show');feedbackModalArea=null}
-function marcarFeedbackEnviado(area){area.classList.add('feedback-disabled');const msg=area.querySelector('.feedback-message');msg.textContent='✓ Obrigado pelo feedback!';msg.className='feedback-message show'}
-async function enviarFeedbackModal(){if(!feedbackModalArea)return;const reason=document.querySelector('input[name="feedbackReason"]:checked')?.value||null;const comment=(document.getElementById('feedbackModalComment')?.value||'').trim()||null;const msg=document.getElementById('feedbackModalMessage');if(!reason){msg.textContent='Selecione um motivo antes de enviar.';msg.className='feedback-modal-message show';return}const botao=document.querySelector('.feedback-submit');await enviarFeedback(feedbackModalArea,'negative',reason,comment,botao,true)}
-async function enviarFeedback(botaoOuArea,tipo,reasonOverride=null,commentOverride=null,botaoModal=null,fecharModal=false){const area=botaoOuArea.classList?.contains('feedback-area')?botaoOuArea:botaoOuArea.closest('.feedback-area');if(!area)return;const scriptId=area.dataset.scriptId;const chave='feedbackEnviado_'+scriptId+'_'+FEEDBACK_SCRIPT_VERSION;if(localStorage.getItem(chave)==='1')return;const reason=reasonOverride??area.querySelector('.feedback-reason')?.value??null;const comment=commentOverride??((area.querySelector('.feedback-comment')?.value||'').trim()||null);if(tipo==='negative'&&!reason)return;const botao=botaoModal||botaoOuArea;botao.disabled=true;const original=botao.textContent;botao.textContent='Enviando...';try{const response=await fetch(SUPABASE_URL+'/rest/v1/feedbacks',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY,'Authorization':'Bearer '+SUPABASE_PUBLISHABLE_KEY,'Prefer':'return=minimal'},body:JSON.stringify({script_id:scriptId,evaluation:tipo,reason:tipo==='negative'?reason:null,comment:tipo==='negative'?comment:null,script_version:FEEDBACK_SCRIPT_VERSION,status:'new'})});if(!response.ok)throw new Error('HTTP '+response.status);localStorage.setItem(chave,'1');marcarFeedbackEnviado(area);if(fecharModal)fecharFeedbackModal()}catch(erro){console.error('Erro ao enviar feedback:',erro);if(fecharModal){const msg=document.getElementById('feedbackModalMessage');msg.textContent='Não foi possível registrar agora. Tente novamente.';msg.className='feedback-modal-message show'}else{const msg=area.querySelector('.feedback-message');msg.textContent='Não foi possível registrar agora. Tente novamente.';msg.className='feedback-message show'}}finally{botao.disabled=false;botao.textContent=original}}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')fecharFeedbackModal()});
-async function copiarTexto(botao,id){const elemento=document.getElementById(id);if(!elemento)return;const texto=elemento.innerText||elemento.textContent||'';const original=botao.textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(texto)}else{const textarea=document.createElement('textarea');textarea.value=texto;textarea.style.position='fixed';textarea.style.left='-9999px';textarea.setAttribute('readonly','');document.body.appendChild(textarea);textarea.select();textarea.setSelectionRange(0,textarea.value.length);const sucesso=document.execCommand('copy');document.body.removeChild(textarea);if(!sucesso)throw new Error('Não foi possível copiar o texto.')}botao.textContent='✓ Copiado!';botao.style.backgroundColor='#218838';setTimeout(()=>{botao.textContent=original;botao.style.backgroundColor=''},1500)}catch(erro){console.error('Erro ao copiar:',erro);botao.textContent='Erro ao copiar';botao.style.backgroundColor='#dc3545';setTimeout(()=>{botao.textContent=original;botao.style.backgroundColor=''},2000)}}
-function filtrarScripts(){const busca=document.getElementById('campoBusca').value.toLowerCase().trim();const cards=document.querySelectorAll('.script-card');let visiveis=0;cards.forEach(card=>{const texto=card.textContent.toLowerCase();const categoria=card.dataset.categoria;const mostraCategoria=categoriaAtual==='todos'||categoria===categoriaAtual;const mostraBusca=!busca||texto.includes(busca);const mostrar=mostraCategoria&&mostraBusca;card.style.display=mostrar?'':'none';if(mostrar)visiveis++});document.getElementById('contador').textContent=visiveis+' script'+(visiveis===1?'':'s');document.getElementById('semResultados').style.display=visiveis?'none':'block'}
-function filtrarCategoria(categoria,botao){categoriaAtual=categoria;document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));botao.classList.add('active');document.getElementById('campoBusca').value='';filtrarScripts();window.scrollTo({top:0,behavior:'smooth'})}
-function buscarRapido(termo){const campo=document.getElementById('campoBusca');campo.value=termo;categoriaAtual='todos';document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));document.querySelector('.menu button').classList.add('active');filtrarScripts();document.querySelector('.grid-scripts').scrollIntoView({behavior:'smooth',block:'start'})}
-iniciarSessao();filtrarScripts();
+
+
+function criarFeedbacks(){
+
+    criarModalFeedback();
+
+    document
+        .querySelectorAll('.script-card')
+        .forEach(card=>{
+
+            if(card.querySelector('.feedback-area'))return;
+
+            const content=
+                card.querySelector('.script-content');
+
+            if(!content)return;
+
+            const id=content.id;
+
+            if(!id)return;
+
+            const area=
+                document.createElement('div');
+
+            area.className='feedback-area';
+
+            area.dataset.scriptId=id;
+
+            area.innerHTML=`
+
+                <span class="feedback-question">
+                    Foi útil?
+                </span>
+
+                <div class="feedback-actions">
+
+                    <button
+                        type="button"
+                        class="feedback-btn positive"
+                        onclick="enviarFeedback(this,'positive')"
+                    >
+                        👍 Sim
+                    </button>
+
+                    <button
+                        type="button"
+                        class="feedback-btn negative"
+                        onclick="abrirFeedbackNegativo(this)"
+                    >
+                        👎 Não
+                    </button>
+
+                </div>
+
+                <span class="feedback-message"></span>
+            `;
+
+            card.appendChild(area);
+
+            const chave=
+                'feedbackEnviado_'+
+                id+
+                '_'+
+                FEEDBACK_SCRIPT_VERSION;
+
+            if(
+                localStorage.getItem(chave)==='1'
+            ){
+
+                marcarFeedbackEnviado(area);
+
+            }
+
+        });
+
+}
+
+
+function abrirFeedbackNegativo(botao){
+
+    const area=
+        botao.closest('.feedback-area');
+
+    if(!area)return;
+
+    feedbackModalArea=area;
+
+    const modal=
+        document.getElementById('feedbackModal');
+
+    if(!modal)return;
+
+    modal
+        .querySelectorAll(
+            'input[name="feedbackReason"]'
+        )
+        .forEach(
+            i=>i.checked=false
+        );
+
+    document
+        .getElementById('feedbackModalComment')
+        .value='';
+
+    document
+        .getElementById('feedbackModalMessage')
+        .textContent='';
+
+    document
+        .getElementById('feedbackModalMessage')
+        .className='feedback-modal-message';
+
+    modal.classList.add('show');
+
+}
+
+
+function fecharFeedbackModal(){
+
+    const modal=
+        document.getElementById('feedbackModal');
+
+    if(modal){
+        modal.classList.remove('show');
+    }
+
+    feedbackModalArea=null;
+
+}
+
+
+function marcarFeedbackEnviado(area){
+
+    area.classList.add('feedback-disabled');
+
+    const msg=
+        area.querySelector('.feedback-message');
+
+    msg.textContent=
+        '✓ Obrigado pelo feedback!';
+
+    msg.className=
+        'feedback-message show';
+
+}
+
+
+async function enviarFeedbackModal(){
+
+    if(!feedbackModalArea)return;
+
+    const reason=
+        document.querySelector(
+            'input[name="feedbackReason"]:checked'
+        )?.value||null;
+
+    const comment=
+        (
+            document.getElementById(
+                'feedbackModalComment'
+            )?.value||''
+        ).trim()||null;
+
+    const msg=
+        document.getElementById(
+            'feedbackModalMessage'
+        );
+
+    if(!reason){
+
+        msg.textContent=
+            'Selecione um motivo antes de enviar.';
+
+        msg.className=
+            'feedback-modal-message show';
+
+        return;
+
+    }
+
+    const botao=
+        document.querySelector('.feedback-submit');
+
+    await enviarFeedback(
+        feedbackModalArea,
+        'negative',
+        reason,
+        comment,
+        botao,
+        true
+    );
+
+}
+
+
+async function enviarFeedback(
+    botaoOuArea,
+    tipo,
+    reasonOverride=null,
+    commentOverride=null,
+    botaoModal=null,
+    fecharModal=false
+){
+
+    const area=
+        botaoOuArea.classList?.contains('feedback-area')
+        ?
+        botaoOuArea
+        :
+        botaoOuArea.closest('.feedback-area');
+
+    if(!area)return;
+
+    const scriptId=
+        area.dataset.scriptId;
+
+    const chave=
+        'feedbackEnviado_'+
+        scriptId+
+        '_'+
+        FEEDBACK_SCRIPT_VERSION;
+
+    if(
+        localStorage.getItem(chave)==='1'
+    )return;
+
+    const reason=
+        reasonOverride??
+        area.querySelector('.feedback-reason')?.value??
+        null;
+
+    const comment=
+        commentOverride??
+        (
+            area.querySelector(
+                '.feedback-comment'
+            )?.value||''
+        ).trim()||
+        null;
+
+    if(tipo==='negative'&&!reason)return;
+
+    const botao=
+        botaoModal||
+        botaoOuArea;
+
+    botao.disabled=true;
+
+    const original=
+        botao.textContent;
+
+    botao.textContent=
+        'Enviando...';
+
+    try{
+
+        const response=
+            await fetch(
+                SUPABASE_URL+
+                '/rest/v1/feedbacks',
+                {
+                    method:'POST',
+
+                    headers:{
+                        'Content-Type':'application/json',
+                        'apikey':SUPABASE_PUBLISHABLE_KEY,
+                        'Authorization':
+                            'Bearer '+
+                            SUPABASE_PUBLISHABLE_KEY,
+                        'Prefer':'return=minimal'
+                    },
+
+                    body:JSON.stringify({
+
+                        script_id:scriptId,
+
+                        evaluation:tipo,
+
+                        reason:
+                            tipo==='negative'
+                            ?
+                            reason
+                            :
+                            null,
+
+                        comment:
+                            tipo==='negative'
+                            ?
+                            comment
+                            :
+                            null,
+
+                        script_version:
+                            FEEDBACK_SCRIPT_VERSION,
+
+                        status:'new'
+
+                    })
+                }
+            );
+
+        if(!response.ok){
+
+            throw new Error(
+                'HTTP '+response.status
+            );
+
+        }
+
+        localStorage.setItem(
+            chave,
+            '1'
+        );
+
+        marcarFeedbackEnviado(area);
+
+        if(fecharModal){
+
+            fecharFeedbackModal();
+
+        }
+
+    }catch(erro){
+
+        console.error(
+            'Erro ao enviar feedback:',
+            erro
+        );
+
+        if(fecharModal){
+
+            const msg=
+                document.getElementById(
+                    'feedbackModalMessage'
+                );
+
+            msg.textContent=
+                'Não foi possível registrar agora. Tente novamente.';
+
+            msg.className=
+                'feedback-modal-message show';
+
+        }else{
+
+            const msg=
+                area.querySelector(
+                    '.feedback-message'
+                );
+
+            msg.textContent=
+                'Não foi possível registrar agora. Tente novamente.';
+
+            msg.className=
+                'feedback-message show';
+
+        }
+
+    }finally{
+
+        botao.disabled=false;
+
+        botao.textContent=
+            original;
+
+    }
+
+}
+
+
+/* =========================================================
+   COPIAR
+   ========================================================= */
+
+async function copiarTexto(botao,id){
+
+    const elemento=
+        document.getElementById(id);
+
+    if(!elemento)return;
+
+    const texto=
+        elemento.innerText||
+        elemento.textContent||
+        '';
+
+    const original=
+        botao.textContent;
+
+    try{
+
+        if(
+            navigator.clipboard&&
+            window.isSecureContext
+        ){
+
+            await navigator.clipboard.writeText(texto);
+
+        }else{
+
+            const textarea=
+                document.createElement('textarea');
+
+            textarea.value=texto;
+
+            textarea.style.position='fixed';
+
+            textarea.style.left='-9999px';
+
+            textarea.setAttribute(
+                'readonly',
+                ''
+            );
+
+            document.body.appendChild(textarea);
+
+            textarea.select();
+
+            textarea.setSelectionRange(
+                0,
+                textarea.value.length
+            );
+
+            const sucesso=
+                document.execCommand('copy');
+
+            document.body.removeChild(textarea);
+
+            if(!sucesso){
+
+                throw new Error(
+                    'Não foi possível copiar o texto.'
+                );
+
+            }
+
+        }
+
+        botao.textContent=
+            '✓ Copiado!';
+
+        botao.style.backgroundColor=
+            '#218838';
+
+        setTimeout(
+            ()=>{
+                botao.textContent=original;
+                botao.style.backgroundColor='';
+            },
+            1500
+        );
+
+    }catch(erro){
+
+        console.error(
+            'Erro ao copiar:',
+            erro
+        );
+
+        botao.textContent=
+            'Erro ao copiar';
+
+        botao.style.backgroundColor=
+            '#dc3545';
+
+        setTimeout(
+            ()=>{
+                botao.textContent=original;
+                botao.style.backgroundColor='';
+            },
+            2000
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   FILTRO DOS SCRIPTS
+   ========================================================= */
+
+function filtrarScripts(){
+
+    const busca=
+        document
+            .getElementById('campoBusca')
+            .value
+            .toLowerCase()
+            .trim();
+
+    const cards=
+        document.querySelectorAll(
+            '.script-card'
+        );
+
+    let visiveis=0;
+
+    cards.forEach(card=>{
+
+        const texto=
+            card.textContent.toLowerCase();
+
+        const categoria=
+            card.dataset.categoria;
+
+        const mostraCategoria=
+            categoriaAtual==='todos'||
+            categoria===categoriaAtual;
+
+        const mostraBusca=
+            !busca||
+            texto.includes(busca);
+
+        const mostrar=
+            mostraCategoria&&
+            mostraBusca;
+
+        card.style.display=
+            mostrar?'':'none';
+
+        if(mostrar){
+            visiveis++;
+        }
+
+    });
+
+    document.getElementById('contador').textContent=
+        visiveis+
+        ' script'+
+        (visiveis===1?'':'s');
+
+    document.getElementById('semResultados').style.display=
+        visiveis?'none':'block';
+
+}
+
+
+/* =========================================================
+   CATEGORIA DOS SCRIPTS
+   ========================================================= */
+
+function filtrarCategoria(categoria,botao){
+
+    categoriaAtual=categoria;
+
+    mostrarPagina('scripts',null);
+
+    document
+        .querySelectorAll('.menu button')
+        .forEach(
+            b=>b.classList.remove('active')
+        );
+
+    botao.classList.add('active');
+
+    document
+        .getElementById('campoBusca')
+        .value='';
+
+    filtrarScripts();
+
+    window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    });
+
+}
+
+
+/* =========================================================
+   ACESSO RÁPIDO DOS SCRIPTS
+   ========================================================= */
+
+function buscarRapido(termo){
+
+    const campo=
+        document.getElementById(
+            'campoBusca'
+        );
+
+    campo.value=termo;
+
+    categoriaAtual='todos';
+
+    document
+        .querySelectorAll('.menu button')
+        .forEach(
+            b=>b.classList.remove('active')
+        );
+
+    document
+        .querySelector('.menu button')
+        .classList.add('active');
+
+    filtrarScripts();
+
+    document
+        .querySelector('.grid-scripts')
+        .scrollIntoView({
+            behavior:'smooth',
+            block:'start'
+        });
+
+}
+
+
+/* =========================================================
+   BUSCA DOS LINKS
+   ========================================================= */
+
+function filtrarLinks(){
+
+    const campo=
+        document.getElementById(
+            'buscaLinks'
+        );
+
+    const termo=
+        campo.value
+            .toLowerCase()
+            .trim();
+
+    const secoes=
+        document.querySelectorAll(
+            '#paginaLinks .links-secao'
+        );
+
+    const cards=
+        document.querySelectorAll(
+            '#paginaLinks .links-card'
+        );
+
+    let encontrados=0;
+
+    cards.forEach(card=>{
+
+        const nome=
+            (
+                card.dataset.linkNome||
+                ''
+            ).toLowerCase();
+
+        const descricao=
+            (
+                card.dataset.linkDescricao||
+                ''
+            ).toLowerCase();
+
+        const corresponde=
+            !termo||
+            nome.includes(termo)||
+            descricao.includes(termo);
+
+        if(corresponde){
+
+            card.classList.remove('oculto');
+
+            encontrados++;
+
+        }else{
+
+            card.classList.add('oculto');
+
+        }
+
+    });
+
+
+    secoes.forEach(secao=>{
+
+        const visiveis=
+            secao.querySelectorAll(
+                '.links-card:not(.oculto)'
+            );
+
+        if(visiveis.length===0){
+
+            secao.classList.add('oculto');
+
+        }else{
+
+            secao.classList.remove('oculto');
+
+        }
+
+    });
+
+
+    document.getElementById(
+        'linksSemResultado'
+    ).style.display=
+        encontrados===0
+        ?
+        'block'
+        :
+        'none';
+
+}
+
+
+/* =========================================================
+   ATALHOS DE TECLADO / ESC
+   ========================================================= */
+
+document.addEventListener(
+    'keydown',
+    e=>{
+
+        if(e.key==='Escape'){
+
+            fecharTermos();
+
+            fecharFeedbackModal();
+
+        }
+
+        if(
+            e.key==='Enter'&&
+            document.getElementById(
+                'loginOverlay'
+            ).style.display!=='none'
+        ){
+
+            entrarNaCentral();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
+document.addEventListener('DOMContentLoaded', function(){
+
+    iniciarSessao();
+    filtrarScripts();
+
+});
 </script>
+
 </body>
 </html>
