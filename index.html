@@ -45,7 +45,36 @@ body.bloqueado{overflow:hidden}.login-overlay{position:fixed;inset:0;background:
 .feedback-cancel{border:0;background:#eef2f7;color:#64748b;border-radius:6px;padding:7px 9px;font-size:11px;cursor:pointer}
 .feedback-modal-message{display:none;font-size:11px;margin-top:8px;color:#b91c1c}
 .feedback-modal-message.show{display:block}
-.quick-links{display:none;text-align:center;background:#fff;border:1px solid var(--borda);border-radius:8px;padding:35px;color:var(--muted);grid-column:1/-1}
+.quick-links{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:25px;
+}
+.quick-link{
+    border:1px solid var(--borda);
+    background:#fff;
+    border-radius:8px;
+    padding:14px 12px;
+    color:var(--texto);
+    cursor:pointer;
+    text-align:left;
+    transition:.15s;
+    font-size:12px;
+}
+
+.quick-link:hover{
+    border-color:#9bbde0;
+    background:var(--azul-claro);
+    transform:translateY(-1px);
+}
+
+.quick-link strong{
+    display:block;
+    color:var(--azul);
+    font-size:13px;
+    margin-bottom:4px;
+}
 .footer{max-width:1440px;margin:0 auto;padding:15px 30px;color:#94a3b8;font-size:11px;text-align:right}
 @media(max-width:900px){.layout{display:block}.layout.collapsed .sidebar{display:none}.sidebar{border-right:0;border-bottom:1px solid var(--borda);padding:10px 14px}.menu{display:flex;gap:4px;overflow-x:auto}.menu-title{display:none}.menu li{min-width:max-content}.menu button{padding:8px 10px}.quick-links{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.topbar{padding:0 14px}.brand-text{font-size:14px}.status{display:none}.main{padding:20px 12px}.welcome h1{font-size:21px}.grid-scripts{grid-template-columns:1fr}.quick-links{grid-template-columns:1fr}.script-card{min-width:0}.script-content{font-size:12.5px}.user-name{display:none}.login-box{padding:25px 20px}}
