@@ -9,43 +9,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* --- ADICIONE ESTE BLOCO NO INÍCIO DO SEU CSS --- */
-:root {
-    --bg-principal: #ffffff;
-    --bg-sidebar: #f8f9fa;
-    --bg-card: #ffffff;
-    --texto-principal: #212529;
-    --texto-secundario: #6c757d;
-    --borda: #dee2e6;
-    --primaria: #0d6efd;
-    --shadow: rgba(0, 0, 0, 0.05);
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
+const themeToggle = document.getElementById('themeToggle');
 
-[data-theme="dark"] {
-    --bg-principal: #121212;
-    --bg-sidebar: #1e1e1e;
-    --bg-card: #252525;
-    --texto-principal: #e0e0e0;
-    --texto-secundario: #a0a0a0;
-    --borda: #333333;
-    --primaria: #375a7f;
-    --shadow: rgba(0, 0, 0, 0.5);
-}
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
 
-/* Botão de alternar tema (pode posicionar onde quiser) */
-.theme-toggle-btn {
-    background-color: var(--bg-sidebar);
-    color: var(--texto-principal);
-    border: 1px solid var(--borda);
-    padding: 8px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 2px 4px var(--shadow);
+    const darkMode = document.body.classList.contains('dark-mode');
+
+    themeToggle.textContent = darkMode ? '☀️' : '🌙';
+
+    localStorage.setItem('darkMode', darkMode);
+});
+
+if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+    themeToggle.textContent = '☀️';
 }
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
