@@ -1,256 +1,250 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Central de Atendimento - Intranet</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23071a35'/%3E%3Cpath d='M16 20c0-4.4 3.6-8 8-8h16c4.4 0 8 3.6 8 8v13c0 4.4-3.6 8-8 8H30l-10 9v-9h-4c-4.4 0-8-3.6-8-8V20z' fill='white'/%3E%3Cpath d='M22 25h20M22 31h13' stroke='%2314b8a6' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --azul-profundo:#071a35;
-  --azul-marinho:#0d2749;
-  --azul-eletrico:#155eef;
-  --azul-eletrico-forte:#0d3fc2;
-  --azul-eletrico-claro:#eaf1ff;
-  --verde-agua:#14b8a6;
-  --verde-agua-suave:#e3f9f6;
-  --fundo:#f3f6fb;
-  --superficie:#ffffff;
-  --borda:#e0e6f0;
-  --texto:#142236;
-  --muted:#647089;
-  --erro:#dc2626;
-  --erro-fundo:#fef2f2;
-  --erro-borda:#fecaca;
-  --assinatura:linear-gradient(90deg,var(--azul-profundo) 0%,var(--azul-eletrico) 55%,var(--verde-agua) 100%);
-  --radius:10px;
-  --font-display:'Sora',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --font-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-}
-html{scroll-behavior:smooth}
-body{font-family:var(--font-body);background:var(--fundo);color:var(--texto);min-height:100vh;-webkit-font-smoothing:antialiased}
-:focus-visible{outline:2px solid var(--azul-eletrico);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Atendimento - Intranet</title>
+    <style>
+        /* Definindo as variáveis de cores para ambos os temas */
+        :root {
+            --bg-principal: #ffffff;
+            --bg-sidebar: #f8f9fa;
+            --bg-card: #ffffff;
+            --texto-principal: #212529;
+            --texto-secundario: #6c757d;
+            --borda: #dee2e6;
+            --primaria: #0d6efd;
+            --primaria-hover: #0b5ed7;
+            --shadow: rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
 
-/* ===== Login ===== */
-body.bloqueado{overflow:hidden}
-.login-overlay{position:fixed;inset:0;background:
-  radial-gradient(1100px 550px at 15% -10%,rgba(21,94,239,.35),transparent 60%),
-  radial-gradient(900px 500px at 110% 110%,rgba(20,184,166,.28),transparent 55%),
-  linear-gradient(160deg,var(--azul-profundo),var(--azul-marinho) 60%,#081e3f);
-  display:flex;align-items:center;justify-content:center;padding:20px;z-index:9999}
-.login-box{width:100%;max-width:440px;background:var(--superficie);border-radius:16px;padding:36px 34px 30px;box-shadow:0 30px 70px rgba(3,12,28,.45);position:relative;overflow:hidden}
-.login-box::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--assinatura)}
-.login-brand{text-align:center;margin-bottom:26px}
-.login-icon{width:56px;height:56px;margin:0 auto 14px;border-radius:14px;background:linear-gradient(135deg,var(--azul-profundo),var(--azul-eletrico));color:#fff;display:grid;place-items:center;font-size:26px;box-shadow:0 10px 24px rgba(21,94,239,.28)}
-.login-brand h1{font-family:var(--font-display);color:var(--azul-profundo);font-size:22px;font-weight:700;margin-bottom:6px;letter-spacing:-.2px}
-.login-brand p{color:var(--muted);font-size:13px}
-.login-label{display:block;color:#334155;font-weight:600;font-size:13px;margin-bottom:7px}
-.login-name{width:100%;padding:13px 14px;border:1px solid var(--borda);border-radius:9px;font-size:15px;font-family:var(--font-body);outline:none;margin-bottom:15px;transition:border-color .15s,box-shadow .15s}
-.login-name:focus{border-color:var(--azul-eletrico);box-shadow:0 0 0 3px rgba(21,94,239,.12)}
-.terms-box{background:#f8fafc;border:1px solid var(--borda);border-radius:9px;padding:13px;margin-bottom:14px}
-.terms-check{display:flex;align-items:flex-start;gap:9px;color:#475569;font-size:12px;line-height:1.5;cursor:pointer}
-.terms-check input{margin-top:3px;accent-color:var(--azul-eletrico)}
-.terms-link{border:0;background:none;color:var(--azul-eletrico);font-weight:700;cursor:pointer;font-size:12px;text-decoration:underline}
-.login-button{width:100%;padding:14px;border:0;border-radius:9px;background:linear-gradient(135deg,var(--azul-eletrico-forte),var(--azul-eletrico));color:#fff;font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:filter .15s,transform .15s}
-.login-button:hover{filter:brightness(1.08)}
-.login-button:active{transform:translateY(1px)}
-.login-error{display:none;color:#b91c1c;background:var(--erro-fundo);border:1px solid var(--erro-borda);border-radius:8px;padding:9px 11px;margin-bottom:12px;font-size:12px}
-.terms-modal{position:fixed;inset:0;background:rgba(7,26,53,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000}
-.terms-modal.show{display:flex}
-.terms-content{background:#fff;width:100%;max-width:650px;max-height:85vh;overflow:auto;border-radius:14px;padding:28px}
-.terms-content h2{font-family:var(--font-display);color:var(--azul-profundo);margin-bottom:15px;font-size:19px}
-.terms-content h3{font-size:14px;color:var(--azul-marinho);margin:16px 0 5px;font-weight:700}
-.terms-content p{font-size:13px;line-height:1.6;color:#475569}
-.terms-close{float:right;border:0;background:#eef2f7;border-radius:7px;padding:6px 11px;cursor:pointer;font-size:13px;font-weight:600;color:var(--texto)}
-.terms-close:hover{background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte)}
+        [data-theme="dark"] {
+            --bg-principal: #121212;
+            --bg-sidebar: #1e1e1e;
+            --bg-card: #252525;
+            --texto-principal: #e0e0e0;
+            --texto-secundario: #a0a0a0;
+            --borda: #333333;
+            --primaria: #375a7f;
+            --primaria-hover: #2b4764;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
 
-/* ===== Topbar ===== */
-.topbar{height:66px;background:var(--superficie);border-bottom:1px solid var(--borda);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10;box-shadow:0 1px 3px rgba(7,26,53,.05)}
-.topbar::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:3px;background:var(--assinatura);opacity:.9}
-.topbar-left{display:flex;align-items:center;gap:14px}
-.menu-toggle{width:38px;height:38px;border:1px solid var(--borda);background:#fff;color:var(--azul-profundo);border-radius:9px;cursor:pointer;font-size:19px;display:grid;place-items:center;transition:background .15s,border-color .15s}
-.menu-toggle:hover{background:var(--azul-eletrico-claro);border-color:#b9d0fb;color:var(--azul-eletrico-forte)}
-.brand{display:flex;align-items:center;gap:12px;color:var(--azul-profundo);font-weight:700}
-.brand-icon{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--azul-profundo),var(--azul-eletrico));color:#fff;display:grid;place-items:center;font-size:19px;flex-shrink:0}
-.brand-text{font-family:var(--font-display);font-size:15px}
-.brand-text small{display:block;color:var(--muted);font-size:11px;font-weight:500;font-family:var(--font-body);margin-top:2px}
-.status{font-size:12.5px;color:#0f6d5f;display:flex;align-items:center;gap:7px;font-weight:600;background:var(--verde-agua-suave);padding:6px 12px;border-radius:999px}
-.status-dot{width:7px;height:7px;background:var(--verde-agua);border-radius:50%;box-shadow:0 0 0 3px rgba(20,184,166,.18)}
-.user-area{display:flex;align-items:center;gap:14px}
-.user-name{font-size:13px;color:#334155;font-weight:600}
-.user-name button{border:0;background:none;color:var(--azul-eletrico);cursor:pointer;font-size:11px;margin-left:6px;font-weight:600}
+        /* Estilização Geral da Página */
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-principal);
+            color: var(--texto-principal);
+            display: flex;
+            min-height: 100vh;
+        }
 
-/* ===== Layout ===== */
-.layout{display:grid;grid-template-columns:236px minmax(0,1fr);max-width:1440px;margin:0 auto;min-height:calc(100vh - 66px);transition:grid-template-columns .2s ease}
-.layout.collapsed{grid-template-columns:72px minmax(0,1fr)}
-.sidebar{background:var(--superficie);border-right:1px solid var(--borda);padding:26px 14px;overflow:hidden;transition:padding .2s ease}
-.layout.collapsed .sidebar{padding:26px 10px}
-.menu-title{font-size:11px;color:#94a3b8;font-weight:700;text-transform:uppercase;padding:0 12px 12px;letter-spacing:.6px;white-space:nowrap;font-family:var(--font-display)}
-.menu{list-style:none}
-.menu li{margin-bottom:4px}
-.menu button{width:100%;border:0;background:transparent;text-align:left;padding:10px 12px;border-radius:8px;color:#475569;font-size:14px;font-family:var(--font-body);cursor:pointer;white-space:nowrap;overflow:hidden;transition:background .15s,color .15s;border-left:3px solid transparent}
-.menu button:hover{background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte)}
-.menu button.active{background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte);font-weight:700;border-left-color:var(--azul-eletrico)}
-.layout.collapsed .menu-title{visibility:hidden;height:0;padding:0}
-.layout.collapsed .menu button{font-size:19px;text-align:center;padding:10px 0;color:transparent}
-.layout.collapsed .menu button::first-letter{font-size:19px}
+        /* Sidebar / Menu Lateral */
+        aside {
+            width: 250px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--borda);
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-/* ===== Main ===== */
-.main{padding:32px}
-.welcome{margin-bottom:24px;position:relative;padding-left:16px}
-.welcome::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:4px;border-radius:4px;background:var(--assinatura)}
-.welcome h1{font-family:var(--font-display);font-size:25px;font-weight:700;color:var(--azul-profundo);margin-bottom:5px;letter-spacing:-.3px}
-.welcome p{color:var(--muted);font-size:14px}
+        aside ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-.search-wrap{position:relative;margin-bottom:26px}
-.search-icon{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:16px;color:#94a3b8}
-.busca-input{width:100%;padding:14px 18px 14px 46px;font-size:15px;font-family:var(--font-body);border:1px solid var(--borda);border-radius:10px;outline:none;background:#fff;transition:border-color .2s,box-shadow .2s}
-.busca-input:focus{border-color:var(--azul-eletrico);box-shadow:0 0 0 3px rgba(21,94,239,.1)}
+        aside li a {
+            display: block;
+            padding: 10px;
+            color: var(--texto-principal);
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 5px;
+        }
 
-/* ===== Recursos rápidos (antigos "atalhos") ===== */
-.quick-links{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px}
-.quick-link{position:relative;text-align:left;background:var(--superficie);border:1px solid var(--borda);border-radius:12px;padding:16px 16px 14px;cursor:pointer;font-family:var(--font-body);display:flex;flex-direction:column;gap:9px;transition:border-color .15s,box-shadow .15s,transform .15s;overflow:hidden}
-.quick-link::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--assinatura);opacity:0;transition:opacity .15s}
-.quick-link:hover{border-color:#c3d5f9;box-shadow:0 10px 22px rgba(7,26,53,.08);transform:translateY(-2px)}
-.quick-link:hover::before{opacity:1}
-.quick-link-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.quick-link-icon{width:34px;height:34px;border-radius:9px;background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte);display:grid;place-items:center;font-size:16px}
-.quick-link-arrow{color:#b6c2d6;font-size:14px;transition:transform .15s,color .15s}
-.quick-link:hover .quick-link-arrow{color:var(--verde-agua);transform:translate(2px,-2px)}
-.quick-link strong{display:block;font-size:13.5px;color:var(--texto);font-weight:700}
-.quick-link span{display:block;font-size:12px;color:var(--muted)}
+        aside li a:hover {
+            background-color: var(--borda);
+        }
 
-.grid-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-.link-card{position:relative;display:flex;align-items:center;gap:12px;background:var(--superficie);border:1px solid var(--borda);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--texto);transition:border-color .15s,box-shadow .15s,transform .15s;overflow:hidden}
-.link-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--assinatura);opacity:0;transition:opacity .15s}
-.link-card:hover{border-color:#c3d5f9;box-shadow:0 10px 22px rgba(7,26,53,.08);transform:translateY(-2px)}
-.link-card:hover::before{opacity:1}
-.link-card-icon{width:36px;height:36px;flex-shrink:0;border-radius:9px;background:var(--verde-agua-suave);color:#0f766e;display:grid;place-items:center;font-size:17px}
-.link-card-text{flex:1;min-width:0;display:flex;flex-direction:column}
-.link-card-text strong{font-size:13.5px;color:var(--texto);font-weight:700}
-.link-card-text span{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.link-card-arrow{color:#b6c2d6;font-size:14px;flex-shrink:0;transition:transform .15s,color .15s}
-.link-card:hover .link-card-arrow{color:var(--verde-agua);transform:translate(2px,-2px)}
+        /* Área de Conteúdo Principal */
+        main {
+            flex: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
 
-.section-head{display:flex;align-items:center;justify-content:space-between;margin:30px 0 13px}
-.section-head h2{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--azul-profundo)}
-.count{font-size:12px;color:var(--muted);background:#eef2f8;padding:4px 10px;border-radius:999px;font-weight:600}
+        /* Topo do Conteúdo (Alinhamento do Título e Botão do Tema) */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--borda);
+            padding-bottom: 20px;
+        }
 
-.grid-scripts{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:15px}
-.no-results{grid-column:1/-1;text-align:center;color:var(--muted);font-size:13.5px;padding:30px;background:var(--superficie);border:1px dashed var(--borda);border-radius:10px}
+        /* Botão de Alternância de Tema */
+        .theme-toggle-btn {
+            background-color: var(--bg-sidebar);
+            color: var(--texto-principal);
+            border: 1px solid var(--borda);
+            padding: 10px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px var(--shadow);
+            transition: all 0.2s ease;
+        }
 
-.script-card{background:var(--superficie);border:1px solid var(--borda);border-left:4px solid var(--azul-eletrico);border-radius:10px;padding:16px;position:relative;box-shadow:0 1px 3px rgba(7,26,53,.04);transition:box-shadow .15s,transform .15s,border-color .15s}
-.script-card:hover{box-shadow:0 8px 20px rgba(7,26,53,.09);transform:translateY(-1px)}
-.script-card.destaque{border-left-color:var(--verde-agua)}
-.script-card.destaque .categoria{background:var(--verde-agua-suave);color:#0f766e}
-.categoria{display:inline-block;margin-bottom:9px;padding:4px 9px;border-radius:5px;background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
-.script-header{display:flex;align-items:center;margin-bottom:11px;padding-right:88px}
-.script-title{font-weight:700;font-size:14px;color:var(--azul-marinho)}
-.btn-copiar{position:absolute;top:15px;right:14px;background:var(--verde-agua);color:#fff;border:0;padding:7px 12px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700;font-family:var(--font-body);transition:background .15s}
-.btn-copiar:hover{background:#0f9d8d}
-.script-content{background:#f8fafc;border:1px solid #e6ebf1;padding:13px;border-radius:6px;font-size:13px;white-space:pre-wrap;word-wrap:break-word;color:#374151;line-height:1.55}
+        .theme-toggle-btn:hover {
+            background-color: var(--borda);
+        }
 
-/* ===== Feedback ===== */
-.feedback-area{display:flex;align-items:center;justify-content:flex-end;gap:7px;margin-top:10px;padding-top:8px;border-top:1px solid #eef2f7;min-height:28px}
-.feedback-question{font-size:11px;color:#64748b;font-weight:600;margin:0 2px 0 0}
-.feedback-actions{display:flex;align-items:center;gap:4px}
-.feedback-btn{border:1px solid var(--borda);background:#fff;color:#475569;border-radius:6px;padding:4px 7px;font-size:11px;font-weight:600;cursor:pointer;transition:.15s;line-height:1.2;font-family:var(--font-body)}
-.feedback-btn:hover{background:var(--azul-eletrico-claro);border-color:#b9d0fb;color:var(--azul-eletrico-forte)}
-.feedback-btn.positive:hover{color:#0f766e;border-color:#99e6db;background:var(--verde-agua-suave)}
-.feedback-btn.negative:hover{color:#b91c1c;border-color:#fecaca;background:var(--erro-fundo)}
-.feedback-message{display:none;font-size:11px;font-weight:600;color:#0f766e;margin:0}
-.feedback-message.show{display:inline}
-.feedback-area.feedback-disabled .feedback-actions{display:none}
-.feedback-area.feedback-disabled .feedback-question{display:none}
-.feedback-modal{position:fixed;inset:0;background:rgba(7,26,53,.5);display:none;align-items:center;justify-content:center;padding:18px;z-index:10001}
-.feedback-modal.show{display:flex}
-.feedback-modal-content{width:100%;max-width:390px;background:#fff;border-radius:12px;padding:18px;box-shadow:0 20px 55px rgba(7,26,53,.28)}
-.feedback-modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
-.feedback-modal-title{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--azul-profundo)}
-.feedback-modal-close{border:0;background:#eef2f7;color:#475569;border-radius:6px;padding:4px 8px;cursor:pointer;font-size:16px;line-height:1}
-.feedback-reasons{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
-.feedback-reasons label{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#334155;cursor:pointer}
-.feedback-reasons input{accent-color:var(--azul-eletrico)}
-.feedback-modal-comment{width:100%;min-height:70px;border:1px solid var(--borda);border-radius:8px;padding:10px;font-size:12.5px;font-family:var(--font-body);resize:vertical;margin-bottom:10px;outline:none}
-.feedback-modal-comment:focus{border-color:var(--azul-eletrico);box-shadow:0 0 0 3px rgba(21,94,239,.1)}
-.feedback-modal-warning{font-size:11px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:7px;padding:8px 10px;margin-bottom:14px;line-height:1.5}
-.feedback-modal-actions{display:flex;justify-content:flex-end;gap:8px}
-.feedback-cancel{border:1px solid var(--borda);background:#fff;color:#475569;border-radius:7px;padding:8px 14px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--font-body)}
-.feedback-cancel:hover{background:#f1f5f9}
-.feedback-submit{border:0;background:var(--azul-eletrico);color:#fff;border-radius:7px;padding:8px 14px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:var(--font-body)}
-.feedback-submit:hover{background:var(--azul-eletrico-forte)}
-.feedback-modal-message{margin-top:10px;font-size:12px;color:#b91c1c;display:none}
-.feedback-modal-message.show{display:block}
+        /* Grid de Ações Rápidas (Cards) */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
 
-/* ===== Footer ===== */
-.footer{text-align:right;padding:22px 32px 34px;color:var(--muted);font-size:12px}
-.footer .user-name{color:var(--muted);font-weight:600}
-.footer .user-name button{color:var(--azul-eletrico)}
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--borda);
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--texto-principal);
+            box-shadow: 0 4px 6px var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
 
-/* ===== Responsivo ===== */
-@media(max-width:1000px){.quick-links{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:900px){
-.layout,.layout.collapsed{padding:14px;display:block}
-.sidebar,.layout.collapsed .sidebar{position:static;margin-bottom:14px;border-radius:14px;padding:12px}
-.main{padding:0}
-.welcome{padding:0 0 0 16px}
-.menu-toggle{display:none}
-.menu-title,.layout.collapsed .menu-title{display:none}
-.menu{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;scrollbar-width:thin}
-.menu li{margin-bottom:0;flex:0 0 auto}
-.menu button,.layout.collapsed .menu button{white-space:nowrap;padding:9px 14px;border-radius:999px;border-left:none;font-size:13px;color:#475569}
-.menu button.active,.layout.collapsed .menu button.active{background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte);font-weight:700}
-.grid-links{display:flex;overflow-x:auto;gap:12px;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:thin}
-.link-card{flex:0 0 220px}
-}
-@media(max-width:600px){.topbar{height:68px;padding:0 14px}.brand-icon{width:38px;height:38px}.layout{padding:10px}.quick-links{grid-template-columns:1fr}.footer{text-align:center;padding:18px}.grid-scripts{gap:12px}}
-</style>
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px var(--shadow);
+        }
+
+        .card strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--primaria);
+        }
+
+        .card span {
+            font-size: 0.9rem;
+            color: var(--texto-secundario);
+        }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--borda);
+            font-size: 0.85rem;
+            color: var(--texto-secundario);
+        }
+    </style>
 </head>
-<body class="bloqueado">
-<div class="login-overlay" id="loginOverlay">
-<div class="login-box">
-<div class="login-brand"><div class="login-icon">▦</div><h1>Central de Atendimento</h1><p>Portal interno de apoio ao atendimento</p></div>
-<label class="login-label" for="loginName">Como podemos te chamar?</label>
-<input class="login-name" id="loginName" type="text" maxlength="80" autocomplete="name" placeholder="Digite seu nome">
-<div class="login-error" id="loginError">Digite seu nome e aceite os Termos de Uso para continuar.</div>
-<div class="terms-box"><label class="terms-check"><input type="checkbox" id="termsCheck"><span>Li e aceito os <button type="button" class="terms-link" onclick="abrirTermos(event)">Termos de Uso</button> da Central de Atendimento.</span></label></div>
-<button class="login-button" onclick="entrarNaCentral()">Entrar na Central</button>
-</div></div>
-<div class="terms-modal" id="termsModal" onclick="fecharTermosFora(event)"><div class="terms-content"><button class="terms-close" onclick="fecharTermos()">Fechar</button><h2>Termos de Uso — Central de Atendimento</h2><p>Última atualização: agosto de 2026.</p><h3>1. Finalidade da ferramenta</h3><p>A Central de Atendimento é uma ferramenta interna destinada exclusivamente ao apoio às atividades de atendimento, consulta e utilização de scripts e orientações disponibilizados pela organização.</p><h3>2. Uso profissional</h3><p>A ferramenta deve ser utilizada exclusivamente para finalidades relacionadas às atividades profissionais. É vedada a utilização para fins pessoais, comerciais ou para qualquer atividade não relacionada ao atendimento.</p><h3>3. Responsabilidade pelo conteúdo</h3><p>Os scripts e orientações disponibilizados servem como material de apoio. O usuário é responsável por utilizar as informações de acordo com os procedimentos, políticas e orientações oficiais vigentes.</p><h3>4. Informações e dados pessoais</h3><p>Não devem ser inseridos, armazenados ou compartilhados na ferramenta dados pessoais, documentos, senhas, códigos de autenticação ou outras informações sensíveis de usuários, salvo quando expressamente autorizado pelos procedimentos oficiais.</p><h3>5. Segurança</h3><p>O usuário deve preservar a segurança das informações acessadas durante sua atividade e não compartilhar o conteúdo da ferramenta com pessoas não autorizadas.</p><h3>6. Atualização dos conteúdos</h3><p>Os scripts podem ser alterados, atualizados ou removidos a qualquer momento, conforme a necessidade operacional.</p><h3>7. Uso indevido</h3><p>O uso da ferramenta em desacordo com estes termos, com as políticas internas ou com as orientações de segurança poderá resultar na restrição de acesso e nas medidas administrativas cabíveis.</p><h3>8. Aceite</h3><p>Ao selecionar “Aceito os Termos de Uso” e acessar a Central de Atendimento, o usuário declara que leu, compreendeu e concorda com as condições estabelecidas.</p></div></div>
-<header class="topbar">
-<div class="topbar-left"><button class="menu-toggle" id="menuToggle" onclick="alternarMenu()" aria-label="Recolher ou expandir menu">☰</button><div class="brand"><div class="brand-icon">▦</div><div class="brand-text">Central de Atendimento<small>Portal interno de apoio</small></div></div></div>
-<div class="user-area"><span class="user-name" id="topUser"></span><div class="status"><span class="status-dot"></span>Sistema operacional</div></div>
-</header>
-<div class="layout" id="layout">
-<aside class="sidebar"><div class="menu-title">Navegação</div><ul class="menu">
-<li><button class="active" onclick="filtrarCategoria('todos',this)">🏠 Início</button></li><li><button onclick="filtrarCategoria('Atendimento',this)">📋 Atendimento</button></li><li><button onclick="filtrarCategoria('Tempo de espera',this)">⏱️ Tempo de espera</button></li><li><button onclick="filtrarCategoria('Segurança',this)">🔒 Segurança</button></li><li><button onclick="filtrarCategoria('Recuperação de conta',this)">🔐 Recuperação de conta</button></li><li><button onclick="filtrarCategoria('Usuários agressivos',this)">⚠️ Situações</button></li><li><button onclick="filtrarCategoria('Gov.br',this)">🏛️ Gov.br</button></li><li><button onclick="filtrarCategoria('Chamados',this)">📝 Chamados</button></li><li><button onclick="filtrarCategoria('Documentação',this)">📄 Documentação</button></li><li><button onclick="filtrarCategoria('Pesquisa',this)">⭐ Pesquisa</button></li>
-</ul></aside>
-<main class="main">
-<div class="welcome"><h1 id="welcomeTitle">Olá! 👋</h1><p>Acesse rapidamente seus scripts e recursos de apoio ao atendimento.</p></div>
-<div class="search-wrap"><span class="search-icon">🔎</span><input type="text" id="campoBusca" class="busca-input" placeholder="Pesquisar scripts, palavras-chave ou situações..." oninput="filtrarScripts()"></div>
-<div class="quick-links">
-<button class="quick-link" onclick="buscarRapido('abertura')"><div class="quick-link-top"><span class="quick-link-icon">⚡</span><span class="quick-link-arrow">↗</span></div><strong>Iniciar atendimento</strong><span>Script de abertura</span></button>
-<button class="quick-link" onclick="buscarRapido('transferir')"><div class="quick-link-top"><span class="quick-link-icon">🔄</span><span class="quick-link-arrow">↗</span></div><strong>Encaminhar caso</strong><span>Transferir para outra fila</span></button>
-<button class="quick-link" onclick="buscarRapido('protocolo')"><div class="quick-link-top"><span class="quick-link-icon">📄</span><span class="quick-link-arrow">↗</span></div><strong>Consultar protocolo</strong><span>Localizar orientações</span></button>
-<button class="quick-link" onclick="buscarRapido('pesquisa')"><div class="quick-link-top"><span class="quick-link-icon">⭐</span><span class="quick-link-arrow">↗</span></div><strong>Encerrar jornada</strong><span>Pesquisa de satisfação</span></button>
-</div>
-<div class="section-head"><h2>🔗 Links rápidos</h2></div>
-<div class="grid-links" id="listaLinks">
-<!-- Os links são carregados por content/links/links-rapidos.js. -->
-</div>
-<div class="section-head"><h2>📋 Scripts de atendimento</h2><span class="count" id="contador"></span></div>
-<div class="grid-scripts" id="listaScripts">
-<!-- Os cartões são carregados por content/scripts/atendimento.js. -->
-<div class="no-results" id="semResultados">Nenhum script encontrado para esta pesquisa.</div>
-</div></main></div>
-<footer class="footer">Central de Atendimento • Portal interno • Desenvolvido por Bruno Silva <span id="footerUser"></span> • <button class="user-name" onclick="trocarUsuario()">Trocar usuário</button></footer>
-<script src="content/scripts/atendimento.js"></script>
-<script src="content/links/links-rapidos.js"></script>
-<script src="assets/js/central.js"></script>
+<body>
+
+    <!-- Menu Lateral / Sidebar -->
+    <aside>
+        <h2>Central</h2>
+        <nav>
+            <ul>
+                <li><a href="#">🏠 Início</a></li>
+                <li><a href="#">📋 Atendimento</a></li>
+                <li><a href="#">⏱ Tempo de espera</a></li>
+                <li><a href="#">🔒 Segurança</a></li>
+                <li><a href="#">📝 Chamados</a></li>
+                <li><a href="#">📄 Documentação</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="header-top">
+            <h1>Olá! 👋</h1>
+            <!-- Botão de Alternar Tema -->
+            <button class="theme-toggle-btn" id="themeToggle" aria-label="Alternar tema">
+                <span id="themeIcon">🌙</span> <span id="themeText">Tema Escuro</span>
+            </button>
+        </div>
+
+        <p>Acesse rapidamente seus scripts e recursos de apoio ao atendimento.</p>
+
+        <!-- Recursos de Acesso Rápido -->
+        <div class="grid-cards">
+            <a href="#" class="card">
+                <strong>⚡ Iniciar atendimento</strong>
+                <span>Script de abertura de chamados</span>
+            </a>
+            <a href="#" class="card">
+                <strong>🔄 Encaminhar caso</strong>
+                <span>Transferir para outra fila</span>
+            </a>
+            <a href="#" class="card">
+                <strong>📄 Consultar protocolo</strong>
+                <span>Localizar orientações</span>
+            </a>
+            <a href="#" class="card">
+                <strong>⭐ Encerrar jornada</strong>
+                <span>Pesquisa de satisfação</span>
+            </a>
+        </div>
+
+        <footer>
+            Central de Atendimento • Portal interno • Desenvolvido por Bruno Silva
+        </footer>
+    </main>
+
+    <!-- Lógica JavaScript para persistência de tema -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const htmlElement = document.documentElement;
+
+        // Verifica se o usuário já possui uma preferência salva no navegador
+        const savedTheme = localStorage.getItem('theme');
+        
+        // Aplica o tema salvo ou usa o padrão do sistema operacional
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateToggleButton(savedTheme);
+        } else {
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const defaultTheme = systemPrefersDark ? 'dark' : 'light';
+            htmlElement.setAttribute('data-theme', defaultTheme);
+            updateToggleButton(defaultTheme);
+        }
+
+        // Função que escuta o clique do botão
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme); // Salva no LocalStorage
+            updateToggleButton(newTheme);
+        });
+
+        // Atualiza visualmente o texto e ícone do botão
+        function updateToggleButton(theme) {
+            if (theme === 'dark') {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Tema Claro';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Tema Escuro';
+            }
+        }
+    </script>
 </body>
 </html>
