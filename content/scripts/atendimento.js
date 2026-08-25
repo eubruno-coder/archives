@@ -20,12 +20,12 @@ Desculpe a demora, o sistema está apresentando lentidão</div></div>
 Tenha uma ótima Tarde!</div></div>
 <div class="script-card" data-categoria="Pesquisa"><span class="categoria">Pesquisa</span><div class="script-header"><span class="script-title">Pesquisa de satisfação — Noite</span><button class="btn-copiar" onclick="copiarTexto(this,'s11')">Copiar</button></div><div class="script-content" id="s11">Obrigado por entrar em contato conosco. Se precisar de mais ajuda, estamos à sua disposição. Peço que, por gentileza, avalie o meu atendimento, sendo 10 a nota máxima.
 Tenha uma ótima Noite!</div></div>
-<div class="script-card" data-categoria="Gov.br"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">2FA Desabilitado</span><button class="btn-copiar" onclick="copiarTexto(this,'s12')">Copiar</button></div><div class="script-content" id="s12">- (Nome do usuário), a verificação em duas etapas da sua conta foi desabilitada. Agora você conseguirá acessar sua conta gov.br sem a necessidade do código.
+<div class="script-card" data-categoria="Gov.br"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">2FA Desabilitado</span><button class="btn-copiar" onclick="copiarTexto(this,'s12')">Copiar</button></div><div class="script-content" id="s12"> (Nome do usuário), a verificação em duas etapas da sua conta foi desabilitada. Agora você conseguirá acessar sua conta gov.br sem a necessidade do código.
 
 Por questões de segurança, o nível da conta foi reduzido para Bronze. Recomendamos que aumente o nível da conta seguindo as orientações disponíveis nessa página
 
 https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/atendimento-gov.br/duvidas-na-conta-gov.br/duvidas-para-aumentar-o-nivel-da-conta-gov.br</div></div>
-<div class="script-card" data-categoria="Gov.br"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">E-mail Alterado</span><button class="btn-copiar" onclick="copiarTexto(this,'s13')">Copiar</button></div><div class="script-content" id="s13">- (Nome do usuário), sua solicitação foi aceita e o e-mail da sua conta gov.br foi alterado com sucesso. Agora você conseguirá recuperar sua senha pelo e-mail cadastrado.
+<div class="script-card" data-categoria="Gov.br"><span class="categoria">Gov.br</span><div class="script-header"><span class="script-title">E-mail Alterado</span><button class="btn-copiar" onclick="copiarTexto(this,'s13')">Copiar</button></div><div class="script-content" id="s13">(Nome do usuário), sua solicitação foi aceita e o e-mail da sua conta gov.br foi alterado com sucesso. Agora você conseguirá recuperar sua senha pelo e-mail cadastrado.
 
 Por questões de segurança, o nível da conta foi reduzido para Bronze. Recomendamos que aumente o nível da conta seguindo as orientações disponíveis nessa página
 
@@ -43,14 +43,12 @@ opção “01 - Dúvidas no aplicativo GOV.BR”.
 Nossa equipe técnica realizará a análise da sua dificuldade e assim te ajudar com esta demanda.</div></div>
 <div class="script-card" data-categoria="Chamados"><span class="categoria">Chamados</span><div class="script-header"><span class="script-title">Chamado encerrado há muito tempo</span><button class="btn-copiar" onclick="copiarTexto(this,'s19')">Copiar</button></div><div class="script-content" id="s19">Este chamado está encerrado a muito tempo, será necessário abrir um novo para que possamos seguir com a solicitação.</div></div>
 <div class="script-card" data-categoria="Chamados"><span class="categoria">Chamados</span><div class="script-header"><span class="script-title">Link — Desativar 2FA</span><button class="btn-copiar" onclick="copiarTexto(this,'s20')">Copiar</button></div><div class="script-content" id="s20">
-
 Para desativar a verificação em duas etapas ou desvincular o aplicativo da sua conta gov.br, preencha o formulário através do link abaixo:
 
 https://atendimento.servicos.gov.br/pt/desativar-2fa
 
 Após o preenchimento, pode me informar o número do protocolo/ID, por favor? Assim consigo priorizar para você.</div></div>
 <div class="script-card" data-categoria="Chamados"><span class="categoria">Chamados</span><div class="script-header"><span class="script-title">Link — Alterar e-mail</span><button class="btn-copiar" onclick="copiarTexto(this,'s21')">Copiar</button></div><div class="script-content" id="s21">
-
 Para recuperar o acesso à sua conta gov.br, preencha o formulário através do link abaixo:
 
 https://atendimento.servicos.gov.br/pt/alterar-email
