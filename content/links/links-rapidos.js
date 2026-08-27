@@ -2,7 +2,6 @@
    Para adicionar, editar ou remover um link, basta alterar este array —
    não é necessário mexer no index.html. */
 window.CENTRAL_LINKS_RAPIDOS = [
-   
   { titulo: "Sistema de Escalas", url: "https://eubruno-coder.github.io/escala/", descricao: "Controle de jornada e pausas", icone: "⏱️" },
   { titulo: "Portal Colabora", url: "https://portalcolabora.speedmais.com.br/user/auth/login", descricao: "Login do portal do colaborador", icone: "📚" },
   { titulo: "Marcar Ponto", url: "https://portal.speedmais.com.br/performancecef", descricao: "Ponto e performance", icone: "⏰" },
