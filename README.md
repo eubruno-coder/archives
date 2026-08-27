@@ -92,3 +92,103 @@ projetoX/
 ├── CONTRIBUTING.md
 ├── CREDITS.md
 └── README.md
+    
+```
+## 🗺️ Roadmap do Projeto
+
+A Intranet está sendo desenvolvida de forma incremental, priorizando **simplicidade, desempenho, facilidade de manutenção e baixo custo operacional**.
+
+### 🟢 Fase 1 — Fundação
+**Status: ✅ Concluída**
+
+- [x] Estrutura base da Intranet
+- [x] Identidade visual
+- [x] Menu lateral e navegação
+- [x] Página inicial
+- [x] Busca de conteúdos
+- [x] Links rápidos
+- [x] Scripts de atendimento
+- [x] Organização por categorias
+- [x] Documentação
+- [x] Termos de uso
+- [x] Identificação inicial do usuário
+- [x] Favicon
+- [x] Estrutura para tema escuro
+- [x] Sistema inicial de feedback
+
+---
+
+### 🟡 Fase 2 — Organização e Experiência
+**Status: 🔄 Em desenvolvimento**
+
+- [ ] Revisão e reorganização das categorias
+- [ ] Padronização dos scripts
+- [ ] Melhoria do sistema de busca
+- [ ] Aprimoramento da barra de acesso rápido
+- [ ] Sistema de favoritos
+- [ ] Melhor experiência de navegação
+- [ ] Finalização do Dark Mode
+- [ ] Melhorias de responsividade
+- [ ] Feedback visual das ações
+
+---
+
+### 🟠 Fase 3 — Usuários e Personalização
+**Status: 📋 Planejada**
+
+- [ ] Identificação do operador
+- [ ] Persistência das informações do usuário
+- [ ] Perfil básico
+- [ ] Preferências individuais
+- [ ] Scripts favoritos
+- [ ] Histórico de utilização
+- [ ] Atalhos personalizados
+
+> Inicialmente, essas funcionalidades poderão utilizar armazenamento local do navegador, reduzindo a necessidade de infraestrutura.
+
+---
+
+### 🔵 Fase 4 — Sistema de Feedback
+**Status: 📋 Planejada**
+
+Evolução do feedback para um fluxo estruturado:
+
+**Operador → Feedback → Registro → Tratamento → Resposta → Encerramento**
+
+Funcionalidades previstas:
+
+- [ ] Formulário de feedback
+- [ ] Identificação do operador
+- [ ] Categorias de solicitação
+- [ ] Classificação de prioridade
+- [ ] Status da solicitação
+- [ ] Data e hora
+- [ ] Campo de resposta
+- [ ] Histórico
+- [ ] Controle de pendências
+- [ ] Registro de solicitações resolvidas
+
+Categorias previstas:
+
+- 💡 Sugestão
+- 🐛 Erro
+- 📚 Conteúdo
+- ⚙️ Sistema
+- 📝 Feedback
+- 🚨 Urgente
+
+---
+
+### 🟣 Fase 5 — Backend e Banco de Dados
+**Status: 📋 Planejada**
+
+Implementação de uma infraestrutura central utilizando **Supabase**.
+
+Estrutura inicial prevista:
+
+```text
+Intranet
+├── Autenticação
+├── Banco de Dados
+├── Armazenamento
+└── Realtime
