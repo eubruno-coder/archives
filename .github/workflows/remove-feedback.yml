@@ -2,8 +2,6 @@ name: Remove feedback feature
 
 on:
   push:
-    paths:
-      - '.github/workflows/remove-feedback.yml'
 
 permissions:
   contents: write
@@ -25,7 +23,6 @@ jobs:
           text = path.read_text(encoding='utf-8')
           original = text
 
-          # Remove the dedicated feedback stylesheet section.
           text, css_count = re.subn(
               r'/\* ===== Feedback ===== \*/.*?(?=/\* ===== Footer ===== \*/)',
               '',
@@ -33,9 +30,9 @@ jobs:
               flags=re.S,
           )
 
-          # Remove feedback containers if present, including nested divs.
           def remove_divs_with_feedback_class(source):
               tag_re = re.compile(r'<div\b[^>]*>|</div\s*>', re.I)
+              removed = 0
               while True:
                   start_match = re.search(
                       r'<div\b[^>]*\bclass\s*=\s*["\'][^"\']*\bfeedback(?:-[^\s"\']+)?\b[^"\']*["\'][^>]*>',
@@ -43,7 +40,7 @@ jobs:
                       re.I,
                   )
                   if not start_match:
-                      return source, 0
+                      return source, removed
 
                   start = start_match.start()
                   depth = 0
@@ -58,11 +55,9 @@ jobs:
                               end = match.end()
                               break
                   if end is None:
-                      return source, 0
+                      return source, removed
                   source = source[:start] + source[end:]
-
-                  # Continue removing additional feedback blocks.
-                  return remove_divs_with_feedback_class(source)[0], 1
+                  removed += 1
 
           text, div_count = remove_divs_with_feedback_class(text)
 
@@ -71,11 +66,15 @@ jobs:
 
           path.write_text(text, encoding='utf-8')
           print(f'CSS removido: {css_count}; blocos de interface removidos: {div_count}')
-      
+
       - name: Commit changes
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
-          git diff --cached --quiet || git commit -m 'refactor: remove feedback feature'
+          if git diff --cached --quiet; then
+            echo 'Nenhuma alteração necessária.'
+            exit 0
+          fi
+          git commit -m 'refactor: remove feedback feature'
           git push
