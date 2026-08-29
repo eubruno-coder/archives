@@ -1,0 +1,81 @@
+name: Remove feedback feature
+
+on:
+  push:
+    paths:
+      - '.github/workflows/remove-feedback.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  remove-feedback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Remove feedback CSS and interface blocks
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+          original = text
+
+          # Remove the dedicated feedback stylesheet section.
+          text, css_count = re.subn(
+              r'/\* ===== Feedback ===== \*/.*?(?=/\* ===== Footer ===== \*/)',
+              '',
+              text,
+              flags=re.S,
+          )
+
+          # Remove feedback containers if present, including nested divs.
+          def remove_divs_with_feedback_class(source):
+              tag_re = re.compile(r'<div\b[^>]*>|</div\s*>', re.I)
+              while True:
+                  start_match = re.search(
+                      r'<div\b[^>]*\bclass\s*=\s*["\'][^"\']*\bfeedback(?:-[^\s"\']+)?\b[^"\']*["\'][^>]*>',
+                      source,
+                      re.I,
+                  )
+                  if not start_match:
+                      return source, 0
+
+                  start = start_match.start()
+                  depth = 0
+                  end = None
+                  for match in tag_re.finditer(source, start_match.start()):
+                      token = match.group(0)
+                      if token.lower().startswith('<div'):
+                          depth += 1
+                      else:
+                          depth -= 1
+                          if depth == 0:
+                              end = match.end()
+                              break
+                  if end is None:
+                      return source, 0
+                  source = source[:start] + source[end:]
+
+                  # Continue removing additional feedback blocks.
+                  return remove_divs_with_feedback_class(source)[0], 1
+
+          text, div_count = remove_divs_with_feedback_class(text)
+
+          if text == original:
+              raise SystemExit('Nenhuma alteração encontrada.')
+
+          path.write_text(text, encoding='utf-8')
+          print(f'CSS removido: {css_count}; blocos de interface removidos: {div_count}')
+      
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet || git commit -m 'refactor: remove feedback feature'
+          git push
