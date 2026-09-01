@@ -90,7 +90,8 @@ body.bloqueado{overflow:hidden}
 .login-brand h1{font-family:var(--font-display);color:var(--azul-profundo);font-size:22px;font-weight:700;margin-bottom:6px;letter-spacing:-.2px}
 .login-brand p{color:var(--muted);font-size:13px}
 .login-label{display:block;color:var(--texto-forte);font-weight:600;font-size:13px;margin-bottom:7px}
-.login-name{width:100%;padding:13px 14px;border:1px solid var(--borda);border-radius:9px;font-size:15px;font-family:var(--font-body);outline:none;margin-bottom:15px;transition:border-color .15s,box-shadow .15s}
+.login-name{width:100%;padding:13px 14px;border:1px solid var(--borda);border-radius:9px;font-size:15px;font-family:var(--font-body);outline:none;margin-bottom:15px;color:var(--texto);background:var(--superficie);transition:border-color .15s,box-shadow .15s}
+.login-name::placeholder{color:var(--muted)}
 .login-name:focus{border-color:var(--azul-eletrico);box-shadow:0 0 0 3px rgba(217,119,87,.15)}
 .terms-box{background:var(--superficie-alt);border:1px solid var(--borda);border-radius:9px;padding:13px;margin-bottom:14px}
 .terms-check{display:flex;align-items:flex-start;gap:9px;color:var(--texto-secundario);font-size:12px;line-height:1.5;cursor:pointer}
@@ -151,7 +152,8 @@ body.bloqueado{overflow:hidden}
 
 .search-wrap{position:relative;margin-bottom:26px}
 .search-icon{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--texto-icone)}
-.busca-input{width:100%;padding:14px 18px 14px 46px;font-size:15px;font-family:var(--font-body);border:1px solid var(--borda);border-radius:10px;outline:none;background:var(--superficie);transition:border-color .2s,box-shadow .2s}
+.busca-input{width:100%;padding:14px 18px 14px 46px;font-size:15px;font-family:var(--font-body);border:1px solid var(--borda);border-radius:10px;outline:none;background:var(--superficie);color:var(--texto);transition:border-color .2s,box-shadow .2s}
+.busca-input::placeholder{color:var(--muted)}
 .busca-input:focus{border-color:var(--azul-eletrico);box-shadow:0 0 0 3px rgba(217,119,87,.12)}
 
 /* ===== Recursos rápidos (antigos "atalhos") ===== */
