@@ -1,68 +1,94 @@
 # Central de Atendimento
 
-> Plataforma de apoio ao atendimento, desenvolvida para centralizar informações, scripts, links, orientações e recursos utilizados na rotina operacional.
+> Plataforma web de apoio operacional desenvolvida para centralizar scripts, links, orientações, documentações e recursos utilizados na rotina de atendimento.
 
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-orange)
-![Versão](https://img.shields.io/badge/vers%C3%A3o-V2-blue)
-![Licença](https://img.shields.io/badge/licen%C3%A7a-a%20definir-lightgrey)
+![Versão](https://img.shields.io/badge/versão-V3-blue)
+![Tecnologia](https://img.shields.io/badge/tecnologia-HTML%20%7C%20CSS%20%7C%20JavaScript-yellow)
+![Licença](https://img.shields.io/badge/licença-a%20definir-lightgrey)
+
 ---
 
 ## 📌 Sobre o projeto
 
-A **Central de Atendimento** é uma plataforma web criada com o objetivo de tornar a rotina de atendimento mais organizada, rápida e acessível.
+A **Central de Atendimento** é uma aplicação web criada para funcionar como um ponto central de consulta durante a rotina operacional.
 
-A proposta é reunir, em um único ambiente, recursos que normalmente ficam dispersos entre documentos, páginas, mensagens e diferentes sistemas.
+A proposta é substituir a utilização de informações dispersas entre documentos, mensagens, páginas e sistemas por uma interface única, organizada e de acesso rápido.
 
-A plataforma foi concebida para funcionar como uma **central operacional**, permitindo que o usuário encontre rapidamente aquilo que precisa durante o atendimento.
+O projeto prioriza:
 
-Entre os recursos previstos e/ou implementados estão:
+- simplicidade;
+- velocidade de acesso;
+- organização das informações;
+- facilidade de manutenção;
+- modularização do conteúdo;
+- experiência do usuário;
+- baixo custo operacional;
+- possibilidade de evolução futura.
 
-- Scripts de atendimento;
-- Links de acesso rápido;
-- Orientações operacionais;
-- Comunicados e novidades;
-- Documentações;
-- Recursos de apoio ao atendente;
-- Organização por categorias;
-- Interface responsiva;
-- Tema claro e escuro;
-- Estrutura preparada para futuras expansões.
+A aplicação foi estruturada para permitir que conteúdos operacionais sejam atualizados sem a necessidade de alterar constantemente a estrutura principal da interface.
 
 ---
 
-## 🤝 Desenvolvimento
+## 🚀 Estado atual
 
-Este projeto está sendo desenvolvido em **parceria entre Bruno Silva e uma assistência de Inteligência Artificial**, utilizada como apoio técnico, arquitetural, documental e de desenvolvimento.
+A Central encontra-se em **desenvolvimento ativo**, com a fundação da aplicação já estabelecida.
 
-A participação da Inteligência Artificial não substitui a autoria, responsabilidade ou tomada de decisão humana sobre o projeto.
+### Atualmente implementado
 
-As decisões relacionadas à finalidade, conteúdo operacional, regras de utilização, publicação e evolução da plataforma são definidas pelo responsável pelo projeto.
-
-O histórico de alterações do GitHub constitui parte da trilha de desenvolvimento e evolução do software.
+- ✅ Interface principal da Central
+- ✅ Identificação inicial do operador
+- ✅ Termos de Uso
+- ✅ Menu lateral
+- ✅ Menu lateral recolhível
+- ✅ Navegação por categorias
+- ✅ Pesquisa de scripts
+- ✅ Scripts de atendimento
+- ✅ Links rápidos
+- ✅ Integração com sistemas externos
+- ✅ Integração com o projeto Sistema de Escalas
+- ✅ Página de novidades
+- ✅ Favicon em SVG
+- ✅ Tema claro
+- ✅ Tema escuro
+- ✅ Persistência do tema
+- ✅ Feedback visual nas ações
+- ✅ Organização modular dos scripts
+- ✅ Organização modular dos links
+- ✅ Separação entre estrutura, lógica e conteúdo
+- ✅ Responsividade
+- ✅ Refinamento visual da interface
+- ✅ Tratamento de scripts duplicados
+- ✅ Estrutura documental do projeto
 
 ---
 
-## 🎯 Objetivos
+## 🎨 Identidade visual
 
-A plataforma possui como principais objetivos:
+A interface passou por uma evolução visual para abandonar a aparência de uma página estática e assumir uma identidade mais próxima de uma **plataforma interna de operação**.
 
-1. Centralizar informações utilizadas durante o atendimento;
-2. Reduzir o tempo necessário para localizar procedimentos;
-3. Facilitar o acesso aos scripts;
-4. Padronizar informações operacionais;
-5. Melhorar a experiência do atendente;
-6. Reduzir a dependência de documentos dispersos;
-7. Criar uma base tecnológica preparada para futuras funcionalidades;
-8. Permitir evolução gradual sem necessidade de reconstrução completa do projeto.
+A nova interface utiliza:
+
+- tipografia diferenciada para títulos;
+- tipografia funcional para conteúdo;
+- sistema de variáveis CSS;
+- identidade visual própria;
+- componentes reutilizáveis;
+- estados de interação;
+- tema claro e escuro;
+- contraste adaptado para os dois temas;
+- elementos visuais voltados à leitura rápida.
+
+O sistema de temas utiliza variáveis CSS para permitir a alteração global da interface sem necessidade de duplicar componentes.
 
 ---
 
-## 🧩 Estrutura do projeto
+## 🧩 Arquitetura
 
-A organização atual segue uma separação entre aplicação, recursos JavaScript e conteúdo operacional.
+A aplicação segue uma arquitetura simples e modular, separando a estrutura visual do conteúdo operacional.
 
 ```text
-projetoX/
+projetointranet/
 │
 ├── .github/
 │   └── PULL_REQUEST_TEMPLATE/
@@ -85,110 +111,281 @@ projetoX/
 │
 ├── index.html
 ├── novidades.html
-├── novidades.js
 │
 ├── AUTHORS.md
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── CREDITS.md
 └── README.md
-    
 ```
-## 🗺️ Roadmap do Projeto
 
-A Intranet está sendo desenvolvida de forma incremental, priorizando **simplicidade, desempenho, facilidade de manutenção e baixo custo operacional**.
+### Separação de responsabilidades
 
-### 🟢 Fase 1 — Fundação
+**`index.html`**
+
+Responsável principalmente pela estrutura da aplicação e interface.
+
+**`assets/js/central.js`**
+
+Concentra a lógica principal da Central, incluindo navegação, pesquisa, interação e funcionalidades da interface.
+
+**`assets/js/novidades.js`**
+
+Responsável pela lógica da página de novidades.
+
+**`content/scripts/atendimento.js`**
+
+Centraliza os scripts operacionais utilizados durante os atendimentos.
+
+**`content/links/links-rapidos.js`**
+
+Centraliza os links externos utilizados na operação.
+
+Essa separação permite alterar conteúdos operacionais sem precisar modificar diretamente a estrutura principal da aplicação.
+
+---
+
+## 🔗 Integrações
+
+A Central funciona também como uma camada de acesso rápido para outros sistemas utilizados na operação.
+
+Entre os recursos atualmente integrados estão:
+
+- Sistema de Escalas;
+- Portal Colabora;
+- Marcar Ponto;
+- Evolux;
+- Gestão GOV;
+- Portal MEXX;
+- Webmail.
+
+O **Sistema de Escalas** possui integração direta através do link disponibilizado na Central.
+
+Essa arquitetura permite que novos sistemas sejam adicionados futuramente através do arquivo de configuração de links, sem necessidade de reconstrução da interface principal.
+
+---
+
+## 📚 Organização dos scripts
+
+Os scripts são organizados por categorias operacionais.
+
+Entre as categorias atuais estão:
+
+- Atendimento
+- Protocolo
+- Encerramento
+- Tempo de espera
+- Tempo de resposta
+- Segurança
+- Pesquisa
+- Gov.br
+- Chamados
+- Documentação
+- Recuperação de conta
+- Usuários agressivos
+
+Cada script possui mecanismo de cópia rápida, permitindo utilização durante o atendimento sem necessidade de selecionar manualmente o conteúdo.
+
+---
+
+## 📰 Novidades
+
+A Central possui uma página própria para divulgação de atualizações.
+
+O objetivo é permitir que novas funcionalidades, alterações operacionais e melhorias sejam comunicadas aos usuários da plataforma sem depender exclusivamente de comunicação externa.
+
+---
+
+# 🗺️ Roadmap
+
+A evolução do projeto está organizada em fases.
+
+## 🟢 Fase 1 — Fundação
 **Status: ✅ Concluída**
 
-- [x] Estrutura base da Intranet
+- [x] Estrutura base da Central
 - [x] Identidade visual
-- [x] Menu lateral e navegação
+- [x] Menu lateral
+- [x] Navegação
 - [x] Página inicial
-- [x] Busca de conteúdos
+- [x] Sistema de pesquisa
 - [x] Links rápidos
 - [x] Scripts de atendimento
 - [x] Organização por categorias
-- [x] Documentação
-- [x] Termos de uso
-- [x] Identificação inicial do usuário
+- [x] Termos de Uso
+- [x] Identificação inicial do operador
 - [x] Favicon
-- [x] Estrutura para tema escuro
-- [x] Sistema inicial de feedback
+- [x] Página de novidades
+- [x] Estrutura documental
 
 ---
 
-### 🟡 Fase 2 — Organização e Experiência
+## 🟢 Fase 2 — Interface e Experiência
+**Status: ✅ Concluída**
+
+- [x] Redesign da interface
+- [x] Nova identidade visual
+- [x] Sistema de variáveis CSS
+- [x] Tema claro
+- [x] Tema escuro
+- [x] Menu lateral recolhível
+- [x] Melhorias na pesquisa
+- [x] Feedback visual das ações
+- [x] Melhorias de responsividade
+- [x] Refinamento da tela de login
+- [x] Refinamento dos campos de pesquisa
+- [x] Organização visual dos scripts
+
+---
+
+## 🟢 Fase 3 — Modularização
+**Status: ✅ Concluída**
+
+- [x] Separação dos scripts do HTML principal
+- [x] Separação dos links rápidos
+- [x] Organização dos arquivos JavaScript
+- [x] Estrutura de conteúdo independente
+- [x] Redução da dependência de alterações no `index.html`
+- [x] Organização da documentação técnica
+
+---
+
+## 🟡 Fase 4 — Integração entre projetos
 **Status: 🔄 Em desenvolvimento**
 
-- [ ] Revisão e reorganização das categorias
-- [ ] Padronização dos scripts
-- [ ] Melhoria do sistema de busca
-- [ ] Aprimoramento da barra de acesso rápido
-- [ ] Sistema de favoritos
-- [ ] Melhor experiência de navegação
-- [ ] Finalização do Dark Mode
-- [ ] Melhorias de responsividade
-- [ ] Feedback visual das ações
+A Central passa a funcionar como um ponto de integração entre diferentes projetos e sistemas.
+
+- [x] Integração com o Sistema de Escalas
+- [x] Estrutura para links externos
+- [ ] Expansão das integrações
+- [ ] Padronização dos projetos integrados
+- [ ] Documentação das integrações
+- [ ] Navegação integrada entre projetos
+- [ ] Evolução da arquitetura multi-projeto
 
 ---
 
-### 🟠 Fase 3 — Usuários e Personalização
+## 🟡 Fase 5 — Personalização
 **Status: 📋 Planejada**
 
-- [ ] Identificação do operador
-- [ ] Persistência das informações do usuário
-- [ ] Perfil básico
-- [ ] Preferências individuais
+- [ ] Favoritos
 - [ ] Scripts favoritos
-- [ ] Histórico de utilização
+- [ ] Preferências individuais
 - [ ] Atalhos personalizados
-
-> Inicialmente, essas funcionalidades poderão utilizar armazenamento local do navegador, reduzindo a necessidade de infraestrutura.
-
----
-
-### 🔵 Fase 4 — Sistema de Feedback
-**Status: 📋 Planejada**
-
-Evolução do feedback para um fluxo estruturado:
-
-**Operador → Feedback → Registro → Tratamento → Resposta → Encerramento**
-
-Funcionalidades previstas:
-
-- [ ] Formulário de feedback
-- [ ] Identificação do operador
-- [ ] Categorias de solicitação
-- [ ] Classificação de prioridade
-- [ ] Status da solicitação
-- [ ] Data e hora
-- [ ] Campo de resposta
-- [ ] Histórico
-- [ ] Controle de pendências
-- [ ] Registro de solicitações resolvidas
-
-Categorias previstas:
-
-- 💡 Sugestão
-- 🐛 Erro
-- 📚 Conteúdo
-- ⚙️ Sistema
-- 📝 Feedback
-- 🚨 Urgente
+- [ ] Persistência de preferências
+- [ ] Histórico de utilização
+- [ ] Personalização da interface
 
 ---
 
-### 🟣 Fase 5 — Backend e Banco de Dados
+## 🔵 Fase 6 — Dados e Backend
 **Status: 📋 Planejada**
 
-Implementação de uma infraestrutura central utilizando **Supabase**.
+Evolução futura para uma arquitetura com persistência centralizada.
 
-Estrutura inicial prevista:
+Possível estrutura:
 
 ```text
-Intranet
+Central de Atendimento
+│
 ├── Autenticação
-├── Banco de Dados
-├── Armazenamento
-└── Realtime
+├── Usuários
+├── Scripts
+├── Links
+├── Novidades
+├── Preferências
+├── Feedback
+└── Banco de Dados
+```
+
+Uma possível implementação futura poderá utilizar **Supabase** para autenticação, banco de dados, armazenamento e recursos em tempo real.
+
+---
+
+## 🛡️ Governança e propriedade intelectual
+
+O projeto possui documentação específica relacionada à autoria, créditos, contribuição e regras de utilização.
+
+Documentos relacionados:
+
+- `AUTHORS.md`
+- `CREDITS.md`
+- `CONTRIBUTING.md`
+- `docs/ARQUITETURA.md`
+- `docs/REGRAS-E-CONFORMIDADE.md`
+
+A utilização de ferramentas de Inteligência Artificial durante o desenvolvimento é tratada como **apoio técnico e de desenvolvimento**, não como substituição da autoria ou das decisões relacionadas ao projeto.
+
+As decisões sobre arquitetura, finalidade, conteúdo, regras de utilização e evolução permanecem sob responsabilidade humana.
+
+---
+
+## 🤝 Desenvolvimento
+
+O projeto é desenvolvido por **Bruno Silva**, com utilização de ferramentas de Inteligência Artificial como apoio técnico, arquitetural, documental e de desenvolvimento.
+
+A IA é utilizada como ferramenta de assistência durante o processo de desenvolvimento.
+
+A autoria, responsabilidade sobre o projeto, definição de requisitos, decisões de produto e direcionamento da evolução permanecem sob responsabilidade humana.
+
+O histórico de commits do GitHub constitui parte da trilha de desenvolvimento do projeto.
+
+---
+
+## 📈 Filosofia de desenvolvimento
+
+A evolução da Central segue alguns princípios:
+
+> **Construir pequeno, modularizar cedo e evoluir sem reconstruir.**
+
+O projeto busca evitar uma arquitetura excessivamente complexa enquanto a necessidade operacional ainda é simples.
+
+A estratégia é:
+
+```text
+Necessidade
+     ↓
+Implementação simples
+     ↓
+Validação
+     ↓
+Modularização
+     ↓
+Documentação
+     ↓
+Integração
+     ↓
+Escala
+```
+
+Dessa forma, novas funcionalidades podem ser incorporadas gradualmente sem comprometer a estrutura existente.
+
+---
+
+## 📋 Changelog
+
+As alterações relevantes do projeto são registradas no:
+
+[`CHANGELOG.md`](CHANGELOG.md)
+
+---
+
+## 📄 Licença
+
+A licença definitiva do projeto ainda está em definição.
+
+Até que uma licença seja formalmente estabelecida, o código e os demais conteúdos do projeto devem ser considerados protegidos pelos direitos aplicáveis de propriedade intelectual.
+
+---
+
+## 👨‍💻 Autor
+
+**Bruno Silva**
+
+Projeto desenvolvido com foco em organização operacional, experiência do usuário e evolução incremental.
+
+---
+
+**Central de Atendimento — Intranet**
+
+*Uma base operacional construída para evoluir junto com a operação.*
