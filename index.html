@@ -1151,6 +1151,11 @@ body,
     pointer-events:none;
 }
 
+
+/* =====================================================
+   BOAS-VINDAS
+===================================================== */
+
 .welcome{
 
     margin-bottom:25px;
@@ -1192,6 +1197,12 @@ body,
     margin-bottom:5px;
 
     letter-spacing:-.6px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:4px;
 }
 
 .welcome p{
@@ -1199,6 +1210,139 @@ body,
     color:var(--muted);
 
     font-size:14px;
+}
+
+
+/* =====================================================
+   EMOJI VIVO
+===================================================== */
+
+.emoji-vivo{
+
+    display:inline-block;
+
+    font-size:1em;
+
+    line-height:1;
+
+    margin-left:3px;
+
+    transform-origin:
+        70% 80%;
+
+    animation:
+        emoji-flutuar 3s ease-in-out infinite;
+
+    cursor:default;
+
+    will-change:
+        transform;
+}
+
+
+/* =====================================================
+   FLUTUAÇÃO
+===================================================== */
+
+@keyframes emoji-flutuar{
+
+    0%,
+    100%{
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    25%{
+
+        transform:
+            translateY(-3px)
+            rotate(-2deg);
+    }
+
+    50%{
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    75%{
+
+        transform:
+            translateY(-2px)
+            rotate(2deg);
+    }
+
+}
+
+
+/* =====================================================
+   ACENO
+===================================================== */
+
+.emoji-vivo.acenar{
+
+    animation:
+        emoji-acenar .9s ease-in-out;
+}
+
+@keyframes emoji-acenar{
+
+    0%{
+
+        transform:
+            rotate(0deg);
+    }
+
+    15%{
+
+        transform:
+            rotate(17deg);
+    }
+
+    30%{
+
+        transform:
+            rotate(-11deg);
+    }
+
+    45%{
+
+        transform:
+            rotate(15deg);
+    }
+
+    60%{
+
+        transform:
+            rotate(-9deg);
+    }
+
+    75%{
+
+        transform:
+            rotate(8deg);
+    }
+
+    100%{
+
+        transform:
+            rotate(0deg);
+    }
+
+}
+
+
+/* =====================================================
+   REAÇÃO AO MOUSE
+===================================================== */
+
+.emoji-vivo:hover{
+
+    animation:
+        emoji-acenar .8s ease-in-out;
 }
 
 
@@ -2549,7 +2693,17 @@ body,
         <div class="welcome">
 
             <h1 id="welcomeTitle">
-                Olá! 👋
+
+                Olá!
+
+                <span
+                    class="emoji-vivo"
+                    aria-hidden="true">
+
+                    👋
+
+                </span>
+
             </h1>
 
             <p>
@@ -2881,6 +3035,155 @@ body,
 
         }
     );
+
+})();
+
+</script>
+
+
+<!-- =====================================================
+     EMOJI VIVO — COMPORTAMENTO
+===================================================== -->
+
+<script>
+
+(function(){
+
+    function iniciarEmoji(){
+
+        const emoji =
+            document.querySelector('.emoji-vivo');
+
+        if(!emoji){
+            return;
+        }
+
+
+        let temporizador;
+
+
+        function acenar(){
+
+            /*
+             * Remove a classe primeiro para
+             * permitir que a animação seja
+             * reiniciada corretamente.
+             */
+
+            emoji.classList.remove('acenar');
+
+
+            void emoji.offsetWidth;
+
+
+            emoji.classList.add('acenar');
+
+
+            /*
+             * Depois da animação,
+             * devolvemos ao movimento
+             * normal de flutuação.
+             */
+
+            setTimeout(function(){
+
+                emoji.classList.remove('acenar');
+
+            }, 950);
+
+        }
+
+
+        function programarProximoAceno(){
+
+            /*
+             * Intervalo aleatório entre
+             * aproximadamente 7 e 15 segundos.
+             */
+
+            const tempo =
+                Math.floor(
+                    Math.random() * 8000
+                ) + 7000;
+
+
+            temporizador =
+                setTimeout(function(){
+
+                    acenar();
+
+                    programarProximoAceno();
+
+                }, tempo);
+
+        }
+
+
+        /*
+         * Primeiro aceno acontece
+         * somente depois de alguns segundos.
+         */
+
+        programarProximoAceno();
+
+
+        /*
+         * Interação manual.
+         */
+
+        emoji.addEventListener(
+            'mouseenter',
+            function(){
+
+                clearTimeout(temporizador);
+
+                acenar();
+
+                programarProximoAceno();
+
+            }
+        );
+
+
+        /*
+         * Clique também provoca uma reação.
+         */
+
+        emoji.addEventListener(
+            'click',
+            function(){
+
+                clearTimeout(temporizador);
+
+                acenar();
+
+                programarProximoAceno();
+
+            }
+        );
+
+    }
+
+
+    /*
+     * Inicializa quando o DOM estiver pronto.
+     */
+
+    if(
+        document.readyState ===
+        'loading'
+    ){
+
+        document.addEventListener(
+            'DOMContentLoaded',
+            iniciarEmoji
+        );
+
+    }else{
+
+        iniciarEmoji();
+
+    }
 
 })();
 
