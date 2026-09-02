@@ -3,288 +3,2654 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Central de Atendimento - Intranet</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233D2B1F'/%3E%3Cpath d='M16 20c0-4.4 3.6-8 8-8h16c4.4 0 8 3.6 8 8v13c0 4.4-3.6 8-8 8H30l-10 9v-9h-4c-4.4 0-8-3.6-8-8V20z' fill='white'/%3E%3Cpath d='M22 25h20M22 31h13' stroke='%23D97757' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23820AD1'/%3E%3Cpath d='M16 20c0-4.4 3.6-8 8-8h16c4.4 0 8 3.6 8 8v13c0 4.4-3.6 8-8 8H30l-10 9v-9h-4c-4.4 0-8-3.6-8-8V20z' fill='white'/%3E%3Cpath d='M22 25h20M22 31h13' stroke='%23B66BE0' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+
+/* =========================================================
+   TEMA PRINCIPAL
+========================================================= */
+
 :root{
-  --azul-profundo:#3D2B1F;
-  --azul-marinho:#55402E;
-  --azul-eletrico:#D97757;
-  --azul-eletrico-forte:#BF5B3D;
-  --azul-eletrico-claro:#FBEAE2;
-  --verde-agua:#8C9B6B;
-  --verde-agua-suave:#EEF1E4;
-  --fundo:#F5F1E9;
+
+  --roxo-profundo:#25003D;
+  --roxo-marinho:#3A075C;
+
+  --roxo:#820AD1;
+  --roxo-forte:#6A00A8;
+  --roxo-hover:#7200B8;
+
+  --roxo-claro:#F3E8FA;
+  --roxo-suave:#F8F2FC;
+
+  --fundo:#F7F7F8;
+
   --superficie:#FFFFFF;
-  --borda:#E7DFD1;
-  --texto:#2B2118;
-  --muted:#84766A;
-  --erro:#B3402A;
-  --erro-fundo:#FBEAE2;
-  --erro-borda:#EBC3AE;
-  --superficie-alt:#FAF6EE;
-  --borda-suave:#EDE4D3;
-  --chip-bg:#F0E9DC;
-  --texto-secundario:#6B5D4F;
-  --texto-forte:#3A2E22;
-  --texto-icone:#9C8D7D;
-  --texto-fraco:#C7B8A8;
-  --hover-borda:#EBC3AE;
-  --oliva-forte:#5C6B3F;
-  --oliva-hover:#6F7D50;
-  --script-texto:#4A3B2C;
-  --assinatura:linear-gradient(90deg,var(--azul-profundo) 0%,var(--azul-eletrico) 55%,var(--verde-agua) 100%);
-  --radius:10px;
-  --font-display:'Fraunces',Georgia,"Times New Roman",serif;
-  --font-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --superficie-alt:#FBFAFC;
+
+  --borda:#E7E4EA;
+  --borda-suave:#EEEAF1;
+
+  --texto:#222222;
+  --texto-forte:#191919;
+  --texto-secundario:#5F5A63;
+
+  --muted:#817B85;
+
+  --texto-icone:#A29BA8;
+  --texto-fraco:#C8C3CC;
+
+  --chip-bg:#F0EDF2;
+
+  --verde:#45A65A;
+  --verde-claro:#EAF6ED;
+  --verde-forte:#328742;
+
+  --erro:#C62828;
+  --erro-fundo:#FDECEC;
+  --erro-borda:#F1C5C5;
+
+  --script-texto:#403A44;
+
+  --assinatura:
+    linear-gradient(
+      90deg,
+      var(--roxo-profundo) 0%,
+      var(--roxo) 55%,
+      #B66BE0 100%
+    );
+
+  --radius:12px;
+
+  --font-body:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
 }
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
 [data-theme="dark"]{
-  --azul-profundo:#F3E8DA;
-  --azul-marinho:#E3C9AE;
-  --azul-eletrico:#E08962;
-  --azul-eletrico-forte:#EF9A76;
-  --azul-eletrico-claro:#3A2418;
-  --verde-agua:#A9BB80;
-  --verde-agua-suave:#2A3220;
-  --fundo:#1A1210;
-  --superficie:#241A14;
-  --borda:#3D2E22;
-  --texto:#F0E6D9;
-  --muted:#B3A290;
-  --erro:#E08768;
-  --erro-fundo:#3A2418;
-  --erro-borda:#5C3826;
-  --superficie-alt:#20160F;
-  --borda-suave:#3D2E22;
-  --chip-bg:#2E2117;
-  --texto-secundario:#C9B8A5;
-  --texto-forte:#F3E8DA;
-  --texto-icone:#8C7C6B;
-  --texto-fraco:#5C4C3D;
-  --hover-borda:#5C3826;
-  --oliva-forte:#C4D39A;
-  --oliva-hover:#B8CC85;
-  --script-texto:#E4D5C4;
+
+  --roxo-profundo:#E9D5F7;
+  --roxo-marinho:#E1C4F0;
+
+  --roxo:#A855D8;
+  --roxo-forte:#B76BE1;
+  --roxo-hover:#C17AE8;
+
+  --roxo-claro:#351B42;
+  --roxo-suave:#281A31;
+
+  --fundo:#101010;
+
+  --superficie:#191919;
+  --superficie-alt:#151515;
+
+  --borda:#302A33;
+  --borda-suave:#29232D;
+
+  --texto:#F4F1F5;
+  --texto-forte:#FFFFFF;
+  --texto-secundario:#C0B9C4;
+
+  --muted:#9B949F;
+
+  --texto-icone:#817987;
+  --texto-fraco:#5C5560;
+
+  --chip-bg:#29232D;
+
+  --verde:#7BC486;
+  --verde-claro:#1E3022;
+  --verde-forte:#92D69A;
+
+  --erro:#F28B8B;
+  --erro-fundo:#3A2020;
+  --erro-borda:#603232;
+
+  --script-texto:#DDD5E0;
 }
-html{scroll-behavior:smooth}
-body{font-family:var(--font-body);background:var(--fundo);color:var(--texto);min-height:100vh;-webkit-font-smoothing:antialiased;transition:background-color .25s ease,color .25s ease}
-body,.topbar,.sidebar,.script-card,.link-card,.quick-link,.login-box,.terms-content,.menu-toggle,.busca-input{transition:background-color .25s ease,border-color .25s ease,color .25s ease}
-:focus-visible{outline:2px solid var(--azul-eletrico);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
-
-/* ===== Login ===== */
-body.bloqueado{overflow:hidden}
-.login-overlay{position:fixed;inset:0;background:
-  radial-gradient(1100px 550px at 15% -10%,rgba(217,119,87,.35),transparent 60%),
-  radial-gradient(900px 500px at 110% 110%,rgba(140,155,107,.28),transparent 55%),
-  linear-gradient(160deg,var(--azul-profundo),var(--azul-marinho) 60%,#241811);
-  display:flex;align-items:center;justify-content:center;padding:20px;z-index:9999}
-.login-box{width:100%;max-width:440px;background:var(--superficie);border-radius:16px;padding:36px 34px 30px;box-shadow:0 30px 70px rgba(61,43,31,.4);position:relative;overflow:hidden}
-.login-box::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--assinatura)}
-.login-brand{text-align:center;margin-bottom:26px}
-.login-icon{width:56px;height:56px;margin:0 auto 14px;border-radius:14px;background:linear-gradient(135deg,var(--azul-eletrico-forte),var(--azul-eletrico));color:#fff;display:grid;place-items:center;font-size:26px;box-shadow:0 10px 24px rgba(217,119,87,.3)}
-.login-brand h1{font-family:var(--font-display);color:var(--azul-profundo);font-size:22px;font-weight:700;margin-bottom:6px;letter-spacing:-.2px}
-.login-brand p{color:var(--muted);font-size:13px}
-.login-label{display:block;color:var(--texto-forte);font-weight:600;font-size:13px;margin-bottom:7px}
-.login-name{width:100%;padding:13px 14px;border:1px solid var(--borda);border-radius:9px;font-size:15px;font-family:var(--font-body);outline:none;margin-bottom:15px;color:var(--texto);background:var(--superficie);transition:border-color .15s,box-shadow .15s}
-.login-name::placeholder{color:var(--muted)}
-.login-name:focus{border-color:var(--azul-eletrico);box-shadow:0 0 0 3px rgba(217,119,87,.15)}
-.terms-box{background:var(--superficie-alt);border:1px solid var(--borda);border-radius:9px;padding:13px;margin-bottom:14px}
-.terms-check{display:flex;align-items:flex-start;gap:9px;color:var(--texto-secundario);font-size:12px;line-height:1.5;cursor:pointer}
-.terms-check input{margin-top:3px;accent-color:var(--azul-eletrico)}
-.terms-link{border:0;background:none;color:var(--azul-eletrico);font-weight:700;cursor:pointer;font-size:12px;text-decoration:underline}
-.login-button{width:100%;padding:14px;border:0;border-radius:9px;background:linear-gradient(135deg,var(--azul-eletrico-forte),var(--azul-eletrico));color:#fff;font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:filter .15s,transform .15s}
-.login-button:hover{filter:brightness(1.08)}
-.login-button:active{transform:translateY(1px)}
-.login-error{display:none;color:#b91c1c;background:var(--erro-fundo);border:1px solid var(--erro-borda);border-radius:8px;padding:9px 11px;margin-bottom:12px;font-size:12px}
-.terms-modal{position:fixed;inset:0;background:rgba(61,43,31,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000}
-.terms-modal.show{display:flex}
-.terms-content{background:var(--superficie);width:100%;max-width:650px;max-height:85vh;overflow:auto;border-radius:14px;padding:28px}
-.terms-content h2{font-family:var(--font-display);color:var(--azul-profundo);margin-bottom:15px;font-size:19px}
-.terms-content h3{font-size:14px;color:var(--azul-marinho);margin:16px 0 5px;font-weight:700}
-.terms-content p{font-size:13px;line-height:1.6;color:var(--texto-secundario)}
-.terms-close{float:right;border:0;background:var(--chip-bg);border-radius:7px;padding:6px 11px;cursor:pointer;font-size:13px;font-weight:600;color:var(--texto)}
-.terms-close:hover{background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte)}
-
-/* ===== Topbar ===== */
-.topbar{height:66px;background:var(--superficie);border-bottom:1px solid var(--borda);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10;box-shadow:0 1px 3px rgba(61,43,31,.06)}
-.topbar::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:3px;background:var(--assinatura);opacity:.9}
-.topbar-left{display:flex;align-items:center;gap:14px}
-.menu-toggle{width:38px;height:38px;border:1px solid var(--borda);background:var(--superficie);color:var(--azul-profundo);border-radius:9px;cursor:pointer;font-size:19px;display:grid;place-items:center;transition:background .15s,border-color .15s}
-.menu-toggle:hover{background:var(--azul-eletrico-claro);border-color:var(--hover-borda);color:var(--azul-eletrico-forte)}
-.brand{display:flex;align-items:center;gap:12px;color:var(--azul-profundo);font-weight:700}
-.brand-icon{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--azul-eletrico-forte),var(--azul-eletrico));color:#fff;display:grid;place-items:center;font-size:19px;flex-shrink:0}
-.brand-text{font-family:var(--font-display);font-size:15px}
-.brand-text small{display:block;color:var(--muted);font-size:11px;font-weight:500;font-family:var(--font-body);margin-top:2px}
-.status{font-size:12.5px;color:var(--oliva-forte);display:flex;align-items:center;gap:7px;font-weight:600;background:var(--verde-agua-suave);padding:6px 12px;border-radius:999px}
-.status-dot{width:7px;height:7px;background:var(--verde-agua);border-radius:50%;box-shadow:0 0 0 3px rgba(140,155,107,.22)}
-.user-area{display:flex;align-items:center;gap:14px}
-.theme-toggle{width:38px;height:38px;border:1px solid var(--borda);background:var(--superficie);color:var(--azul-eletrico-forte);border-radius:9px;cursor:pointer;font-size:16px;display:grid;place-items:center;transition:background .15s,border-color .15s}
-.theme-toggle:hover{background:var(--azul-eletrico-claro);border-color:var(--hover-borda)}
-.user-name{font-size:13px;color:var(--texto-forte);font-weight:600}
-.user-name button{border:0;background:none;color:var(--azul-eletrico);cursor:pointer;font-size:11px;margin-left:6px;font-weight:600}
-
-/* ===== Layout ===== */
-.layout{display:grid;grid-template-columns:236px minmax(0,1fr);max-width:1440px;margin:0 auto;min-height:calc(100vh - 66px);transition:grid-template-columns .2s ease}
-.layout.collapsed{grid-template-columns:72px minmax(0,1fr)}
-.sidebar{background:var(--superficie);border-right:1px solid var(--borda);padding:26px 14px;overflow:hidden;transition:padding .2s ease}
-.layout.collapsed .sidebar{padding:26px 10px}
-.menu-title{font-size:11px;color:var(--texto-icone);font-weight:700;text-transform:uppercase;padding:0 12px 12px;letter-spacing:.6px;white-space:nowrap;font-family:var(--font-body)}
-.menu{list-style:none}
-.menu li{margin-bottom:4px}
-.menu button{width:100%;border:0;background:transparent;text-align:left;padding:10px 12px;border-radius:8px;color:var(--texto-secundario);font-size:14px;font-family:var(--font-body);cursor:pointer;white-space:nowrap;overflow:hidden;transition:background .15s,color .15s;border-left:3px solid transparent}
-.menu button:hover{background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte)}
-.menu button.active{background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte);font-weight:700;border-left-color:var(--azul-eletrico)}
-.layout.collapsed .menu-title{visibility:hidden;height:0;padding:0}
-.layout.collapsed .menu button{font-size:19px;text-align:center;padding:10px 0;color:transparent}
-.layout.collapsed .menu button::first-letter{font-size:19px}
-
-/* ===== Main ===== */
-.main{padding:32px}
-.welcome{margin-bottom:24px;position:relative;padding-left:16px}
-.welcome::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:4px;border-radius:4px;background:var(--assinatura)}
-.welcome h1{font-family:var(--font-display);font-size:25px;font-weight:700;color:var(--azul-profundo);margin-bottom:5px;letter-spacing:-.3px}
-.welcome p{color:var(--muted);font-size:14px}
-
-.search-wrap{position:relative;margin-bottom:26px}
-.search-icon{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--texto-icone)}
-.busca-input{width:100%;padding:14px 18px 14px 46px;font-size:15px;font-family:var(--font-body);border:1px solid var(--borda);border-radius:10px;outline:none;background:var(--superficie);color:var(--texto);transition:border-color .2s,box-shadow .2s}
-.busca-input::placeholder{color:var(--muted)}
-.busca-input:focus{border-color:var(--azul-eletrico);box-shadow:0 0 0 3px rgba(217,119,87,.12)}
-
-/* ===== Recursos rápidos (antigos "atalhos") ===== */
-.quick-links{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px}
-.quick-link{position:relative;text-align:left;background:var(--superficie);border:1px solid var(--borda);border-radius:12px;padding:16px 16px 14px;cursor:pointer;font-family:var(--font-body);display:flex;flex-direction:column;gap:9px;transition:border-color .15s,box-shadow .15s,transform .15s;overflow:hidden}
-.quick-link::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--assinatura);opacity:0;transition:opacity .15s}
-.quick-link:hover{border-color:var(--hover-borda);box-shadow:0 10px 22px rgba(61,43,31,.09);transform:translateY(-2px)}
-.quick-link:hover::before{opacity:1}
-.quick-link-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.quick-link-icon{width:34px;height:34px;border-radius:9px;background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte);display:grid;place-items:center;font-size:16px}
-.quick-link-arrow{color:var(--texto-fraco);font-size:14px;transition:transform .15s,color .15s}
-.quick-link:hover .quick-link-arrow{color:var(--verde-agua);transform:translate(2px,-2px)}
-.quick-link strong{display:block;font-size:13.5px;color:var(--texto);font-weight:700}
-.quick-link span{display:block;font-size:12px;color:var(--muted)}
-
-.grid-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-.link-card{position:relative;display:flex;align-items:center;gap:12px;background:var(--superficie);border:1px solid var(--borda);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--texto);transition:border-color .15s,box-shadow .15s,transform .15s;overflow:hidden}
-.link-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--assinatura);opacity:0;transition:opacity .15s}
-.link-card:hover{border-color:var(--hover-borda);box-shadow:0 10px 22px rgba(61,43,31,.09);transform:translateY(-2px)}
-.link-card:hover::before{opacity:1}
-.link-card-icon{width:36px;height:36px;flex-shrink:0;border-radius:9px;background:var(--verde-agua-suave);color:var(--oliva-forte);display:grid;place-items:center;font-size:17px}
-.link-card-text{flex:1;min-width:0;display:flex;flex-direction:column}
-.link-card-text strong{font-size:13.5px;color:var(--texto);font-weight:700}
-.link-card-text span{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.link-card-arrow{color:var(--texto-fraco);font-size:14px;flex-shrink:0;transition:transform .15s,color .15s}
-.link-card:hover .link-card-arrow{color:var(--verde-agua);transform:translate(2px,-2px)}
 
 
-.section-head{display:flex;align-items:center;justify-content:space-between;margin:30px 0 13px}
-.section-head h2{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--azul-profundo)}
-.count{font-size:12px;color:var(--muted);background:var(--chip-bg);padding:4px 10px;border-radius:999px;font-weight:600}
+/* =========================================================
+   BASE
+========================================================= */
 
-.grid-scripts{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:15px}
-.no-results{grid-column:1/-1;text-align:center;color:var(--muted);font-size:13.5px;padding:30px;background:var(--superficie);border:1px dashed var(--borda);border-radius:10px}
+body{
 
-.script-card{background:var(--superficie);border:1px solid var(--borda);border-left:4px solid var(--azul-eletrico);border-radius:10px;padding:16px;position:relative;box-shadow:0 1px 3px rgba(61,43,31,.05);transition:box-shadow .15s,transform .15s,border-color .15s}
-.script-card:hover{box-shadow:0 8px 20px rgba(61,43,31,.1);transform:translateY(-1px)}
-.script-card.destaque{border-left-color:var(--verde-agua)}
-.script-card.destaque .categoria{background:var(--verde-agua-suave);color:var(--oliva-forte)}
-.categoria{display:inline-block;margin-bottom:9px;padding:4px 9px;border-radius:5px;background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
-.script-header{display:flex;align-items:center;margin-bottom:11px;padding-right:88px}
-.script-title{font-weight:700;font-size:14px;color:var(--azul-marinho)}
-.btn-copiar{position:absolute;top:15px;right:14px;background:var(--verde-agua);color:#fff;border:0;padding:7px 12px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700;font-family:var(--font-body);transition:background .15s}
-.btn-copiar:hover{background:var(--oliva-hover)}
-.script-content{background:var(--superficie-alt);border:1px solid var(--borda-suave);padding:13px;border-radius:6px;font-size:13px;white-space:pre-wrap;word-wrap:break-word;color:var(--script-texto);line-height:1.55}
+  font-family:var(--font-body);
 
-/* ===== Footer ===== */
-.footer{text-align:right;padding:22px 32px 34px;color:var(--muted);font-size:12px}
-.footer .user-name{color:var(--muted);font-weight:600}
-.footer .user-name button{color:var(--azul-eletrico)}
+  background:var(--fundo);
 
-/* ===== Responsivo ===== */
-@media(max-width:1000px){.quick-links{grid-template-columns:repeat(2,1fr)}}
+  color:var(--texto);
+
+  min-height:100vh;
+
+  -webkit-font-smoothing:antialiased;
+
+  transition:
+    background-color .25s ease,
+    color .25s ease;
+}
+
+body,
+.topbar,
+.sidebar,
+.script-card,
+.link-card,
+.quick-link,
+.login-box,
+.terms-content,
+.menu-toggle,
+.theme-toggle,
+.busca-input{
+
+  transition:
+    background-color .25s ease,
+    border-color .25s ease,
+    color .25s ease,
+    box-shadow .25s ease;
+}
+
+body.bloqueado{
+  overflow:hidden;
+}
+
+:focus-visible{
+
+  outline:
+    2px solid var(--roxo);
+
+  outline-offset:2px;
+}
+
+@media (prefers-reduced-motion:reduce){
+
+  *{
+
+    animation-duration:.001ms!important;
+
+    transition-duration:.001ms!important;
+
+    scroll-behavior:auto!important;
+  }
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-overlay{
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+
+    radial-gradient(
+      800px 500px at 10% 0%,
+      rgba(130,10,209,.45),
+      transparent 65%
+    ),
+
+    radial-gradient(
+      700px 500px at 100% 100%,
+      rgba(182,107,224,.25),
+      transparent 60%
+    ),
+
+    linear-gradient(
+      145deg,
+      #25003D,
+      #3A075C 55%,
+      #180025
+    );
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  z-index:9999;
+}
+
+.login-box{
+
+  width:100%;
+
+  max-width:440px;
+
+  background:var(--superficie);
+
+  border-radius:18px;
+
+  padding:38px 34px 32px;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.35);
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.login-box::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:4px;
+
+  background:var(--assinatura);
+}
+
+.login-brand{
+
+  text-align:center;
+
+  margin-bottom:28px;
+}
+
+.login-icon{
+
+  width:58px;
+
+  height:58px;
+
+  margin:0 auto 15px;
+
+  border-radius:15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--roxo-forte),
+      var(--roxo)
+    );
+
+  color:#fff;
+
+  display:grid;
+
+  place-items:center;
+
+  font-size:27px;
+
+  box-shadow:
+    0 12px 28px rgba(130,10,209,.28);
+}
+
+.login-brand h1{
+
+  color:var(--roxo-profundo);
+
+  font-size:23px;
+
+  font-weight:800;
+
+  margin-bottom:7px;
+
+  letter-spacing:-.4px;
+}
+
+.login-brand p{
+
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+.login-label{
+
+  display:block;
+
+  color:var(--texto-forte);
+
+  font-weight:700;
+
+  font-size:13px;
+
+  margin-bottom:8px;
+}
+
+.login-name{
+
+  width:100%;
+
+  padding:14px;
+
+  border:
+    1px solid var(--borda);
+
+  border-radius:10px;
+
+  font-size:15px;
+
+  font-family:var(--font-body);
+
+  outline:none;
+
+  margin-bottom:15px;
+
+  color:var(--texto);
+
+  background:var(--superficie);
+}
+
+.login-name::placeholder{
+
+  color:var(--muted);
+}
+
+.login-name:focus{
+
+  border-color:var(--roxo);
+
+  box-shadow:
+    0 0 0 3px rgba(130,10,209,.12);
+}
+
+.terms-box{
+
+  background:var(--superficie-alt);
+
+  border:
+    1px solid var(--borda);
+
+  border-radius:10px;
+
+  padding:14px;
+
+  margin-bottom:15px;
+}
+
+.terms-check{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:9px;
+
+  color:var(--texto-secundario);
+
+  font-size:12px;
+
+  line-height:1.5;
+
+  cursor:pointer;
+}
+
+.terms-check input{
+
+  margin-top:3px;
+
+  accent-color:var(--roxo);
+}
+
+.terms-link{
+
+  border:0;
+
+  background:none;
+
+  color:var(--roxo);
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  font-size:12px;
+
+  text-decoration:underline;
+}
+
+.login-button{
+
+  width:100%;
+
+  padding:14px;
+
+  border:0;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--roxo-forte),
+      var(--roxo)
+    );
+
+  color:#fff;
+
+  font-family:var(--font-body);
+
+  font-size:14px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+  transition:
+    filter .15s,
+    transform .15s,
+    box-shadow .15s;
+}
+
+.login-button:hover{
+
+  filter:brightness(1.07);
+
+  box-shadow:
+    0 8px 20px rgba(130,10,209,.22);
+}
+
+.login-button:active{
+
+  transform:translateY(1px);
+}
+
+.login-error{
+
+  display:none;
+
+  color:var(--erro);
+
+  background:var(--erro-fundo);
+
+  border:
+    1px solid var(--erro-borda);
+
+  border-radius:8px;
+
+  padding:9px 11px;
+
+  margin-bottom:12px;
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   TERMOS
+========================================================= */
+
+.terms-modal{
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(15,0,25,.65);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  z-index:10000;
+}
+
+.terms-modal.show{
+
+  display:flex;
+}
+
+.terms-content{
+
+  background:var(--superficie);
+
+  width:100%;
+
+  max-width:650px;
+
+  max-height:85vh;
+
+  overflow:auto;
+
+  border-radius:16px;
+
+  padding:28px;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.3);
+}
+
+.terms-content h2{
+
+  color:var(--roxo-profundo);
+
+  margin-bottom:15px;
+
+  font-size:20px;
+}
+
+.terms-content h3{
+
+  font-size:14px;
+
+  color:var(--roxo-marinho);
+
+  margin:16px 0 5px;
+
+  font-weight:800;
+}
+
+.terms-content p{
+
+  font-size:13px;
+
+  line-height:1.6;
+
+  color:var(--texto-secundario);
+}
+
+.terms-close{
+
+  float:right;
+
+  border:0;
+
+  background:var(--chip-bg);
+
+  border-radius:7px;
+
+  padding:6px 11px;
+
+  cursor:pointer;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  color:var(--texto);
+}
+
+.terms-close:hover{
+
+  background:var(--roxo-claro);
+
+  color:var(--roxo);
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar{
+
+  height:66px;
+
+  background:var(--superficie);
+
+  border-bottom:
+    1px solid var(--borda);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:0 28px;
+
+  position:sticky;
+
+  top:0;
+
+  z-index:10;
+
+  box-shadow:
+    0 1px 5px rgba(0,0,0,.04);
+}
+
+.topbar::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+
+  bottom:-2px;
+
+  height:2px;
+
+  background:var(--assinatura);
+
+  opacity:.85;
+}
+
+.topbar-left{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+}
+
+.menu-toggle{
+
+  width:38px;
+
+  height:38px;
+
+  border:
+    1px solid var(--borda);
+
+  background:var(--superficie);
+
+  color:var(--roxo);
+
+  border-radius:9px;
+
+  cursor:pointer;
+
+  font-size:19px;
+
+  display:grid;
+
+  place-items:center;
+}
+
+.menu-toggle:hover{
+
+  background:var(--roxo-claro);
+
+  border-color:#D7B5E8;
+}
+
+.brand{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  color:var(--roxo-profundo);
+
+  font-weight:800;
+}
+
+.brand-icon{
+
+  width:38px;
+
+  height:38px;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--roxo-forte),
+      var(--roxo)
+    );
+
+  color:#fff;
+
+  display:grid;
+
+  place-items:center;
+
+  font-size:19px;
+
+  flex-shrink:0;
+}
+
+.brand-text{
+
+  font-size:15px;
+
+  letter-spacing:-.2px;
+}
+
+.brand-text small{
+
+  display:block;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  font-weight:500;
+
+  margin-top:2px;
+}
+
+.status{
+
+  font-size:12px;
+
+  color:var(--verde-forte);
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  font-weight:700;
+
+  background:var(--verde-claro);
+
+  padding:6px 12px;
+
+  border-radius:999px;
+}
+
+.status-dot{
+
+  width:7px;
+
+  height:7px;
+
+  background:var(--verde);
+
+  border-radius:50%;
+
+  box-shadow:
+    0 0 0 3px rgba(69,166,90,.15);
+}
+
+.user-area{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+}
+
+.theme-toggle{
+
+  width:38px;
+
+  height:38px;
+
+  border:
+    1px solid var(--borda);
+
+  background:var(--superficie);
+
+  color:var(--roxo);
+
+  border-radius:9px;
+
+  cursor:pointer;
+
+  font-size:16px;
+
+  display:grid;
+
+  place-items:center;
+}
+
+.theme-toggle:hover{
+
+  background:var(--roxo-claro);
+
+  border-color:#D7B5E8;
+}
+
+.user-name{
+
+  font-size:13px;
+
+  color:var(--texto-forte);
+
+  font-weight:600;
+}
+
+.user-name button{
+
+  border:0;
+
+  background:none;
+
+  color:var(--roxo);
+
+  cursor:pointer;
+
+  font-size:11px;
+
+  margin-left:6px;
+
+  font-weight:700;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.layout{
+
+  display:grid;
+
+  grid-template-columns:
+    236px minmax(0,1fr);
+
+  max-width:1440px;
+
+  margin:0 auto;
+
+  min-height:
+    calc(100vh - 66px);
+
+  transition:
+    grid-template-columns .2s ease;
+}
+
+.layout.collapsed{
+
+  grid-template-columns:
+    72px minmax(0,1fr);
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+
+  background:var(--superficie);
+
+  border-right:
+    1px solid var(--borda);
+
+  padding:26px 14px;
+
+  overflow:hidden;
+}
+
+.layout.collapsed .sidebar{
+
+  padding:26px 10px;
+}
+
+.menu-title{
+
+  font-size:11px;
+
+  color:var(--texto-icone);
+
+  font-weight:800;
+
+  text-transform:uppercase;
+
+  padding:0 12px 12px;
+
+  letter-spacing:.7px;
+
+  white-space:nowrap;
+}
+
+.menu{
+
+  list-style:none;
+}
+
+.menu li{
+
+  margin-bottom:4px;
+}
+
+.menu button{
+
+  width:100%;
+
+  border:0;
+
+  background:transparent;
+
+  text-align:left;
+
+  padding:10px 12px;
+
+  border-radius:8px;
+
+  color:var(--texto-secundario);
+
+  font-size:14px;
+
+  font-family:var(--font-body);
+
+  cursor:pointer;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  border-left:
+    3px solid transparent;
+}
+
+.menu button:hover{
+
+  background:var(--roxo-suave);
+
+  color:var(--roxo);
+}
+
+.menu button.active{
+
+  background:var(--roxo-claro);
+
+  color:var(--roxo);
+
+  font-weight:800;
+
+  border-left-color:var(--roxo);
+}
+
+.layout.collapsed .menu-title{
+
+  visibility:hidden;
+
+  height:0;
+
+  padding:0;
+}
+
+.layout.collapsed .menu button{
+
+  font-size:19px;
+
+  text-align:center;
+
+  padding:10px 0;
+
+  color:transparent;
+}
+
+.layout.collapsed .menu button::first-letter{
+
+  font-size:19px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+
+  padding:32px;
+}
+
+.welcome{
+
+  margin-bottom:24px;
+
+  position:relative;
+
+  padding-left:16px;
+}
+
+.welcome::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+
+  top:4px;
+
+  bottom:4px;
+
+  width:4px;
+
+  border-radius:4px;
+
+  background:var(--assinatura);
+}
+
+.welcome h1{
+
+  font-size:25px;
+
+  font-weight:800;
+
+  color:var(--roxo-profundo);
+
+  margin-bottom:5px;
+
+  letter-spacing:-.5px;
+}
+
+.welcome p{
+
+  color:var(--muted);
+
+  font-size:14px;
+}
+
+
+/* =========================================================
+   BUSCA
+========================================================= */
+
+.search-wrap{
+
+  position:relative;
+
+  margin-bottom:26px;
+}
+
+.search-icon{
+
+  position:absolute;
+
+  left:17px;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  font-size:16px;
+
+  color:var(--texto-icone);
+}
+
+.busca-input{
+
+  width:100%;
+
+  padding:14px 18px 14px 46px;
+
+  font-size:15px;
+
+  font-family:var(--font-body);
+
+  border:
+    1px solid var(--borda);
+
+  border-radius:10px;
+
+  outline:none;
+
+  background:var(--superficie);
+
+  color:var(--texto);
+}
+
+.busca-input::placeholder{
+
+  color:var(--muted);
+}
+
+.busca-input:focus{
+
+  border-color:var(--roxo);
+
+  box-shadow:
+    0 0 0 3px rgba(130,10,209,.10);
+}
+
+
+/* =========================================================
+   QUICK LINKS
+========================================================= */
+
+.quick-links{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:14px;
+
+  margin-bottom:8px;
+}
+
+.quick-link{
+
+  position:relative;
+
+  text-align:left;
+
+  background:var(--superficie);
+
+  border:
+    1px solid var(--borda);
+
+  border-radius:12px;
+
+  padding:16px 16px 14px;
+
+  cursor:pointer;
+
+  font-family:var(--font-body);
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:9px;
+
+  overflow:hidden;
+}
+
+.quick-link::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+
+  top:0;
+
+  bottom:0;
+
+  width:3px;
+
+  background:var(--assinatura);
+
+  opacity:0;
+
+  transition:opacity .15s;
+}
+
+.quick-link:hover{
+
+  border-color:#D9BCE7;
+
+  box-shadow:
+    0 10px 25px rgba(48,0,70,.08);
+
+  transform:translateY(-2px);
+}
+
+.quick-link:hover::before{
+
+  opacity:1;
+}
+
+.quick-link-top{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:8px;
+}
+
+.quick-link-icon{
+
+  width:34px;
+
+  height:34px;
+
+  border-radius:9px;
+
+  background:var(--roxo-claro);
+
+  color:var(--roxo);
+
+  display:grid;
+
+  place-items:center;
+
+  font-size:16px;
+}
+
+.quick-link-arrow{
+
+  color:var(--texto-fraco);
+
+  font-size:14px;
+
+  transition:
+    transform .15s,
+    color .15s;
+}
+
+.quick-link:hover .quick-link-arrow{
+
+  color:var(--roxo);
+
+  transform:
+    translate(2px,-2px);
+}
+
+.quick-link strong{
+
+  display:block;
+
+  font-size:13.5px;
+
+  color:var(--texto);
+
+  font-weight:800;
+}
+
+.quick-link span{
+
+  display:block;
+
+  font-size:12px;
+
+  color:var(--muted);
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.section-head{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin:30px 0 13px;
+}
+
+.section-head h2{
+
+  font-size:16px;
+
+  font-weight:800;
+
+  color:var(--roxo-profundo);
+}
+
+.count{
+
+  font-size:12px;
+
+  color:var(--muted);
+
+  background:var(--chip-bg);
+
+  padding:4px 10px;
+
+  border-radius:999px;
+
+  font-weight:700;
+}
+
+.grid-links{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fill,minmax(230px,1fr));
+
+  gap:14px;
+}
+
+.link-card{
+
+  position:relative;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  background:var(--superficie);
+
+  border:
+    1px solid var(--borda);
+
+  border-radius:12px;
+
+  padding:14px 16px;
+
+  text-decoration:none;
+
+  color:var(--texto);
+
+  overflow:hidden;
+}
+
+.link-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+
+  top:0;
+
+  bottom:0;
+
+  width:3px;
+
+  background:var(--assinatura);
+
+  opacity:0;
+}
+
+.link-card:hover{
+
+  border-color:#D9BCE7;
+
+  box-shadow:
+    0 10px 22px rgba(48,0,70,.08);
+
+  transform:translateY(-2px);
+}
+
+.link-card:hover::before{
+
+  opacity:1;
+}
+
+.link-card-icon{
+
+  width:36px;
+
+  height:36px;
+
+  flex-shrink:0;
+
+  border-radius:9px;
+
+  background:var(--roxo-suave);
+
+  color:var(--roxo);
+
+  display:grid;
+
+  place-items:center;
+
+  font-size:17px;
+}
+
+.link-card-text{
+
+  flex:1;
+
+  min-width:0;
+
+  display:flex;
+
+  flex-direction:column;
+}
+
+.link-card-text strong{
+
+  font-size:13.5px;
+
+  color:var(--texto);
+
+  font-weight:800;
+}
+
+.link-card-text span{
+
+  font-size:11.5px;
+
+  color:var(--muted);
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+}
+
+.link-card-arrow{
+
+  color:var(--texto-fraco);
+
+  font-size:14px;
+
+  flex-shrink:0;
+}
+
+.link-card:hover .link-card-arrow{
+
+  color:var(--roxo);
+
+  transform:
+    translate(2px,-2px);
+}
+
+
+/* =========================================================
+   SCRIPTS
+========================================================= */
+
+.grid-scripts{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fill,minmax(330px,1fr));
+
+  gap:15px;
+}
+
+.script-card{
+
+  background:var(--superficie);
+
+  border:
+    1px solid var(--borda);
+
+  border-left:
+    4px solid var(--roxo);
+
+  border-radius:10px;
+
+  padding:16px;
+
+  position:relative;
+
+  box-shadow:
+    0 1px 3px rgba(0,0,0,.04);
+}
+
+.script-card:hover{
+
+  box-shadow:
+    0 8px 24px rgba(48,0,70,.09);
+
+  transform:translateY(-1px);
+}
+
+.script-card.destaque{
+
+  border-left-color:var(--verde);
+}
+
+.script-card.destaque .categoria{
+
+  background:var(--verde-claro);
+
+  color:var(--verde-forte);
+}
+
+.categoria{
+
+  display:inline-block;
+
+  margin-bottom:9px;
+
+  padding:4px 9px;
+
+  border-radius:5px;
+
+  background:var(--roxo-claro);
+
+  color:var(--roxo);
+
+  font-size:10px;
+
+  font-weight:800;
+
+  text-transform:uppercase;
+
+  letter-spacing:.5px;
+}
+
+.script-header{
+
+  display:flex;
+
+  align-items:center;
+
+  margin-bottom:11px;
+
+  padding-right:88px;
+}
+
+.script-title{
+
+  font-weight:800;
+
+  font-size:14px;
+
+  color:var(--roxo-marinho);
+}
+
+.btn-copiar{
+
+  position:absolute;
+
+  top:15px;
+
+  right:14px;
+
+  background:var(--roxo);
+
+  color:#fff;
+
+  border:0;
+
+  padding:7px 12px;
+
+  border-radius:6px;
+
+  cursor:pointer;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  font-family:var(--font-body);
+}
+
+.btn-copiar:hover{
+
+  background:var(--roxo-hover);
+}
+
+.script-content{
+
+  background:var(--superficie-alt);
+
+  border:
+    1px solid var(--borda-suave);
+
+  padding:13px;
+
+  border-radius:6px;
+
+  font-size:13px;
+
+  white-space:pre-wrap;
+
+  word-wrap:break-word;
+
+  color:var(--script-texto);
+
+  line-height:1.55;
+}
+
+.no-results{
+
+  grid-column:1/-1;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:13.5px;
+
+  padding:30px;
+
+  background:var(--superficie);
+
+  border:
+    1px dashed var(--borda);
+
+  border-radius:10px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+  text-align:right;
+
+  padding:22px 32px 34px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+.footer .user-name{
+
+  color:var(--muted);
+
+  font-weight:600;
+}
+
+.footer .user-name button{
+
+  color:var(--roxo);
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media(max-width:1000px){
+
+  .quick-links{
+
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+}
+
 @media(max-width:900px){
-.layout,.layout.collapsed{padding:14px;display:block}
-.sidebar,.layout.collapsed .sidebar{position:static;margin-bottom:14px;border-radius:14px;padding:12px}
-.main{padding:0}
-.welcome{padding:0 0 0 16px}
-.menu-toggle{display:none}
-.menu-title,.layout.collapsed .menu-title{display:none}
-.menu{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;scrollbar-width:thin}
-.menu li{margin-bottom:0;flex:0 0 auto}
-.menu button,.layout.collapsed .menu button{white-space:nowrap;padding:9px 14px;border-radius:999px;border-left:none;font-size:13px;color:var(--texto-secundario)}
-.menu button.active,.layout.collapsed .menu button.active{background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte);font-weight:700}
-.grid-links{display:flex;overflow-x:auto;gap:12px;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:thin}
-.link-card{flex:0 0 220px}
-.quick-links{display:flex;overflow-x:auto;gap:12px;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:thin}
-.quick-link{flex:0 0 190px}
+
+  .layout,
+  .layout.collapsed{
+
+    padding:14px;
+
+    display:block;
+  }
+
+  .sidebar,
+  .layout.collapsed .sidebar{
+
+    position:static;
+
+    margin-bottom:14px;
+
+    border-radius:14px;
+
+    padding:12px;
+  }
+
+  .main{
+
+    padding:0;
+  }
+
+  .welcome{
+
+    padding:
+      0 0 0 16px;
+  }
+
+  .menu-toggle{
+
+    display:none;
+  }
+
+  .menu-title,
+  .layout.collapsed .menu-title{
+
+    display:none;
+  }
+
+  .menu{
+
+    display:flex;
+
+    gap:8px;
+
+    overflow-x:auto;
+
+    padding-bottom:2px;
+
+    scrollbar-width:thin;
+  }
+
+  .menu li{
+
+    margin-bottom:0;
+
+    flex:0 0 auto;
+  }
+
+  .menu button,
+  .layout.collapsed .menu button{
+
+    white-space:nowrap;
+
+    padding:9px 14px;
+
+    border-radius:999px;
+
+    border-left:none;
+
+    font-size:13px;
+
+    color:var(--texto-secundario);
+  }
+
+  .menu button.active,
+  .layout.collapsed .menu button.active{
+
+    background:var(--roxo-claro);
+
+    color:var(--roxo);
+
+    font-weight:800;
+  }
+
+  .grid-links{
+
+    display:flex;
+
+    overflow-x:auto;
+
+    gap:12px;
+
+    padding-bottom:4px;
+
+    scrollbar-width:thin;
+  }
+
+  .link-card{
+
+    flex:
+      0 0 220px;
+  }
+
+  .quick-links{
+
+    display:flex;
+
+    overflow-x:auto;
+
+    gap:12px;
+
+    padding-bottom:4px;
+
+    scrollbar-width:thin;
+  }
+
+  .quick-link{
+
+    flex:
+      0 0 190px;
+  }
 }
-@media(max-width:600px){.topbar{height:68px;padding:0 14px}.brand-icon{width:38px;height:38px}.layout{padding:10px}.footer{text-align:center;padding:18px}.grid-scripts{gap:12px}}
+
+@media(max-width:600px){
+
+  .topbar{
+
+    height:68px;
+
+    padding:0 14px;
+  }
+
+  .brand-icon{
+
+    width:38px;
+
+    height:38px;
+  }
+
+  .brand-text small{
+
+    display:none;
+  }
+
+  .status{
+
+    display:none;
+  }
+
+  .user-area{
+
+    gap:8px;
+  }
+
+  .user-name{
+
+    display:none;
+  }
+
+  .layout{
+
+    padding:10px;
+  }
+
+  .footer{
+
+    text-align:center;
+
+    padding:18px;
+  }
+
+  .grid-scripts{
+
+    gap:12px;
+  }
+}
+
 </style>
 </head>
+
+
 <body class="bloqueado">
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
 <div class="login-overlay" id="loginOverlay">
-<div class="login-box">
-<div class="login-brand"><div class="login-icon">▦</div><h1>Central de Atendimento</h1><p>Portal interno de apoio ao atendimento</p></div>
-<label class="login-label" for="loginName">Como podemos te chamar?</label>
-<input class="login-name" id="loginName" type="text" maxlength="80" autocomplete="name" placeholder="Digite seu nome">
-<div class="login-error" id="loginError">Digite seu nome e aceite os Termos de Uso para continuar.</div>
-<div class="terms-box"><label class="terms-check"><input type="checkbox" id="termsCheck"><span>Li e aceito os <button type="button" class="terms-link" onclick="abrirTermos(event)">Termos de Uso</button> da Central de Atendimento.</span></label></div>
-<button class="login-button" onclick="entrarNaCentral()">Entrar na Central</button>
-</div></div>
-<div class="terms-modal" id="termsModal" onclick="fecharTermosFora(event)"><div class="terms-content"><button class="terms-close" onclick="fecharTermos()">Fechar</button><h2>Termos de Uso — Central de Atendimento</h2><p>Última atualização: agosto de 2026.</p><h3>1. Finalidade da ferramenta</h3><p>A Central de Atendimento é uma ferramenta interna destinada exclusivamente ao apoio às atividades de atendimento, consulta e utilização de scripts e orientações disponibilizados pela organização.</p><h3>2. Uso profissional</h3><p>A ferramenta deve ser utilizada exclusivamente para finalidades relacionadas às atividades profissionais. É vedada a utilização para fins pessoais, comerciais ou para qualquer atividade não relacionada ao atendimento.</p><h3>3. Responsabilidade pelo conteúdo</h3><p>Os scripts e orientações disponibilizados servem como material de apoio. O usuário é responsável por utilizar as informações de acordo com os procedimentos, políticas e orientações oficiais vigentes.</p><h3>4. Informações e dados pessoais</h3><p>Não devem ser inseridos, armazenados ou compartilhados na ferramenta dados pessoais, documentos, senhas, códigos de autenticação ou outras informações sensíveis de usuários, salvo quando expressamente autorizado pelos procedimentos oficiais.</p><h3>5. Segurança</h3><p>O usuário deve preservar a segurança das informações acessadas durante sua atividade e não compartilhar o conteúdo da ferramenta com pessoas não autorizadas.</p><h3>6. Atualização dos conteúdos</h3><p>Os scripts podem ser alterados, atualizados ou removidos a qualquer momento, conforme a necessidade operacional.</p><h3>7. Uso indevido</h3><p>O uso da ferramenta em desacordo com estes termos, com as políticas internas ou com as orientações de segurança poderá resultar na restrição de acesso e nas medidas administrativas cabíveis.</p><h3>8. Aceite</h3><p>Ao selecionar “Aceito os Termos de Uso” e acessar a Central de Atendimento, o usuário declara que leu, compreendeu e concorda com as condições estabelecidas.</p></div></div>
+
+  <div class="login-box">
+
+    <div class="login-brand">
+
+      <div class="login-icon">
+        ▦
+      </div>
+
+      <h1>
+        Central de Atendimento
+      </h1>
+
+      <p>
+        Portal interno de apoio ao atendimento
+      </p>
+
+    </div>
+
+
+    <label
+      class="login-label"
+      for="loginName">
+
+      Como podemos te chamar?
+
+    </label>
+
+
+    <input
+      class="login-name"
+      id="loginName"
+      type="text"
+      maxlength="80"
+      autocomplete="name"
+      placeholder="Digite seu nome"
+    >
+
+
+    <div
+      class="login-error"
+      id="loginError">
+
+      Digite seu nome e aceite os Termos de Uso para continuar.
+
+    </div>
+
+
+    <div class="terms-box">
+
+      <label class="terms-check">
+
+        <input
+          type="checkbox"
+          id="termsCheck"
+        >
+
+        <span>
+
+          Li e aceito os
+
+          <button
+            type="button"
+            class="terms-link"
+            onclick="abrirTermos(event)">
+
+            Termos de Uso
+
+          </button>
+
+          da Central de Atendimento.
+
+        </span>
+
+      </label>
+
+    </div>
+
+
+    <button
+      class="login-button"
+      onclick="entrarNaCentral()">
+
+      Entrar na Central
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     TERMOS
+===================================================== -->
+
+<div
+  class="terms-modal"
+  id="termsModal"
+  onclick="fecharTermosFora(event)">
+
+  <div class="terms-content">
+
+    <button
+      class="terms-close"
+      onclick="fecharTermos()">
+
+      Fechar
+
+    </button>
+
+
+    <h2>
+      Termos de Uso — Central de Atendimento
+    </h2>
+
+    <p>
+      Última atualização: agosto de 2026.
+    </p>
+
+
+    <h3>
+      1. Finalidade da ferramenta
+    </h3>
+
+    <p>
+      A Central de Atendimento é uma ferramenta interna destinada exclusivamente ao apoio às atividades de atendimento, consulta e utilização de scripts e orientações disponibilizados pela organização.
+    </p>
+
+
+    <h3>
+      2. Uso profissional
+    </h3>
+
+    <p>
+      A ferramenta deve ser utilizada exclusivamente para finalidades relacionadas às atividades profissionais. É vedada a utilização para fins pessoais, comerciais ou para qualquer atividade não relacionada ao atendimento.
+    </p>
+
+
+    <h3>
+      3. Responsabilidade pelo conteúdo
+    </h3>
+
+    <p>
+      Os scripts e orientações disponibilizados servem como material de apoio. O usuário é responsável por utilizar as informações de acordo com os procedimentos, políticas e orientações oficiais vigentes.
+    </p>
+
+
+    <h3>
+      4. Informações e dados pessoais
+    </h3>
+
+    <p>
+      Não devem ser inseridos, armazenados ou compartilhados na ferramenta dados pessoais, documentos, senhas, códigos de autenticação ou outras informações sensíveis de usuários, salvo quando expressamente autorizado pelos procedimentos oficiais.
+    </p>
+
+
+    <h3>
+      5. Segurança
+    </h3>
+
+    <p>
+      O usuário deve preservar a segurança das informações acessadas durante sua atividade e não compartilhar o conteúdo da ferramenta com pessoas não autorizadas.
+    </p>
+
+
+    <h3>
+      6. Atualização dos conteúdos
+    </h3>
+
+    <p>
+      Os scripts podem ser alterados, atualizados ou removidos a qualquer momento, conforme a necessidade operacional.
+    </p>
+
+
+    <h3>
+      7. Uso indevido
+    </h3>
+
+    <p>
+      O uso da ferramenta em desacordo com estes termos, com as políticas internas ou com as orientações de segurança poderá resultar na restrição de acesso e nas medidas administrativas cabíveis.
+    </p>
+
+
+    <h3>
+      8. Aceite
+    </h3>
+
+    <p>
+      Ao selecionar “Aceito os Termos de Uso” e acessar a Central de Atendimento, o usuário declara que leu, compreendeu e concorda com as condições estabelecidas.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOPBAR
+===================================================== -->
+
 <header class="topbar">
-<div class="topbar-left"><button class="menu-toggle" id="menuToggle" onclick="alternarMenu()" aria-label="Recolher ou expandir menu">☰</button><div class="brand"><div class="brand-icon">▦</div><div class="brand-text">Central de Atendimento<small>Portal interno de apoio</small></div></div></div>
-<div class="user-area"><span class="user-name" id="topUser"></span><button class="theme-toggle" id="themeToggle" onclick="alternarTema()" aria-label="Alternar tema claro ou escuro" title="Alternar tema">🌙</button><div class="status"><span class="status-dot"></span>Sistema operacional</div></div>
+
+  <div class="topbar-left">
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      onclick="alternarMenu()"
+      aria-label="Recolher ou expandir menu">
+
+      ☰
+
+    </button>
+
+
+    <div class="brand">
+
+      <div class="brand-icon">
+        ▦
+      </div>
+
+      <div class="brand-text">
+
+        Central de Atendimento
+
+        <small>
+          Portal interno de apoio
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="user-area">
+
+    <span
+      class="user-name"
+      id="topUser">
+    </span>
+
+
+    <button
+      class="theme-toggle"
+      id="themeToggle"
+      onclick="alternarTema()"
+      aria-label="Alternar tema claro ou escuro"
+      title="Alternar tema">
+
+      🌙
+
+    </button>
+
+
+    <div class="status">
+
+      <span class="status-dot"></span>
+
+      Sistema operacional
+
+    </div>
+
+  </div>
+
 </header>
-<div class="layout" id="layout">
-<aside class="sidebar"><div class="menu-title">Navegação</div><ul class="menu">
-<li><button class="active" onclick="filtrarCategoria('todos',this)">🏠 Início</button></li><li><button onclick="filtrarCategoria('Atendimento',this)">📋 Atendimento</button></li><li><button onclick="filtrarCategoria('Tempo de espera',this)">⏱️ Tempo de espera</button></li><li><button onclick="filtrarCategoria('Segurança',this)">🔒 Segurança</button></li><li><button onclick="filtrarCategoria('Recuperação de conta',this)">🔐 Recuperação de conta</button></li><li><button onclick="filtrarCategoria('Usuários agressivos',this)">⚠️ Situações</button></li><li><button onclick="filtrarCategoria('Gov.br',this)">🏛️ Gov.br</button></li><li><button onclick="filtrarCategoria('Chamados',this)">📝 Chamados</button></li><li><button onclick="filtrarCategoria('Documentação',this)">📄 Documentação</button></li><li><button onclick="filtrarCategoria('Pesquisa',this)">⭐ Pesquisa</button></li>
-</ul></aside>
-<main class="main">
-<div class="welcome"><h1 id="welcomeTitle">Olá! 👋</h1><p>Acesse rapidamente seus scripts e recursos de apoio ao atendimento.</p></div>
-<div class="search-wrap"><span class="search-icon">🔎</span><input type="text" id="campoBusca" class="busca-input" placeholder="Pesquisar scripts, palavras-chave ou situações..." oninput="filtrarScripts()"></div>
-<div class="quick-links">
-<button class="quick-link" onclick="buscarRapido('abertura')"><div class="quick-link-top"><span class="quick-link-icon">⚡</span><span class="quick-link-arrow">↗</span></div><strong>Iniciar atendimento</strong><span>Script de abertura</span></button>
-<button class="quick-link" onclick="buscarRapido('transferir')"><div class="quick-link-top"><span class="quick-link-icon">🔄</span><span class="quick-link-arrow">↗</span></div><strong>Encaminhar caso</strong><span>Transferir para outra fila</span></button>
-<button class="quick-link" onclick="buscarRapido('protocolo')"><div class="quick-link-top"><span class="quick-link-icon">📄</span><span class="quick-link-arrow">↗</span></div><strong>Consultar protocolo</strong><span>Localizar orientações</span></button>
-<button class="quick-link" onclick="buscarRapido('pesquisa')"><div class="quick-link-top"><span class="quick-link-icon">⭐</span><span class="quick-link-arrow">↗</span></div><strong>Encerrar jornada</strong><span>Pesquisa de satisfação</span></button>
+
+
+<!-- =====================================================
+     LAYOUT
+===================================================== -->
+
+<div
+  class="layout"
+  id="layout">
+
+
+  <!-- ===================================================
+       SIDEBAR
+  ==================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="menu-title">
+      Navegação
+    </div>
+
+
+    <ul class="menu">
+
+      <li>
+
+        <button
+          class="active"
+          onclick="filtrarCategoria('todos',this)">
+
+          🏠 Início
+
+        </button>
+
+      </li>
+
+
+      <li>
+
+        <button
+          onclick="filtrarCategoria('Atendimento',this)">
+
+          📋 Atendimento
+
+        </button>
+
+      </li>
+
+
+      <li>
+
+        <button
+          onclick="filtrarCategoria('Tempo de espera',this)">
+
+          ⏱️ Tempo de espera
+
+        </button>
+
+      </li>
+
+
+      <li>
+
+        <button
+          onclick="filtrarCategoria('Segurança',this)">
+
+          🔒 Segurança
+
+        </button>
+
+      </li>
+
+
+      <li>
+
+        <button
+          onclick="filtrarCategoria('Recuperação de conta',this)">
+
+          🔐 Recuperação de conta
+
+        </button>
+
+      </li>
+
+
+      <li>
+
+        <button
+          onclick="filtrarCategoria('Usuários agressivos',this)">
+
+          ⚠️ Situações
+
+        </button>
+
+      </li>
+
+
+      <li>
+
+        <button
+          onclick="filtrarCategoria('Gov.br',this)">
+
+          🏛️ Gov.br
+
+        </button>
+
+      </li>
+
+
+      <li>
+
+        <button
+          onclick="filtrarCategoria('Chamados',this)">
+
+          📝 Chamados
+
+        </button>
+
+      </li>
+
+
+      <li>
+
+        <button
+          onclick="filtrarCategoria('Documentação',this)">
+
+          📄 Documentação
+
+        </button>
+
+      </li>
+
+
+      <li>
+
+        <button
+          onclick="filtrarCategoria('Pesquisa',this)">
+
+          ⭐ Pesquisa
+
+        </button>
+
+      </li>
+
+    </ul>
+
+  </aside>
+
+
+  <!-- ===================================================
+       MAIN
+  ==================================================== -->
+
+  <main class="main">
+
+
+    <div class="welcome">
+
+      <h1 id="welcomeTitle">
+        Olá! 👋
+      </h1>
+
+      <p>
+        Acesse rapidamente seus scripts e recursos de apoio ao atendimento.
+      </p>
+
+    </div>
+
+
+    <!-- BUSCA -->
+
+    <div class="search-wrap">
+
+      <span class="search-icon">
+        🔎
+      </span>
+
+      <input
+        type="text"
+        id="campoBusca"
+        class="busca-input"
+        placeholder="Pesquisar scripts, palavras-chave ou situações..."
+        oninput="filtrarScripts()"
+      >
+
+    </div>
+
+
+    <!-- =================================================
+         RECURSOS RÁPIDOS
+    ================================================== -->
+
+    <div class="quick-links">
+
+
+      <button
+        class="quick-link"
+        onclick="buscarRapido('abertura')">
+
+        <div class="quick-link-top">
+
+          <span class="quick-link-icon">
+            ⚡
+          </span>
+
+          <span class="quick-link-arrow">
+            ↗
+          </span>
+
+        </div>
+
+        <strong>
+          Iniciar atendimento
+        </strong>
+
+        <span>
+          Script de abertura
+        </span>
+
+      </button>
+
+
+      <button
+        class="quick-link"
+        onclick="buscarRapido('transferir')">
+
+        <div class="quick-link-top">
+
+          <span class="quick-link-icon">
+            🔄
+          </span>
+
+          <span class="quick-link-arrow">
+            ↗
+          </span>
+
+        </div>
+
+        <strong>
+          Encaminhar caso
+        </strong>
+
+        <span>
+          Transferir para outra fila
+        </span>
+
+      </button>
+
+
+      <button
+        class="quick-link"
+        onclick="buscarRapido('protocolo')">
+
+        <div class="quick-link-top">
+
+          <span class="quick-link-icon">
+            📄
+          </span>
+
+          <span class="quick-link-arrow">
+            ↗
+          </span>
+
+        </div>
+
+        <strong>
+          Consultar protocolo
+        </strong>
+
+        <span>
+          Localizar orientações
+        </span>
+
+      </button>
+
+
+      <button
+        class="quick-link"
+        onclick="buscarRapido('pesquisa')">
+
+        <div class="quick-link-top">
+
+          <span class="quick-link-icon">
+            ⭐
+          </span>
+
+          <span class="quick-link-arrow">
+            ↗
+          </span>
+
+        </div>
+
+        <strong>
+          Encerrar jornada
+        </strong>
+
+        <span>
+          Pesquisa de satisfação
+        </span>
+
+      </button>
+
+    </div>
+
+
+    <!-- =================================================
+         LINKS RÁPIDOS
+    ================================================== -->
+
+    <div class="section-head">
+
+      <h2>
+        🔗 Links rápidos
+      </h2>
+
+    </div>
+
+
+    <div
+      class="grid-links"
+      id="listaLinks">
+
+      <!--
+        Os links são carregados por:
+        content/links/links-rapidos.js
+      -->
+
+    </div>
+
+
+    <!-- =================================================
+         SCRIPTS
+    ================================================== -->
+
+    <div class="section-head">
+
+      <h2>
+        📋 Scripts de atendimento
+      </h2>
+
+      <span
+        class="count"
+        id="contador">
+      </span>
+
+    </div>
+
+
+    <div
+      class="grid-scripts"
+      id="listaScripts">
+
+      <!--
+        Os cartões são carregados por:
+        content/scripts/atendimento.js
+      -->
+
+      <div
+        class="no-results"
+        id="semResultados">
+
+        Nenhum script encontrado para esta pesquisa.
+
+      </div>
+
+    </div>
+
+  </main>
+
 </div>
-<div class="section-head"><h2>🔗 Links rápidos</h2></div>
-<div class="grid-links" id="listaLinks">
-<!-- Os links são carregados por content/links/links-rapidos.js. -->
-</div>
-<div class="section-head"><h2>📋 Scripts de atendimento</h2><span class="count" id="contador"></span></div>
-<div class="grid-scripts" id="listaScripts">
-<!-- Os cartões são carregados por content/scripts/atendimento.js. -->
-<div class="no-results" id="semResultados">Nenhum script encontrado para esta pesquisa.</div>
-</div></main></div>
-<footer class="footer">Central de Atendimento • Portal interno • Desenvolvido por Bruno Silva <span id="footerUser"></span> • <button class="user-name" onclick="trocarUsuario()">Trocar usuário</button></footer>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+  Central de Atendimento • Portal interno • Desenvolvido por Bruno Silva
+
+  <span id="footerUser"></span>
+
+  • 
+
+  <button
+    class="user-name"
+    onclick="trocarUsuario()">
+
+    Trocar usuário
+
+  </button>
+
+</footer>
+
+
+<!-- =====================================================
+     TEMA
+===================================================== -->
+
 <script>
+
 (function(){
-  var salvo = localStorage.getItem('central-tema');
-  var preferido = salvo || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+  var salvo =
+    localStorage.getItem('central-tema');
+
+  var preferido =
+    salvo ||
+    (
+      window.matchMedia &&
+      window.matchMedia(
+        '(prefers-color-scheme: dark)'
+      ).matches
+        ? 'dark'
+        : 'light'
+    );
+
+
   aplicarTema(preferido);
+
+
   function aplicarTema(tema){
-    document.documentElement.setAttribute('data-theme', tema);
-    var btn = document.getElementById('themeToggle');
-    if(btn){ btn.textContent = tema === 'dark' ? '☀️' : '🌙'; }
+
+    document.documentElement
+      .setAttribute(
+        'data-theme',
+        tema
+      );
+
+
+    var btn =
+      document.getElementById(
+        'themeToggle'
+      );
+
+
+    if(btn){
+
+      btn.textContent =
+        tema === 'dark'
+          ? '☀️'
+          : '🌙';
+
+    }
+
   }
-  window.alternarTema = function(){
-    var atual = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-    var novo = atual === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('central-tema', novo);
-    aplicarTema(novo);
-  };
-  document.addEventListener('DOMContentLoaded', function(){ aplicarTema(document.documentElement.getAttribute('data-theme') || preferido); });
+
+
+  window.alternarTema =
+    function(){
+
+      var atual =
+        document.documentElement
+          .getAttribute('data-theme') === 'dark'
+          ? 'dark'
+          : 'light';
+
+
+      var novo =
+        atual === 'dark'
+          ? 'light'
+          : 'dark';
+
+
+      localStorage.setItem(
+        'central-tema',
+        novo
+      );
+
+
+      aplicarTema(novo);
+
+    };
+
+
+  document.addEventListener(
+    'DOMContentLoaded',
+    function(){
+
+      aplicarTema(
+        document.documentElement
+          .getAttribute('data-theme') ||
+        preferido
+      );
+
+    }
+  );
+
 })();
+
 </script>
+
+
+<!-- =====================================================
+     SCRIPTS EXTERNOS
+===================================================== -->
+
 <script src="content/scripts/atendimento.js"></script>
+
 <script src="content/links/links-rapidos.js"></script>
+
 <script src="assets/js/central.js"></script>
+
+
 </body>
 </html>
