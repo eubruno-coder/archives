@@ -72,7 +72,7 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:var(--font-body);background:var(--fundo);color:var(--texto);min-height:100vh;-webkit-font-smoothing:antialiased;transition:background-color .25s ease,color .25s ease}
-body,.topbar,.sidebar,.script-card,.card-acao,.login-box,.terms-content,.menu-toggle,.busca-input{transition:background-color .25s ease,border-color .25s ease,color .25s ease}
+body,.topbar,.sidebar,.script-card,.link-card,.quick-link,.login-box,.terms-content,.menu-toggle,.busca-input{transition:background-color .25s ease,border-color .25s ease,color .25s ease}
 :focus-visible{outline:2px solid var(--azul-eletrico);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
 
@@ -156,19 +156,30 @@ body.bloqueado{overflow:hidden}
 .busca-input::placeholder{color:var(--muted)}
 .busca-input:focus{border-color:var(--azul-eletrico);box-shadow:0 0 0 3px rgba(217,119,87,.12)}
 
-/* ===== Card de ação unificado (Recursos rápidos + Links rápidos) ===== */
-.quick-links,.grid-links{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px}
-.grid-links{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));margin-bottom:0}
-.card-acao{position:relative;text-align:left;background:var(--superficie);border:1px solid var(--borda);border-radius:12px;padding:16px 16px 14px;cursor:pointer;font-family:var(--font-body);display:flex;flex-direction:column;gap:9px;text-decoration:none;color:inherit;transition:border-color .15s,box-shadow .15s,transform .15s;overflow:hidden}
-.card-acao::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--assinatura);opacity:0;transition:opacity .15s}
-.card-acao:hover{border-color:var(--hover-borda);box-shadow:0 10px 22px rgba(61,43,31,.09);transform:translateY(-2px)}
-.card-acao:hover::before{opacity:1}
-.card-acao-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.card-acao-icone{width:34px;height:34px;flex-shrink:0;border-radius:9px;background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte);display:grid;place-items:center;font-size:16px}
-.card-acao-seta{color:var(--texto-fraco);font-size:14px;flex-shrink:0;transition:transform .15s,color .15s}
-.card-acao:hover .card-acao-seta{color:var(--verde-agua);transform:translate(2px,-2px)}
-.card-acao-titulo{display:block;font-size:13.5px;color:var(--texto);font-weight:700}
-.card-acao-sub{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ===== Recursos rápidos (antigos "atalhos") ===== */
+.quick-links{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px}
+.quick-link{position:relative;text-align:left;background:var(--superficie);border:1px solid var(--borda);border-radius:12px;padding:16px 16px 14px;cursor:pointer;font-family:var(--font-body);display:flex;flex-direction:column;gap:9px;transition:border-color .15s,box-shadow .15s,transform .15s;overflow:hidden}
+.quick-link::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--assinatura);opacity:0;transition:opacity .15s}
+.quick-link:hover{border-color:var(--hover-borda);box-shadow:0 10px 22px rgba(61,43,31,.09);transform:translateY(-2px)}
+.quick-link:hover::before{opacity:1}
+.quick-link-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.quick-link-icon{width:34px;height:34px;border-radius:9px;background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte);display:grid;place-items:center;font-size:16px}
+.quick-link-arrow{color:var(--texto-fraco);font-size:14px;transition:transform .15s,color .15s}
+.quick-link:hover .quick-link-arrow{color:var(--verde-agua);transform:translate(2px,-2px)}
+.quick-link strong{display:block;font-size:13.5px;color:var(--texto);font-weight:700}
+.quick-link span{display:block;font-size:12px;color:var(--muted)}
+
+.grid-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.link-card{position:relative;display:flex;align-items:center;gap:12px;background:var(--superficie);border:1px solid var(--borda);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--texto);transition:border-color .15s,box-shadow .15s,transform .15s;overflow:hidden}
+.link-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--assinatura);opacity:0;transition:opacity .15s}
+.link-card:hover{border-color:var(--hover-borda);box-shadow:0 10px 22px rgba(61,43,31,.09);transform:translateY(-2px)}
+.link-card:hover::before{opacity:1}
+.link-card-icon{width:36px;height:36px;flex-shrink:0;border-radius:9px;background:var(--verde-agua-suave);color:var(--oliva-forte);display:grid;place-items:center;font-size:17px}
+.link-card-text{flex:1;min-width:0;display:flex;flex-direction:column}
+.link-card-text strong{font-size:13.5px;color:var(--texto);font-weight:700}
+.link-card-text span{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.link-card-arrow{color:var(--texto-fraco);font-size:14px;flex-shrink:0;transition:transform .15s,color .15s}
+.link-card:hover .link-card-arrow{color:var(--verde-agua);transform:translate(2px,-2px)}
 
 .section-head{display:flex;align-items:center;justify-content:space-between;margin:30px 0 13px}
 .section-head h2{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--azul-profundo)}
@@ -193,11 +204,6 @@ body.bloqueado{overflow:hidden}
 .footer .user-name{color:var(--muted);font-weight:600}
 .footer .user-name button{color:var(--azul-eletrico)}
 
-.footer-credits{text-align:right;padding:0 32px 30px;color:var(--muted);font-size:12px;display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap}
-.footer-credits a{color:var(--azul-eletrico-forte);text-decoration:none;font-weight:600}
-.footer-credits a:hover{text-decoration:underline}
-.footer-separator{color:var(--texto-fraco)}
-
 /* ===== Responsivo ===== */
 @media(max-width:1000px){.quick-links{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){
@@ -211,10 +217,12 @@ body.bloqueado{overflow:hidden}
 .menu li{margin-bottom:0;flex:0 0 auto}
 .menu button,.layout.collapsed .menu button{white-space:nowrap;padding:9px 14px;border-radius:999px;border-left:none;font-size:13px;color:var(--texto-secundario)}
 .menu button.active,.layout.collapsed .menu button.active{background:var(--azul-eletrico-claro);color:var(--azul-eletrico-forte);font-weight:700}
-.grid-links,.quick-links{display:flex;overflow-x:auto;gap:12px;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:thin}
-.card-acao{flex:0 0 200px}
+.grid-links{display:flex;overflow-x:auto;gap:12px;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:thin}
+.link-card{flex:0 0 220px}
+.quick-links{display:flex;overflow-x:auto;gap:12px;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:thin}
+.quick-link{flex:0 0 190px}
 }
-@media(max-width:600px){.topbar{height:68px;padding:0 14px}.brand-icon{width:38px;height:38px}.layout{padding:10px}.footer{text-align:center;padding:18px}.footer-credits{justify-content:center;padding:0 18px 18px}.grid-scripts{gap:12px}}
+@media(max-width:600px){.topbar{height:68px;padding:0 14px}.brand-icon{width:38px;height:38px}.layout{padding:10px}.footer{text-align:center;padding:18px}.grid-scripts{gap:12px}}
 </style>
 </head>
 <body class="bloqueado">
@@ -240,10 +248,10 @@ body.bloqueado{overflow:hidden}
 <div class="welcome"><h1 id="welcomeTitle">Olá! 👋</h1><p>Acesse rapidamente seus scripts e recursos de apoio ao atendimento.</p></div>
 <div class="search-wrap"><span class="search-icon">🔎</span><input type="text" id="campoBusca" class="busca-input" placeholder="Pesquisar scripts, palavras-chave ou situações..." oninput="filtrarScripts()"></div>
 <div class="quick-links">
-<button class="card-acao" onclick="buscarRapido('abertura')"><span class="card-acao-top"><span class="card-acao-icone">⚡</span><span class="card-acao-seta">↗</span></span><strong class="card-acao-titulo">Iniciar atendimento</strong><span class="card-acao-sub">Script de abertura</span></button>
-<button class="card-acao" onclick="buscarRapido('transferir')"><span class="card-acao-top"><span class="card-acao-icone">🔄</span><span class="card-acao-seta">↗</span></span><strong class="card-acao-titulo">Encaminhar caso</strong><span class="card-acao-sub">Transferir para outra fila</span></button>
-<button class="card-acao" onclick="buscarRapido('protocolo')"><span class="card-acao-top"><span class="card-acao-icone">📄</span><span class="card-acao-seta">↗</span></span><strong class="card-acao-titulo">Consultar protocolo</strong><span class="card-acao-sub">Localizar orientações</span></button>
-<button class="card-acao" onclick="buscarRapido('pesquisa')"><span class="card-acao-top"><span class="card-acao-icone">⭐</span><span class="card-acao-seta">↗</span></span><strong class="card-acao-titulo">Encerrar jornada</strong><span class="card-acao-sub">Pesquisa de satisfação</span></button>
+<button class="quick-link" onclick="buscarRapido('abertura')"><div class="quick-link-top"><span class="quick-link-icon">⚡</span><span class="quick-link-arrow">↗</span></div><strong>Iniciar atendimento</strong><span>Script de abertura</span></button>
+<button class="quick-link" onclick="buscarRapido('transferir')"><div class="quick-link-top"><span class="quick-link-icon">🔄</span><span class="quick-link-arrow">↗</span></div><strong>Encaminhar caso</strong><span>Transferir para outra fila</span></button>
+<button class="quick-link" onclick="buscarRapido('protocolo')"><div class="quick-link-top"><span class="quick-link-icon">📄</span><span class="quick-link-arrow">↗</span></div><strong>Consultar protocolo</strong><span>Localizar orientações</span></button>
+<button class="quick-link" onclick="buscarRapido('pesquisa')"><div class="quick-link-top"><span class="quick-link-icon">⭐</span><span class="quick-link-arrow">↗</span></div><strong>Encerrar jornada</strong><span>Pesquisa de satisfação</span></button>
 </div>
 <div class="section-head"><h2>🔗 Links rápidos</h2></div>
 <div class="grid-links" id="listaLinks">
@@ -255,11 +263,6 @@ body.bloqueado{overflow:hidden}
 <div class="no-results" id="semResultados">Nenhum script encontrado para esta pesquisa.</div>
 </div></main></div>
 <footer class="footer">Central de Atendimento • Portal interno • Desenvolvido por Bruno Silva <span id="footerUser"></span> • <button class="user-name" onclick="trocarUsuario()">Trocar usuário</button></footer>
-<footer class="footer-credits">
-<span>© 2026 Archives</span>
-<span class="footer-separator">•</span>
-<a href="https://github.com/eubruno-coder/projetointranet" target="_blank" rel="noopener noreferrer">Projeto no GitHub</a>
-</footer>
 <script>
 (function(){
   var salvo = localStorage.getItem('central-tema');
