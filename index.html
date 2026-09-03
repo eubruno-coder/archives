@@ -1,118 +1,817 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Central de Atendimento - Intranet</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236C3BFF'/%3E%3Cpath d='M16 20c0-4.4 3.6-8 8-8h16c4.4 0 8 3.6 8 8v13c0 4.4-3.6 8-8 8H30l-10 9v-9h-4c-4.4 0-8-3.6-8-8V20z' fill='white'/%3E%3Cpath d='M22 25h20M22 31h13' stroke='%23B9A7FF' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<title>Intranet | Login</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-:root{
-  --primary:#6C3BFF;--primary-light:#8B5CFF;--primary-dark:#4C20D8;
-  --blue:#5268FF;--violet:#7A3FF2;
-  --gradient:linear-gradient(135deg,#5268FF 0%,#713CF5 48%,#8B3FE8 100%);
-  --gradient-soft:linear-gradient(135deg,#EEF0FF 0%,#F6EEFF 100%);
-  --background:#F5F4FF;--surface:#FFFFFF;--surface-soft:#FAF9FF;
-  --text:#242038;--text-strong:#18152A;--text-secondary:#69657A;--muted:#89859A;--icon-muted:#A7A3B5;
-  --border:rgba(105,83,180,.10);--border-strong:rgba(105,83,180,.17);
-  --success:#45A65A;--success-bg:#EAF7ED;--danger:#C62828;--danger-bg:#FDECEC;--danger-border:#F1C5C5;
-  --script-text:#413C4D;--chip:#F0EEFA;
-  --shadow:0 15px 40px rgba(72,52,160,.08);--shadow-hover:0 20px 45px rgba(72,52,160,.14);
-  --radius:14px;
-  --font:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-[data-theme="dark"]{
-  --primary:#9A76FF;--primary-light:#B295FF;--primary-dark:#7A51F5;
-  --blue:#7484FF;--violet:#9B6AF5;
-  --gradient:linear-gradient(135deg,#4659D8 0%,#6937D8 48%,#833DC8 100%);
-  --gradient-soft:linear-gradient(135deg,#251E3E 0%,#301D3A 100%);
-  --background:#10101A;--surface:#191923;--surface-soft:#15151F;
-  --text:#F3F1FA;--text-strong:#FFFFFF;--text-secondary:#C1BDCC;--muted:#9691A5;--icon-muted:#777286;
-  --border:rgba(190,175,255,.10);--border-strong:rgba(190,175,255,.17);
-  --success:#7BC486;--success-bg:#1D3022;--danger:#F28B8B;--danger-bg:#3A2020;--danger-border:#603232;
-  --script-text:#DED9E7;--chip:#292633;
-  --shadow:0 15px 40px rgba(0,0,0,.18);--shadow-hover:0 20px 45px rgba(0,0,0,.30);
+
+html,
+body {
+    width: 100%;
+    height: 100%;
 }
-body{font-family:var(--font);background:radial-gradient(700px 400px at 90% -10%,rgba(139,92,255,.10),transparent 70%),var(--background);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;transition:background-color .25s ease,color .25s ease}
-body.bloqueado{overflow:hidden}
-body,.topbar,.sidebar,.script-card,.card-acao,.login-box,.terms-content,.menu-toggle,.theme-toggle,.busca-input{transition:background-color .25s ease,border-color .25s ease,color .25s ease,box-shadow .25s ease}
-:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
-.login-overlay{position:fixed;inset:0;overflow:hidden;background:radial-gradient(900px 600px at 5% 0%,rgba(82,104,255,.50),transparent 65%),radial-gradient(800px 600px at 100% 100%,rgba(139,63,232,.45),transparent 60%),linear-gradient(145deg,#4659E8 0%,#6937D8 48%,#833DC8 100%);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9999}
-.aurora-blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;will-change:transform}
-.blob-1{width:420px;height:420px;background:#5268FF;top:-120px;left:-100px;animation:aurora-flutuar-1 14s ease-in-out infinite}
-.blob-2{width:380px;height:380px;background:#8B3FE8;bottom:-140px;right:-100px;animation:aurora-flutuar-2 16s ease-in-out infinite}
-.blob-3{width:300px;height:300px;background:#7A3FF2;top:40%;left:60%;animation:aurora-flutuar-3 18s ease-in-out infinite}
-@keyframes aurora-flutuar-1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
-@keyframes aurora-flutuar-2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-30px)}}
-@keyframes aurora-flutuar-3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,50px) scale(1.12)}}
-.login-box{width:100%;max-width:440px;background:rgba(255,255,255,.97);border-radius:22px;padding:40px 35px 32px;box-shadow:0 35px 90px rgba(34,17,100,.30);position:relative;overflow:hidden;z-index:1}
-.login-box::before{content:"";position:absolute;left:0;top:0;right:0;height:5px;background:var(--gradient)}
-.login-brand{text-align:center;margin-bottom:28px}.login-icon{width:62px;height:62px;margin:0 auto 16px;border-radius:17px;background:var(--gradient);color:#fff;display:grid;place-items:center;font-size:28px;box-shadow:0 12px 30px rgba(108,59,255,.28)}
-.login-brand h1{color:#27213D;font-size:23px;font-weight:800;margin-bottom:7px;letter-spacing:-.5px}.login-brand p{color:#89859A;font-size:13px}.login-label{display:block;color:#302A42;font-weight:700;font-size:13px;margin-bottom:8px}
-.login-name{width:100%;padding:14px 15px;border:1px solid #E4E1EC;border-radius:11px;font-size:15px;font-family:var(--font);outline:none;margin-bottom:15px;color:#27213D;background:#FFFFFF}.login-name::placeholder{color:#A19CAF}.login-name:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(108,59,255,.10)}
-.terms-box{background:#FAF9FF;border:1px solid #E7E3F0;border-radius:11px;padding:14px;margin-bottom:15px}.terms-check{display:flex;align-items:flex-start;gap:9px;color:#69657A;font-size:12px;line-height:1.5;cursor:pointer}.terms-check input{margin-top:3px;accent-color:var(--primary)}.terms-link{border:0;background:none;color:var(--primary);font-weight:700;cursor:pointer;font-size:12px;text-decoration:underline}
-.login-button{width:100%;padding:15px;border:0;border-radius:11px;background:var(--gradient);color:#FFFFFF;font-family:var(--font);font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 10px 25px rgba(108,59,255,.22);transition:transform .15s,box-shadow .15s,filter .15s}.login-button:hover{filter:brightness(1.06);box-shadow:0 14px 30px rgba(108,59,255,.28)}.login-button:active{transform:translateY(1px)}.login-error{display:none;color:var(--danger);background:var(--danger-bg);border:1px solid var(--danger-border);border-radius:9px;padding:9px 11px;margin-bottom:12px;font-size:12px}
-.terms-modal{position:fixed;inset:0;background:rgba(22,10,40,.65);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000}.terms-modal.show{display:flex}.terms-content{background:var(--surface);width:100%;max-width:650px;max-height:85vh;overflow:auto;border-radius:18px;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.25)}.terms-content h2{color:var(--text-strong);margin-bottom:15px;font-size:20px}.terms-content h3{font-size:14px;color:var(--primary);margin:16px 0 5px;font-weight:800}.terms-content p{font-size:13px;line-height:1.6;color:var(--text-secondary)}.terms-close{float:right;border:0;background:var(--chip);border-radius:8px;padding:7px 11px;cursor:pointer;font-size:13px;font-weight:700;color:var(--text)}.terms-close:hover{background:var(--gradient-soft);color:var(--primary)}
-.topbar{height:70px;background:rgba(255,255,255,.88);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10;backdrop-filter:blur(16px);box-shadow:0 4px 20px rgba(70,50,160,.04)}[data-theme="dark"] .topbar{background:rgba(25,25,35,.90)}.topbar::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--gradient);opacity:.85}.topbar-left{display:flex;align-items:center;gap:14px}.menu-toggle{width:39px;height:39px;border:1px solid var(--border-strong);background:var(--surface);color:var(--primary);border-radius:10px;cursor:pointer;font-size:19px;display:grid;place-items:center}.menu-toggle:hover{background:var(--gradient-soft);border-color:rgba(108,59,255,.25)}.brand{display:flex;align-items:center;gap:12px;color:var(--text-strong);font-weight:800}.brand-icon{width:39px;height:39px;border-radius:11px;background:var(--gradient);color:#FFFFFF;display:grid;place-items:center;font-size:19px;flex-shrink:0;box-shadow:0 8px 20px rgba(108,59,255,.20)}.brand-text{font-size:15px;letter-spacing:-.2px}.brand-text small{display:block;color:var(--muted);font-size:11px;font-weight:500;margin-top:2px}.user-area{display:flex;align-items:center;gap:12px}.user-name{font-size:13px;color:var(--text-strong);font-weight:600}.theme-toggle{width:39px;height:39px;border:1px solid var(--border-strong);background:var(--surface);color:var(--primary);border-radius:10px;cursor:pointer;font-size:16px;display:grid;place-items:center}.theme-toggle:hover{background:var(--gradient-soft)}.status{font-size:12px;color:var(--success);display:flex;align-items:center;gap:7px;font-weight:700;background:var(--success-bg);padding:7px 13px;border-radius:999px}.status-dot{width:7px;height:7px;background:var(--success);border-radius:50%;box-shadow:0 0 0 3px rgba(69,166,90,.14)}
-.layout{display:grid;grid-template-columns:238px minmax(0,1fr);max-width:1500px;margin:0 auto;min-height:calc(100vh - 70px);transition:grid-template-columns .25s ease}.layout.collapsed{grid-template-columns:76px minmax(0,1fr)}.sidebar{background:var(--gradient);border:0;padding:25px 14px;overflow:hidden;position:relative;box-shadow:12px 0 35px rgba(76,52,190,.13)}.sidebar::before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.08);top:-100px;right:-160px;pointer-events:none;animation:blob-flutuar-a 20s ease-in-out infinite}.sidebar::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.06);bottom:-100px;left:-130px;pointer-events:none;animation:blob-flutuar-b 24s ease-in-out infinite}@keyframes blob-flutuar-a{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,25px)}}@keyframes blob-flutuar-b{0%,100%{transform:translate(0,0)}50%{transform:translate(25px,-20px)}}.layout.collapsed .sidebar{padding:25px 10px}.menu-title{font-size:10px;color:rgba(255,255,255,.60);font-weight:800;text-transform:uppercase;padding:0 12px 13px;letter-spacing:.8px;white-space:nowrap}.menu{list-style:none;position:relative;z-index:1}.menu li{margin-bottom:5px}.menu button{width:100%;border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;color:rgba(255,255,255,.78);font-size:13px;font-family:var(--font);cursor:pointer;white-space:nowrap;overflow:hidden;border-left:3px solid transparent;transition:background .15s,color .15s,transform .15s}.menu button:hover{background:rgba(255,255,255,.11);color:#FFFFFF;transform:translateX(2px)}.menu button.active{background:rgba(255,255,255,.17);color:#FFFFFF;font-weight:800;border-left-color:#FFFFFF;box-shadow:0 8px 20px rgba(40,15,100,.10)}.layout.collapsed .menu-title{visibility:hidden;height:0;padding:0}.layout.collapsed .menu button{font-size:19px;text-align:center;padding:11px 0;color:transparent}.layout.collapsed .menu button::first-letter{font-size:19px}
-.main{padding:34px;min-width:0;position:relative}.main::before{content:"";position:absolute;top:0;right:0;width:420px;height:260px;background:radial-gradient(circle,rgba(139,92,255,.09),transparent 70%);pointer-events:none;animation:blob-flutuar-c 22s ease-in-out infinite}@keyframes blob-flutuar-c{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,15px)}}.welcome{margin-bottom:25px;position:relative;padding-left:17px;z-index:1}.welcome::before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:4px;border-radius:5px;background:var(--gradient)}.welcome h1{font-size:26px;font-weight:800;color:var(--text-strong);margin-bottom:5px;letter-spacing:-.6px;display:flex;align-items:center;gap:4px}.welcome p{color:var(--muted);font-size:14px}.emoji-vivo{display:inline-block;font-size:1em;line-height:1;margin-left:3px;transform-origin:70% 80%;animation:emoji-flutuar 3s ease-in-out infinite;cursor:default;will-change:transform}@keyframes emoji-flutuar{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-3px) rotate(-2deg)}50%{transform:translateY(0) rotate(0deg)}75%{transform:translateY(-2px) rotate(2deg)}}.emoji-vivo.acenar{animation:emoji-acenar .9s ease-in-out}@keyframes emoji-acenar{0%{transform:rotate(0deg)}15%{transform:rotate(17deg)}30%{transform:rotate(-11deg)}45%{transform:rotate(15deg)}60%{transform:rotate(-9deg)}75%{transform:rotate(8deg)}100%{transform:rotate(0deg)}}.emoji-vivo:hover{animation:emoji-acenar .8s ease-in-out}
-.search-wrap{position:relative;margin-bottom:27px;z-index:1}.search-icon{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--icon-muted)}.busca-input{width:100%;padding:15px 18px 15px 46px;font-size:14px;font-family:var(--font);border:1px solid var(--border);border-radius:13px;outline:none;background:rgba(255,255,255,.88);color:var(--text);box-shadow:0 7px 25px rgba(72,52,160,.05);backdrop-filter:blur(10px)}[data-theme="dark"] .busca-input{background:rgba(25,25,35,.88)}.busca-input::placeholder{color:var(--muted)}.busca-input:focus{border-color:rgba(108,59,255,.35);box-shadow:0 0 0 4px rgba(108,59,255,.08),0 10px 30px rgba(72,52,160,.08)}
-.quick-links,.grid-links{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:10px;position:relative;z-index:1}.grid-links{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));margin-bottom:0}.card-acao{position:relative;text-align:left;background:rgba(255,255,255,.94);border:1px solid var(--border);border-radius:14px;padding:17px 17px 15px;cursor:pointer;font-family:var(--font);display:flex;flex-direction:column;gap:9px;overflow:hidden;box-shadow:var(--shadow);text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s,border-color .2s}[data-theme="dark"] .card-acao{background:rgba(25,25,35,.95)}.card-acao::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gradient);opacity:0;transition:opacity .2s}.card-acao:hover{border-color:rgba(108,59,255,.18);box-shadow:var(--shadow-hover);transform:translateY(-3px)}.card-acao:hover::before{opacity:1}.card-acao-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.card-acao-icone{width:36px;height:36px;flex-shrink:0;border-radius:10px;background:var(--gradient);color:#FFFFFF;display:grid;place-items:center;font-size:16px;box-shadow:0 8px 18px rgba(108,59,255,.20)}.card-acao-seta{color:var(--icon-muted);font-size:14px;flex-shrink:0;transition:transform .15s,color .15s}.card-acao:hover .card-acao-seta{color:var(--primary);transform:translate(2px,-2px)}.card-acao-titulo{display:block;font-size:13px;color:var(--text);font-weight:800}.card-acao-sub{display:block;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.section-head{display:flex;align-items:center;justify-content:space-between;margin:31px 0 14px}.section-head h2{font-size:16px;font-weight:800;color:var(--text-strong);letter-spacing:-.2px}.count{font-size:11px;color:var(--primary);background:var(--gradient-soft);padding:5px 11px;border-radius:999px;font-weight:800}
-.grid-scripts{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;position:relative;z-index:1}.script-card{background:rgba(255,255,255,.96);border:1px solid var(--border);border-left:0;border-radius:14px;padding:17px;position:relative;box-shadow:0 10px 30px rgba(72,52,160,.06);overflow:hidden}[data-theme="dark"] .script-card{background:rgba(25,25,35,.96)}.script-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gradient)}.script-card:hover{box-shadow:0 18px 40px rgba(72,52,160,.11);transform:translateY(-2px)}.script-card.destaque::before{background:linear-gradient(180deg,#45A65A,#79C987)}.script-card.destaque .categoria{background:var(--success-bg);color:var(--success)}.categoria{display:inline-block;margin-bottom:9px;padding:5px 9px;border-radius:6px;background:var(--gradient-soft);color:var(--primary);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.6px}.script-header{display:flex;align-items:center;margin-bottom:11px;padding-right:88px}.script-title{font-weight:800;font-size:14px;color:var(--text-strong)}.btn-copiar{position:absolute;top:15px;right:14px;background:var(--gradient);color:#FFFFFF;border:0;padding:7px 12px;border-radius:7px;cursor:pointer;font-size:11px;font-weight:800;font-family:var(--font);box-shadow:0 6px 14px rgba(108,59,255,.16);transition:transform .15s,filter .15s}.btn-copiar:hover{filter:brightness(1.07);transform:translateY(-1px)}.script-content{background:var(--surface-soft);border:1px solid var(--border);padding:13px;border-radius:8px;font-size:13px;white-space:pre-wrap;word-wrap:break-word;color:var(--script-text);line-height:1.55}.no-results{grid-column:1/-1;text-align:center;color:var(--muted);font-size:13.5px;padding:32px;background:var(--surface);border:1px dashed var(--border-strong);border-radius:12px}
-.footer{text-align:right;padding:22px 34px 34px;color:var(--muted);font-size:11.5px}.footer .user-name{color:var(--muted);font-weight:600}.footer .user-name:hover{color:var(--primary)}
-@media(max-width:1100px){.quick-links{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:900px){.layout,.layout.collapsed{padding:12px;display:block}.sidebar,.layout.collapsed .sidebar{position:static;margin-bottom:14px;border-radius:16px;padding:12px;box-shadow:0 12px 30px rgba(72,52,160,.12)}.main{padding:8px 0 0}.welcome{padding-left:15px}.menu-toggle{display:none}.menu-title,.layout.collapsed .menu-title{display:none}.menu{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}.menu li{margin-bottom:0;flex:0 0 auto}.menu button,.layout.collapsed .menu button{white-space:nowrap;padding:9px 14px;border-radius:999px;border-left:none;font-size:12px;color:rgba(255,255,255,.82)}.menu button.active,.layout.collapsed .menu button.active{background:rgba(255,255,255,.20);color:#FFFFFF;font-weight:800}.grid-links,.quick-links{display:flex;overflow-x:auto;gap:12px;padding-bottom:5px;scrollbar-width:thin}.card-acao{flex:0 0 200px}}
-@media(max-width:600px){.topbar{height:68px;padding:0 14px}.brand-icon{width:38px;height:38px}.brand-text small{display:none}.status{display:none}.user-area{gap:7px}.user-name{display:none}.layout{padding:8px}.main{padding:7px 0 0}.welcome h1{font-size:23px}.footer{text-align:center;padding:18px}.grid-scripts{gap:12px}.login-box{padding:34px 24px 28px}}
+
+body {
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    overflow: hidden;
+    color: #fff;
+}
+
+
+/* =========================================================
+   FUNDO
+========================================================= */
+
+.login-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(190, 100, 255, .28),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(119, 64, 255, .30),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #18052e 0%,
+            #2b0750 45%,
+            #16052b 100%
+        );
+}
+
+
+/* =========================================================
+   ELEMENTOS DECORATIVOS
+========================================================= */
+
+.background-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(20px);
+    pointer-events: none;
+}
+
+.glow-1 {
+    width: 320px;
+    height: 320px;
+
+    top: -120px;
+    left: -100px;
+
+    background: rgba(187, 83, 255, .25);
+}
+
+.glow-2 {
+    width: 400px;
+    height: 400px;
+
+    right: -160px;
+    bottom: -180px;
+
+    background: rgba(100, 52, 255, .28);
+}
+
+
+/* =========================================================
+   GRID / TEXTURA
+========================================================= */
+
+.grid {
+    position: absolute;
+    inset: 0;
+
+    opacity: .08;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.25) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.25) 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 25%,
+        black 75%,
+        transparent
+    );
+}
+
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
+
+.login-container {
+    position: relative;
+    z-index: 2;
+
+    width: min(1100px, 92%);
+    min-height: 620px;
+
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    border-radius: 32px;
+
+    overflow: hidden;
+
+    background: rgba(255,255,255,.075);
+
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+
+/* =========================================================
+   LADO ESQUERDO
+========================================================= */
+
+.brand-section {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 60px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(144, 61, 255, .35),
+            rgba(58, 16, 104, .12)
+        );
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    font-size: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c56cff,
+            #6d35ff
+        );
+
+    box-shadow:
+        0 12px 35px rgba(142, 65, 255, .45);
+}
+
+.logo-text strong {
+    display: block;
+
+    font-size: 20px;
+    letter-spacing: -.4px;
+}
+
+.logo-text span {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 12px;
+
+    color: rgba(255,255,255,.55);
+}
+
+
+/* =========================================================
+   TEXTO PRINCIPAL
+========================================================= */
+
+.hero-text {
+    max-width: 520px;
+}
+
+.hero-text .eyebrow {
+    margin-bottom: 18px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    color: #d89cff;
+}
+
+.hero-text h1 {
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: .98;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 24px;
+}
+
+.hero-text h1 span {
+    display: block;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #d58cff,
+            #9b6cff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.hero-text p {
+    max-width: 450px;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    color: rgba(255,255,255,.65);
+}
+
+
+/* =========================================================
+   CARDS INFORMATIVOS
+========================================================= */
+
+.features {
+    display: flex;
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 11px 15px;
+
+    border-radius: 50px;
+
+    background: rgba(255,255,255,.07);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    font-size: 12px;
+
+    color: rgba(255,255,255,.7);
+}
+
+.feature-icon {
+    width: 26px;
+    height: 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(191,105,255,.18);
+
+    color: #db9cff;
+}
+
+
+/* =========================================================
+   LADO DO LOGIN
+========================================================= */
+
+.login-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 55px;
+
+    background: rgba(10, 3, 20, .28);
+}
+
+.login-box {
+    width: 100%;
+    max-width: 350px;
+}
+
+.login-box h2 {
+    margin-bottom: 8px;
+
+    font-size: 30px;
+    letter-spacing: -.8px;
+}
+
+.login-description {
+    margin-bottom: 34px;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    color: rgba(255,255,255,.55);
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: rgba(255,255,255,.72);
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper span {
+    position: absolute;
+
+    left: 16px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 17px;
+
+    opacity: .6;
+}
+
+.input-wrapper input {
+    width: 100%;
+
+    padding: 15px 16px 15px 46px;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    outline: none;
+
+    color: white;
+
+    font-size: 14px;
+
+    background: rgba(255,255,255,.07);
+
+    transition: .25s;
+}
+
+.input-wrapper input::placeholder {
+    color: rgba(255,255,255,.32);
+}
+
+.input-wrapper input:focus {
+    border-color: rgba(195,113,255,.8);
+
+    background: rgba(255,255,255,.10);
+
+    box-shadow:
+        0 0 0 4px rgba(169,72,255,.10);
+}
+
+
+/* =========================================================
+   BOTÃO
+========================================================= */
+
+.login-button {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            100deg,
+            #a83cff,
+            #7136ff
+        );
+
+    box-shadow:
+        0 14px 30px rgba(125,45,255,.32);
+
+    transition: .25s;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 18px 35px rgba(125,45,255,.45);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   RODAPÉ LOGIN
+========================================================= */
+
+.login-footer {
+    margin-top: 25px;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    color: rgba(255,255,255,.35);
+}
+
+.login-footer a {
+    color: #d18aff;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.system-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 25px;
+
+    font-size: 11px;
+
+    color: rgba(255,255,255,.4);
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #62e89a;
+
+    box-shadow:
+        0 0 10px rgba(98,232,154,.8);
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .login-page {
+        min-height: 100vh;
+
+        padding: 25px 0;
+    }
+
+    .login-container {
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+    }
+
+    .brand-section {
+        padding: 40px;
+
+        min-height: 430px;
+    }
+
+    .hero-text h1 {
+        font-size: 46px;
+    }
+
+    .login-section {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .login-container {
+        width: 94%;
+
+        border-radius: 24px;
+    }
+
+    .brand-section {
+        padding: 30px;
+
+        min-height: 400px;
+    }
+
+    .login-section {
+        padding: 30px;
+    }
+
+    .hero-text h1 {
+        font-size: 38px;
+
+        letter-spacing: -2px;
+    }
+
+    .features {
+        display: none;
+    }
+}
 </style>
 </head>
-<body class="bloqueado">
-<div class="login-overlay" id="loginOverlay">
-<span class="aurora-blob blob-1"></span><span class="aurora-blob blob-2"></span><span class="aurora-blob blob-3"></span>
-<div class="login-box">
-<div class="login-brand"><div class="login-icon">▦</div><h1>Central de Atendimento</h1><p>Portal interno de apoio ao atendimento</p></div>
-<label class="login-label" for="loginName">Como podemos te chamar?</label>
-<input class="login-name" id="loginName" type="text" maxlength="80" autocomplete="name" placeholder="Digite seu nome">
-<div class="login-error" id="loginError">Digite seu nome e aceite os Termos de Uso para continuar.</div>
-<div class="terms-box"><label class="terms-check"><input type="checkbox" id="termsCheck"><span>Li e aceito os <button type="button" class="terms-link" onclick="abrirTermos(event)">Termos de Uso</button> da Central de Atendimento.</span></label></div>
-<button class="login-button" onclick="entrarNaCentral()">Entrar na Central</button>
-</div></div>
-<div class="terms-modal" id="termsModal" onclick="fecharTermosFora(event)"><div class="terms-content"><button class="terms-close" onclick="fecharTermos()">Fechar</button><h2>Termos de Uso — Central de Atendimento</h2><p>Última atualização: agosto de 2026.</p><h3>1. Finalidade da ferramenta</h3><p>A Central de Atendimento é uma ferramenta interna destinada exclusivamente ao apoio às atividades de atendimento, consulta e utilização de scripts e orientações disponibilizados pela organização.</p><h3>2. Uso profissional</h3><p>A ferramenta deve ser utilizada exclusivamente para finalidades relacionadas às atividades profissionais. É vedada a utilização para fins pessoais, comerciais ou para qualquer atividade não relacionada ao atendimento.</p><h3>3. Responsabilidade pelo conteúdo</h3><p>Os scripts e orientações disponibilizados servem como material de apoio. O usuário é responsável por utilizar as informações de acordo com os procedimentos, políticas e orientações oficiais vigentes.</p><h3>4. Informações e dados pessoais</h3><p>Não devem ser inseridos, armazenados ou compartilhados na ferramenta dados pessoais, documentos, senhas, códigos de autenticação ou outras informações sensíveis de usuários, salvo quando expressamente autorizado pelos procedimentos oficiais.</p><h3>5. Segurança</h3><p>O usuário deve preservar a segurança das informações acessadas durante sua atividade e não compartilhar o conteúdo da ferramenta com pessoas não autorizadas.</p><h3>6. Atualização dos conteúdos</h3><p>Os scripts podem ser alterados, atualizados ou removidos a qualquer momento, conforme a necessidade operacional.</p><h3>7. Uso indevido</h3><p>O uso da ferramenta em desacordo com estes termos, com as políticas internas ou com as orientações de segurança poderá resultar na restrição de acesso e nas medidas administrativas cabíveis.</p><h3>8. Aceite</h3><p>Ao selecionar “Aceito os Termos de Uso” e acessar a Central de Atendimento, o usuário declara que leu, compreendeu e concorda com as condições estabelecidas.</p></div></div>
-<header class="topbar">
-<div class="topbar-left"><button class="menu-toggle" id="menuToggle" onclick="alternarMenu()" aria-label="Recolher ou expandir menu">☰</button><div class="brand"><div class="brand-icon">▦</div><div class="brand-text">Central de Atendimento<small>Portal interno de apoio</small></div></div></div>
-<div class="user-area"><span class="user-name" id="topUser"></span><button class="theme-toggle" id="themeToggle" onclick="alternarTema()" aria-label="Alternar tema claro ou escuro" title="Alternar tema">🌙</button><div class="status"><span class="status-dot"></span>Sistema operacional</div></div>
-</header>
-<div class="layout" id="layout">
-<aside class="sidebar"><div class="menu-title">Navegação</div><ul class="menu">
-<li><button class="active" onclick="filtrarCategoria('todos',this)">🏠 Início</button></li><li><button onclick="filtrarCategoria('Atendimento',this)">📋 Atendimento</button></li><li><button onclick="filtrarCategoria('Tempo de espera',this)">⏱️ Tempo de espera</button></li><li><button onclick="filtrarCategoria('Segurança',this)">🔒 Segurança</button></li><li><button onclick="filtrarCategoria('Recuperação de conta',this)">🔐 Recuperação de conta</button></li><li><button onclick="filtrarCategoria('Usuários agressivos',this)">⚠️ Situações</button></li><li><button onclick="filtrarCategoria('Gov.br',this)">🏛️ Gov.br</button></li><li><button onclick="filtrarCategoria('Chamados',this)">📝 Chamados</button></li><li><button onclick="filtrarCategoria('Documentação',this)">📄 Documentação</button></li><li><button onclick="filtrarCategoria('Pesquisa',this)">⭐ Pesquisa</button></li>
-</ul></aside>
-<main class="main">
-<div class="welcome"><h1 id="welcomeTitle">Olá! <span class="emoji-vivo" aria-hidden="true">👋</span></h1><p>Acesse rapidamente seus scripts e recursos de apoio ao atendimento.</p></div>
-<div class="search-wrap"><span class="search-icon">🔎</span><input type="text" id="campoBusca" class="busca-input" placeholder="Pesquisar scripts, palavras-chave ou situações..." oninput="filtrarScripts()"></div>
-<div class="quick-links">
-<button class="card-acao" onclick="buscarRapido('abertura')"><span class="card-acao-top"><span class="card-acao-icone">⚡</span><span class="card-acao-seta">↗</span></span><strong class="card-acao-titulo">Iniciar atendimento</strong><span class="card-acao-sub">Script de abertura</span></button>
-<button class="card-acao" onclick="buscarRapido('transferir')"><span class="card-acao-top"><span class="card-acao-icone">🔄</span><span class="card-acao-seta">↗</span></span><strong class="card-acao-titulo">Encaminhar caso</strong><span class="card-acao-sub">Transferir para outra fila</span></button>
-<button class="card-acao" onclick="buscarRapido('protocolo')"><span class="card-acao-top"><span class="card-acao-icone">📄</span><span class="card-acao-seta">↗</span></span><strong class="card-acao-titulo">Consultar protocolo</strong><span class="card-acao-sub">Localizar orientações</span></button>
-<button class="card-acao" onclick="buscarRapido('pesquisa')"><span class="card-acao-top"><span class="card-acao-icone">⭐</span><span class="card-acao-seta">↗</span></span><strong class="card-acao-titulo">Encerrar jornada</strong><span class="card-acao-sub">Pesquisa de satisfação</span></button>
+
+<body>
+
+<div class="login-page">
+
+    <!-- Efeitos de fundo -->
+    <div class="background-glow glow-1"></div>
+    <div class="background-glow glow-2"></div>
+
+    <!-- Grid tecnológico -->
+    <div class="grid"></div>
+
+
+    <!-- =====================================================
+         CONTAINER
+    ====================================================== -->
+
+    <main class="login-container">
+
+
+        <!-- =================================================
+             IDENTIDADE
+        ================================================== -->
+
+        <section class="brand-section">
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    ✦
+                </div>
+
+                <div class="logo-text">
+                    <strong>INTRANET</strong>
+                    <span>Central de Atendimento</span>
+                </div>
+
+            </div>
+
+
+            <div class="hero-text">
+
+                <div class="eyebrow">
+                    Ambiente interno
+                </div>
+
+                <h1>
+                    Tudo que você
+                    <span>precisa.</span>
+                </h1>
+
+                <p>
+                    Acesse scripts, procedimentos, ferramentas
+                    e informações essenciais para o seu atendimento
+                    em um único lugar.
+                </p>
+
+            </div>
+
+
+            <div class="features">
+
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    Acesso rápido
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    Ferramentas
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">◈</div>
+                    Conteúdo atualizado
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LOGIN
+        ================================================== -->
+
+        <section class="login-section">
+
+            <div class="login-box">
+
+                <h2>
+                    Bem-vindo 👋
+                </h2>
+
+                <p class="login-description">
+                    Como podemos te chamar?
+                    Informe seu nome para entrar na Intranet.
+                </p>
+
+
+                <form id="loginForm">
+
+                    <div class="input-group">
+
+                        <label for="nome">
+                            Seu nome
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span>👤</span>
+
+                            <input
+                                type="text"
+                                id="nome"
+                                placeholder="Digite seu nome"
+                                autocomplete="name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                    >
+                        Entrar na Intranet →
+                    </button>
+
+                </form>
+
+
+                <div class="system-status">
+
+                    <span class="status-dot"></span>
+
+                    Sistema operacional
+
+                </div>
+
+
+                <div class="login-footer">
+
+                    Ao continuar, você concorda com as
+                    <a href="#">
+                        diretrizes de uso
+                    </a>
+                    da Intranet.
+
+                    <br><br>
+
+                    © 2026 • Central de Atendimento
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
 </div>
-<div class="section-head"><h2>🔗 Links rápidos</h2></div>
-<div class="grid-links" id="listaLinks"><!-- Os links são carregados por content/links/links-rapidos.js. --></div>
-<div class="section-head"><h2>📋 Scripts de atendimento</h2><span class="count" id="contador"></span></div>
-<div class="grid-scripts" id="listaScripts"><!-- Os cartões são carregados por content/scripts/atendimento.js. --><div class="no-results" id="semResultados">Nenhum script encontrado para esta pesquisa.</div></div></main></div>
-<footer class="footer">Central de Atendimento • Portal interno • Desenvolvido por Bruno Silva <span id="footerUser"></span> • <button class="user-name" onclick="trocarUsuario()">Trocar usuário</button></footer>
+
+
 <script>
-(function(){var salvo=localStorage.getItem('central-tema');var preferido=salvo||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');aplicarTema(preferido);function aplicarTema(tema){document.documentElement.setAttribute('data-theme',tema);var btn=document.getElementById('themeToggle');if(btn){btn.textContent=tema==='dark'?'☀️':'🌙';}}window.alternarTema=function(){var atual=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light';var novo=atual==='dark'?'light':'dark';localStorage.setItem('central-tema',novo);aplicarTema(novo);};document.addEventListener('DOMContentLoaded',function(){aplicarTema(document.documentElement.getAttribute('data-theme')||preferido);});})();
+
+document
+.getElementById("loginForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const nome =
+        document
+        .getElementById("nome")
+        .value
+        .trim();
+
+    if (!nome) {
+        return;
+    }
+
+    /*
+        TESTE:
+
+        Aqui futuramente podemos conectar
+        com o sistema atual da Intranet.
+
+        Por enquanto apenas exibimos
+        uma mensagem.
+    */
+
+    alert(
+        "Olá, " + nome + "! 👋\n\n" +
+        "Login de teste realizado com sucesso."
+    );
+
+});
+
 </script>
-<script>
-(function(){function iniciarEmoji(){const emoji=document.querySelector('.emoji-vivo');if(!emoji)return;let temporizador;function acenar(){emoji.classList.remove('acenar');void emoji.offsetWidth;emoji.classList.add('acenar');setTimeout(function(){emoji.classList.remove('acenar');},950);}function programarProximoAceno(){const tempo=Math.floor(Math.random()*8000)+7000;temporizador=setTimeout(function(){acenar();programarProximoAceno();},tempo);}programarProximoAceno();emoji.addEventListener('mouseenter',function(){clearTimeout(temporizador);acenar();programarProximoAceno();});emoji.addEventListener('click',function(){clearTimeout(temporizador);acenar();programarProximoAceno();});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',iniciarEmoji);}else{iniciarEmoji();}})();
-</script>
-<script src="content/scripts/atendimento.js"></script>
-<script src="content/links/links-rapidos.js"></script>
-<script src="assets/js/central.js"></script>
+
 </body>
 </html>
+```
