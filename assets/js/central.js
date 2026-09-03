@@ -22,4 +22,22 @@ carregarScriptsAtendimento();carregarLinksRapidos();iniciarSessao();filtrarScrip
 
 function carregarScriptsAtendimento(){const lista=document.getElementById('listaScripts');if(!lista||lista.dataset.contentLoaded==='1')return;const conteudo=window.CENTRAL_ATENDIMENTO_HTML;if(typeof conteudo!=='string'){console.error('Conteúdo dos scripts de atendimento não foi carregado.');return}lista.insertAdjacentHTML('afterbegin',conteudo);lista.dataset.contentLoaded='1'}
 
+/* ===== Estilo dos Links Rápidos ===== */
+(function(){const style=document.createElement('style');style.textContent=`
+.link-card{position:relative;display:flex;align-items:center;gap:12px;min-width:0;min-height:82px;padding:15px 16px;text-decoration:none;color:var(--text);background:rgba(255,255,255,.94);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s,background-color .25s ease}
+[data-theme="dark"] .link-card{background:rgba(25,25,35,.95)}
+.link-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gradient);opacity:0;transition:opacity .2s}
+.link-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:rgba(108,59,255,.20)}
+.link-card:hover::before{opacity:1}
+.link-card-icon{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border-radius:10px;background:var(--gradient-soft);font-size:18px}
+.link-card-text{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.link-card-text strong{display:block;color:var(--text-strong);font-size:13px;font-weight:800;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.link-card-text span{display:block;color:var(--muted);font-size:11px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.link-card-arrow{flex:0 0 auto;color:var(--icon-muted);font-size:15px;transition:transform .15s,color .15s}
+.link-card:hover .link-card-arrow{color:var(--primary);transform:translate(2px,-2px)}
+@media(max-width:1100px){.grid-links{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.grid-links{display:flex;overflow-x:auto;gap:12px;padding-bottom:5px;scrollbar-width:thin}.link-card{flex:0 0 250px}}
+@media(max-width:600px){.link-card{flex-basis:230px;min-height:76px}}
+`;document.head.appendChild(style)})();
+
 function carregarLinksRapidos(){const lista=document.getElementById('listaLinks');if(!lista||lista.dataset.contentLoaded==='1')return;const links=window.CENTRAL_LINKS_RAPIDOS;if(!Array.isArray(links)){console.error('Lista de links rápidos não foi carregada.');return}lista.innerHTML=links.map(link=>`<a class="link-card" href="${link.url}" target="_blank" rel="noopener noreferrer"><span class="link-card-icon">${link.icone||'🔗'}</span><span class="link-card-text"><strong>${link.titulo}</strong><span>${link.descricao||''}</span></span><span class="link-card-arrow">↗</span></a>`).join('');lista.dataset.contentLoaded='1'}
