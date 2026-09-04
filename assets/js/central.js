@@ -17,7 +17,20 @@ function mostrarCentral(nome){
   const chaveVisita='centralVisitou_'+nome;
   const visitou=localStorage.getItem(chaveVisita)==='1';
   const welcome=document.getElementById('welcomeTitle');
-  if(welcome)welcome.textContent=(visitou?'Bem-vindo de volta, ':'Olá, ')+nome+'! 👋';
+  if(welcome){
+    welcome.textContent=(visitou?'Bem-vindo de volta, ':'Olá, ')+nome+'! ';
+    const emoji=document.createElement('span');
+    emoji.className='emoji-vivo';
+    emoji.setAttribute('aria-hidden','true');
+    emoji.textContent=visitou?'✨':'👋';
+    welcome.appendChild(emoji);
+
+    /* Saudação de entrada: animação única de 1,5s. */
+    emoji.style.animation='emoji-acenar 1.5s ease-in-out 1';
+    emoji.addEventListener('animationend',function(){
+      emoji.style.animation='none';
+    },{once:true});
+  }
   localStorage.setItem(chaveVisita,'1');
   localStorage.setItem('centralNome',nome);
   const topUser=document.getElementById('topUser');
