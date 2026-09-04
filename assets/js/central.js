@@ -1,14 +1,48 @@
 let categoriaAtual='todos';
 
-/* ===== Sessão, login e termos ===== */
-function iniciarSessao(){const nome=(localStorage.getItem('centralNome')||'').trim();const aceitou=localStorage.getItem('centralTermosAceitos')==='1';if(nome&&aceitou){mostrarCentral(nome)}else{document.body.classList.add('bloqueado');const overlay=document.getElementById('loginOverlay');if(overlay)overlay.style.display='flex';setTimeout(()=>document.getElementById('loginName')?.focus(),100)}}
-function mostrarCentral(nome){document.body.classList.remove('bloqueado');const overlay=document.getElementById('loginOverlay');if(overlay)overlay.style.display='none';const chaveVisita='centralVisitou_'+nome;const visitou=localStorage.getItem(chaveVisita)==='1';const welcome=document.getElementById('welcomeTitle');if(welcome)welcome.textContent=(visitou?'Bem-vindo de volta, ':'Olá, ')+nome+'! 👋';localStorage.setItem(chaveVisita,'1');const topUser=document.getElementById('topUser');if(topUser)topUser.innerHTML=nome+' <button onclick="trocarUsuario()">Trocar usuário</button>';const footerUser=document.getElementById('footerUser');if(footerUser)footerUser.textContent='• '+nome;const abertura=document.getElementById('s1');if(abertura)abertura.textContent='Olá! Sou '+nome+' e estarei com você durante este atendimento.\nComo posso ajudar?'}
-function entrarNaCentral(){const nome=(document.getElementById('loginName')?.value||'').trim();const aceitou=!!document.getElementById('termsCheck')?.checked;const erro=document.getElementById('loginError');if(!nome||!aceitou){if(erro)erro.style.display='block';return}localStorage.setItem('centralNome',nome);localStorage.setItem('centralTermosAceitos','1');localStorage.setItem('centralTermosData',new Date().toISOString());mostrarCentral(nome)}
-function trocarUsuario(){localStorage.removeItem('centralNome');const nameInput=document.getElementById('loginName');const terms=document.getElementById('termsCheck');const erro=document.getElementById('loginError');if(nameInput)nameInput.value='';if(terms)terms.checked=false;if(erro)erro.style.display='none';document.body.classList.add('bloqueado');const overlay=document.getElementById('loginOverlay');if(overlay)overlay.style.display='flex';setTimeout(()=>document.getElementById('loginName')?.focus(),100)}
+/* ===== Sessão ===== */
+function iniciarSessao(){
+  const nome=(localStorage.getItem('usuarioIntranet')||localStorage.getItem('centralNome')||'').trim();
+  if(nome){
+    mostrarCentral(nome);
+    return;
+  }
+  window.location.href='index.html';
+}
+
+function mostrarCentral(nome){
+  document.body.classList.remove('bloqueado');
+  const overlay=document.getElementById('loginOverlay');
+  if(overlay)overlay.style.display='none';
+  const chaveVisita='centralVisitou_'+nome;
+  const visitou=localStorage.getItem(chaveVisita)==='1';
+  const welcome=document.getElementById('welcomeTitle');
+  if(welcome)welcome.textContent=(visitou?'Bem-vindo de volta, ':'Olá, ')+nome+'! 👋';
+  localStorage.setItem(chaveVisita,'1');
+  localStorage.setItem('centralNome',nome);
+  const topUser=document.getElementById('topUser');
+  if(topUser)topUser.innerHTML=nome+' <button onclick="trocarUsuario()">Trocar usuário</button>';
+  const footerUser=document.getElementById('footerUser');
+  if(footerUser)footerUser.textContent='• '+nome;
+  const abertura=document.getElementById('s1');
+  if(abertura)abertura.textContent='Olá! Sou '+nome+' e estarei com você durante este atendimento.\nComo posso ajudar?';
+}
+
+/* O login antigo não é mais utilizado. A entrada oficial acontece em index.html. */
+function entrarNaCentral(){window.location.href='index.html';}
+
+function trocarUsuario(){
+  localStorage.removeItem('usuarioIntranet');
+  localStorage.removeItem('centralNome');
+  localStorage.removeItem('centralTermosAceitos');
+  localStorage.removeItem('centralTermosData');
+  window.location.href='index.html';
+}
+
 function abrirTermos(e){if(e)e.preventDefault();document.getElementById('termsModal')?.classList.add('show')}
 function fecharTermos(){document.getElementById('termsModal')?.classList.remove('show')}
 function fecharTermosFora(e){if(e.target.id==='termsModal')fecharTermos()}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')fecharTermos();if(e.key==='Enter'&&document.getElementById('loginOverlay')?.style.display!=='none')entrarNaCentral()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fecharTermos()});
 
 /* ===== Menu lateral ===== */
 function alternarMenu(){const layout=document.getElementById('layout');if(!layout)return;layout.classList.toggle('collapsed');localStorage.setItem('menuRecolhido',layout.classList.contains('collapsed')?'1':'0')}
