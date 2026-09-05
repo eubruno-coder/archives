@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Links rápidos | Intranet</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236C3BFF'/%3E%3Cpath d='M16 20c0-4.4 3.6-8 8-8h16c4.4 0 8 3.6 8 8v13c0 4.4-3.6 8-8 8H30l-10 9v-9h-4c-4.4 0-8-3.6-8-8V20z' fill='white'/%3E%3Cpath d='M22 25h20M22 31h13' stroke='%23B9A7FF' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/links.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand-area">
+    <a class="back-button" href="../central.html" aria-label="Voltar para a Central">←</a>
+    <div class="brand-icon">✦</div>
+    <div><strong>INTRANET</strong><small>Central de Atendimento</small></div>
+  </div>
+  <div class="top-actions">
+    <span class="user-name" id="userName">Olá!</span>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">☾</button>
+  </div>
+</header>
+
+<main class="page-shell">
+  <section class="hero">
+    <div class="hero-icon">🔗</div>
+    <div>
+      <p class="eyebrow">Central de Atendimento</p>
+      <h1>Links rápidos</h1>
+      <p class="hero-description">Acesse os principais sistemas e ferramentas do seu dia a dia em um só lugar.</p>
+    </div>
+  </section>
+
+  <section class="toolbar" aria-label="Pesquisa e filtros">
+    <label class="search-box">
+      <span>⌕</span>
+      <input id="searchInput" type="search" placeholder="Pesquisar sistema ou ferramenta..." autocomplete="off">
+    </label>
+    <div class="filters" id="filters" role="group" aria-label="Categorias"></div>
+  </section>
+
+  <section class="stats-row">
+    <span><strong id="resultCount">0</strong> links disponíveis</span>
+    <span id="statusMessage">Todos os sistemas</span>
+  </section>
+
+  <section class="links-grid" id="linksGrid" aria-live="polite"></section>
+
+  <div class="empty-state" id="emptyState" hidden>
+    <div>🔎</div>
+    <h2>Nenhum link encontrado</h2>
+    <p>Tente outro termo de pesquisa ou selecione a categoria “Todos”.</p>
+    <button id="clearSearch" type="button">Limpar pesquisa</button>
+  </div>
+</main>
+
+<footer>© 2026 • Central de Atendimento</footer>
+
+<script src="../content/links/links-rapidos.js"></script>
+<script src="../assets/js/links.js"></script>
+</body>
+</html>
