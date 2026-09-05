@@ -10,3 +10,33 @@ window.CENTRAL_LINKS_RAPIDOS = [
   { titulo: "Portal MEXX", url: "https://portaldeservicos.gestao.gov.br/pt#/", descricao: "Portal de serviços", icone: "🗂️" },
   { titulo: "Webmail", url: "https://webmail.speedmais.com.br/", descricao: "E-mail corporativo", icone: "✉️" }
 ];
+
+/* ===== Navegação: Central → Links Rápidos =====
+   A entrada é criada dinamicamente para evitar alterações no HTML
+   principal e manter a navegação centralizada. */
+(function integrarLinksRapidos(){
+  function adicionarEntrada(){
+    const menu = document.querySelector('.menu');
+    if(!menu || menu.querySelector('[data-nav="links-rapidos"]')) return;
+
+    const item = document.createElement('li');
+    item.innerHTML = `
+      <button type="button" data-nav="links-rapidos" title="Links rápidos" aria-label="Abrir Links rápidos">
+        🔗 Links rápidos
+      </button>
+    `;
+
+    const botao = item.querySelector('button');
+    botao.addEventListener('click', function(){
+      window.location.href = 'pages/links.html';
+    });
+
+    menu.appendChild(item);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', adicionarEntrada, {once:true});
+  }else{
+    adicionarEntrada();
+  }
+})();
