@@ -11,27 +11,27 @@ window.CENTRAL_LINKS_RAPIDOS = [
   { titulo: "Webmail", url: "https://webmail.speedmais.com.br/", descricao: "E-mail corporativo", icone: "✉️" }
 ];
 
-/* ===== Navegação: Central → Links Rápidos =====
-   A entrada é criada dinamicamente para evitar alterações no HTML
-   principal e manter a navegação centralizada. */
-(function integrarLinksRapidos(){
+/* ===== Navegação: Central → Links Rápidos / Mural ===== */
+(function integrarNavegacaoModular(){
   function adicionarEntrada(){
     const menu = document.querySelector('.menu');
-    if(!menu || menu.querySelector('[data-nav="links-rapidos"]')) return;
+    if(!menu) return;
 
-    const item = document.createElement('li');
-    item.innerHTML = `
-      <button type="button" data-nav="links-rapidos" title="Links rápidos" aria-label="Abrir Links rápidos">
-        🔗 Links rápidos
-      </button>
-    `;
+    const itens = [
+      { id: 'links-rapidos', texto: '🔗 Links rápidos', titulo: 'Links rápidos', destino: 'pages/links.html' },
+      { id: 'mural', texto: '📌 Mural', titulo: 'Mural', destino: 'pages/mural.html' }
+    ];
 
-    const botao = item.querySelector('button');
-    botao.addEventListener('click', function(){
-      window.location.href = 'pages/links.html';
+    itens.forEach(config => {
+      if(menu.querySelector(`[data-nav="${config.id}"]`)) return;
+
+      const item = document.createElement('li');
+      item.innerHTML = `<button type="button" data-nav="${config.id}" title="${config.titulo}" aria-label="Abrir ${config.titulo}">${config.texto}</button>`;
+      item.querySelector('button').addEventListener('click', () => {
+        window.location.href = config.destino;
+      });
+      menu.appendChild(item);
     });
-
-    menu.appendChild(item);
   }
 
   if(document.readyState === 'loading'){
