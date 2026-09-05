@@ -59,6 +59,30 @@ window.CENTRAL_LINKS_RAPIDOS = [
   }
 })();
 
+/* ===== Novidades — temporariamente desativado =====
+   A estrutura será reestruturada posteriormente.
+   Mantemos o código original em central.js para a próxima evolução,
+   mas o componente não será exibido enquanto esta flag estiver ativa. */
+(function desativarNovidadesTemporariamente(){
+  const style = document.createElement('style');
+  style.id = 'desativarNovidadesTemporariamente';
+  style.textContent = '.novidades-wrap{display:none !important;}';
+  document.head.appendChild(style);
+
+  function removerSeJaCriado(){
+    const novidades = document.getElementById('novidadesTicker');
+    if(novidades) novidades.remove();
+  }
+
+  removerSeJaCriado();
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', removerSeJaCriado, {once:true});
+  }else{
+    removerSeJaCriado();
+  }
+})();
+
 /* ===== Aviso de manutenção programada =====
    Este aviso é operacional e deve aparecer na Central, não no README.
    Para alterar a data ou a mensagem, edite somente este bloco. */
