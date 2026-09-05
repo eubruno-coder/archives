@@ -83,6 +83,39 @@ window.CENTRAL_LINKS_RAPIDOS = [
   }
 })();
 
+/* ===== Visual: Central ocupa toda a largura da tela =====
+   No desktop removemos a limitação de 1500px do layout.
+   A estrutura interna continua respeitando seus próprios espaçamentos,
+   preservando a leitura e evitando esticar excessivamente os conteúdos. */
+(function ampliarVisualizacaoWeb(){
+  function aplicar(){
+    if(document.getElementById('estiloVisualizacaoTelaCheia')) return;
+
+    const style = document.createElement('style');
+    style.id = 'estiloVisualizacaoTelaCheia';
+    style.textContent = `
+      .layout{
+        width:100% !important;
+        max-width:none !important;
+        margin:0 !important;
+      }
+
+      @media(min-width:901px){
+        .main{
+          width:100%;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', aplicar, {once:true});
+  }else{
+    aplicar();
+  }
+})();
+
 /* ===== Menu de acesso rápido | visual compacto =====
    Mantém as ações existentes, mas transforma os quatro cards em um único
    painel retangular compacto com grade 2x2. A lógica dos botões não muda. */
