@@ -9,20 +9,6 @@
 
 ---
 
-## 🚨 Aviso importante — manutenção programada
-
-**📅 09/09/2026 — Manutenção programada da Intranet**
-
-Será realizada uma **manutenção programada na Central de Atendimento — Intranet no dia 09/09/2026**.
-
-Durante o período de manutenção, a plataforma poderá apresentar **indisponibilidade temporária, alterações de comportamento ou instabilidade**.
-
-> ⚠️ Recomenda-se considerar a possibilidade de indisponibilidade da Intranet durante a janela de manutenção e utilizar os canais ou materiais alternativos definidos pela operação, quando necessário.
-
-Este aviso será atualizado conforme o andamento da manutenção.
-
----
-
 ## 📌 Sobre o projeto
 
 A **Central de Atendimento** é uma aplicação web criada para funcionar como um ponto central de consulta durante a rotina operacional.
@@ -154,7 +140,7 @@ Centraliza os scripts operacionais utilizados durante os atendimentos.
 
 **`content/links/links-rapidos.js`**
 
-Centraliza os links externos utilizados na operação.
+Centraliza os links externos utilizados na operação e os avisos operacionais exibidos na Central.
 
 **`diretrizes.html`**
 
