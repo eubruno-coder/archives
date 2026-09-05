@@ -1,6 +1,6 @@
 /* Lista de links rápidos da Central de Atendimento.
    Para adicionar, editar ou remover um link, basta alterar este array —
-   não é necessário mexer no index.html. */
+   não é necessário mexer no index.html ou no central.html. */
 window.CENTRAL_LINKS_RAPIDOS = [
   { titulo: "Sistema de Escalas", url: "https://eubruno-coder.github.io/escala/", descricao: "Controle de jornada e pausas", icone: "⏱️" },
   { titulo: "Portal Colabora", url: "https://portalcolabora.speedmais.com.br/user/auth/login", descricao: "Login do portal do colaborador", icone: "📚" },
@@ -11,27 +11,45 @@ window.CENTRAL_LINKS_RAPIDOS = [
   { titulo: "Webmail", url: "https://webmail.speedmais.com.br/", descricao: "E-mail corporativo", icone: "✉️" }
 ];
 
-/* ===== Navegação: Central → Links Rápidos / Mural ===== */
-(function integrarNavegacaoModular(){
+/* ===== Navegação: Central → Links Rápidos =====
+   Os links rápidos pertencem exclusivamente à página pages/links.html.
+   Se a versão antiga da Central ainda possuir o bloco #listaLinks,
+   ele é removido automaticamente para evitar duplicidade. */
+(function integrarLinksRapidos(){
+  function removerBlocoAntigo(){
+    const lista = document.getElementById('listaLinks');
+    if(!lista) return;
+
+    const cabecalho = lista.previousElementSibling;
+    if(cabecalho && cabecalho.classList.contains('section-head')){
+      const titulo = cabecalho.querySelector('h2');
+      if(titulo && /links\s*rápidos/i.test(titulo.textContent || '')){
+        cabecalho.remove();
+      }
+    }
+
+    lista.remove();
+  }
+
   function adicionarEntrada(){
+    removerBlocoAntigo();
+
     const menu = document.querySelector('.menu');
-    if(!menu) return;
+    if(!menu || menu.querySelector('[data-nav="links-rapidos"]')) return;
 
-    const itens = [
-      { id: 'links-rapidos', texto: '🔗 Links rápidos', titulo: 'Links rápidos', destino: 'pages/links.html' },
-      { id: 'mural', texto: '📌 Mural', titulo: 'Mural', destino: 'pages/mural.html' }
-    ];
+    const item = document.createElement('li');
+    item.innerHTML = `
+      <button type="button" data-nav="links-rapidos" title="Links rápidos" aria-label="Abrir Links rápidos">
+        🔗 Links rápidos
+      </button>
+    `;
 
-    itens.forEach(config => {
-      if(menu.querySelector(`[data-nav="${config.id}"]`)) return;
-
-      const item = document.createElement('li');
-      item.innerHTML = `<button type="button" data-nav="${config.id}" title="${config.titulo}" aria-label="Abrir ${config.titulo}">${config.texto}</button>`;
-      item.querySelector('button').addEventListener('click', () => {
-        window.location.href = config.destino;
-      });
-      menu.appendChild(item);
+    const botao = item.querySelector('button');
+    botao.addEventListener('click', function(){
+      window.location.href = 'pages/links.html';
     });
+
+    menu.appendChild(item);
   }
 
   if(document.readyState === 'loading'){
