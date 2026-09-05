@@ -83,6 +83,101 @@ window.CENTRAL_LINKS_RAPIDOS = [
   }
 })();
 
+/* ===== Menu de acesso rápido | visual compacto =====
+   Mantém as ações existentes, mas transforma os quatro cards em um único
+   painel retangular compacto com grade 2x2. A lógica dos botões não muda. */
+(function compactarAcessoRapido(){
+  function aplicar(){
+    if(document.getElementById('estiloAcessoRapidoCompacto')) return;
+
+    const cards = Array.from(document.querySelectorAll('.card-acao')).slice(0,4);
+    if(cards.length !== 4) return;
+
+    const pais = cards.map(card => card.parentElement).find(pai =>
+      pai && cards.every(card => card.parentElement === pai)
+    );
+    if(!pais) return;
+
+    pais.classList.add('acoes-rapidas-compactas');
+
+    const style = document.createElement('style');
+    style.id = 'estiloAcessoRapidoCompacto';
+    style.textContent = `
+      .acoes-rapidas-compactas{
+        display:grid !important;
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:10px !important;
+        padding:12px !important;
+        margin:0 0 24px !important;
+        background:var(--surface) !important;
+        border:1px solid var(--border) !important;
+        border-radius:16px !important;
+        box-shadow:var(--shadow) !important;
+        position:relative !important;
+        overflow:hidden !important;
+      }
+      .acoes-rapidas-compactas::before{
+        content:"";
+        position:absolute;
+        left:0;
+        top:0;
+        bottom:0;
+        width:4px;
+        background:var(--gradient);
+      }
+      .acoes-rapidas-compactas .card-acao{
+        min-height:68px !important;
+        padding:11px 13px !important;
+        margin:0 !important;
+        border-radius:11px !important;
+        box-shadow:none !important;
+        border:1px solid var(--border) !important;
+        background:var(--surface-soft) !important;
+        transition:transform .18s ease,background-color .18s ease,border-color .18s ease,box-shadow .18s ease !important;
+      }
+      .acoes-rapidas-compactas .card-acao:hover{
+        transform:translateY(-2px) !important;
+        border-color:rgba(108,59,255,.22) !important;
+        background:var(--gradient-soft) !important;
+        box-shadow:0 8px 20px rgba(72,52,160,.08) !important;
+      }
+      .acoes-rapidas-compactas .card-acao h3,
+      .acoes-rapidas-compactas .card-acao strong{
+        font-size:12px !important;
+      }
+      .acoes-rapidas-compactas .card-acao p,
+      .acoes-rapidas-compactas .card-acao span{
+        font-size:10px !important;
+      }
+      @media(max-width:700px){
+        .acoes-rapidas-compactas{
+          gap:8px !important;
+          padding:10px !important;
+        }
+        .acoes-rapidas-compactas .card-acao{
+          min-height:62px !important;
+          padding:9px 10px !important;
+        }
+      }
+      @media(max-width:430px){
+        .acoes-rapidas-compactas{
+          grid-template-columns:1fr 1fr !important;
+        }
+        .acoes-rapidas-compactas .card-acao{
+          min-height:58px !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', aplicar, {once:true});
+  }else{
+    aplicar();
+  }
+})();
+
 /* ===== Aviso de manutenção programada =====
    Este aviso é operacional e deve aparecer na Central, não no README.
    Para alterar a data ou a mensagem, edite somente este bloco. */
